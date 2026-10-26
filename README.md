@@ -3,7 +3,8 @@
 Aplicación web para aprender los tiempos verbales del francés, de A1 a C1.
 
 - Personajes 3D articulados actúan cada tiempo en situaciones de la vida diaria (casa, café, calle, estación…).
-- Tú conjugas: escribes, armas con fichas o reconoces la forma, en afirmativa, negativa y pregunta, con todos los sujetos.
+- Escalera de dificultad automática (copiar → elegir → armar → completar → escribir) y ayuda «paso a paso».
+- Historietas de tres viñetas (antes · ahora · después) y juegos: sopa de letras, ahorcado y memoria.
 - Verbos organizados por grupo (1, 2 y 3), pronominales y verbos con être (concordancia).
 - Fábrica de verbos, laboratorio de participios, ejercicios y mapa A1–C1.
 

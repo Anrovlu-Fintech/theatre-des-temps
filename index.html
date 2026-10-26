@@ -3,17 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Théâtre des Temps</title>
-<meta name="description" content="Los tiempos verbales del francés, de A1 a C1, en situaciones de la vida diaria con personajes 3D.">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Temps">
+<title>Théâtre des Temps</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Los tiempos verbales del francés, de A1 a C1, actuados por personajes 3D articulados.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Figtree:wght@400;500;600;700;800&family=Gloock&family=JetBrains+Mono:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@600&family=Patrick+Hand&family=Figtree:wght@400;500;600;700;800&family=Gloock&family=JetBrains+Mono:wght@500;600;700;800&display=swap">
 <style>
 :root{box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px)}
 [hidden]{display:none!important}
 img{max-width:100%}
+
 /* Concepto: un programa de teatro parisino. El escenario arriba manda; el "programa" (cuaderno) lo explica al lado. */
 :root{
   --bg:#eceef3; --paper:#ffffff; --paper-2:#f5f6f9; --ink:#161b2a; --ink-2:#465068; --ink-3:#737c92; --line:#d8dce5; --line-2:#e7e9ef;
@@ -428,6 +430,101 @@ footer{max-width:1500px; margin:0 auto; padding-block:0 30px; padding-left:max(1
 .ov-top{flex-wrap:wrap}
 .ov-tools{margin-left:auto}
 @media (max-width:560px){ .ov-tag .mt{display:none} .ov-btn{padding:5px 9px; font-size:12px} }
+
+/* ---------- escalera y paso a paso ---------- */
+.ladder{display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:12.5px; color:var(--ink-2)}
+.steps6{display:flex; gap:4px}
+.steps6 span{width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-size:11px; font-weight:700; background:var(--paper-2); border:1px solid var(--line); color:var(--ink-3)}
+.steps6 .did{background:var(--ok); color:var(--paper); border-color:var(--ok)}
+.steps6 .cur{background:var(--velvet); color:var(--paper); border-color:var(--velvet); transform:scale(1.12)}
+.model{font-size:24px; background:var(--gilt-soft); border-radius:10px; padding:10px 14px; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+.gapline{font-size:22px; display:flex; align-items:baseline; flex-wrap:wrap; gap:0; line-height:2}
+.gapline input{font:inherit; font-weight:800; color:var(--velvet); border:0; border-bottom:3px dashed var(--velvet); background:color-mix(in srgb, var(--velvet) 7%, transparent); padding:0 4px; margin:0 2px; text-align:center; border-radius:4px 4px 0 0; max-width:60vw}
+.opt.big{font-size:18px; padding:14px 10px}
+.guide{display:flex; flex-direction:column; gap:10px; background:var(--paper-2); border:2px dashed var(--line); border-radius:12px; padding:12px}
+.g-prog{display:flex; gap:6px}
+.g-prog span{width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--f-mono); font-weight:700; font-size:12px; background:var(--paper); border:1px solid var(--line)}
+.g-prog .did{background:var(--ok); color:var(--paper)} .g-prog .cur{background:var(--velvet); color:var(--paper)}
+.g-q{font-size:18px; font-weight:700}
+.g-q small{font-weight:500; color:var(--ink-3); font-size:13px}
+.g-tip{font-size:13.5px; color:var(--ink-2)}
+.g-built{font-size:15px}
+.g-built b{background:var(--ok-soft); color:var(--ok); border-radius:6px; padding:1px 7px}
+.lvup,.lvdown{margin-top:8px; border-radius:10px; padding:10px 12px; font-size:15px; animation:drop .6s cubic-bezier(.2,1.4,.4,1)}
+.lvup{background:var(--gilt-soft)} .lvdown{background:var(--paper-2)}
+/* ---------- cómic en la escena 3D ---------- */
+.ov-cap{position:absolute; left:12px; top:46px; z-index:5; pointer-events:none; background:#ffd23d; color:#1d1d24; border:3px solid #1d1d24; box-shadow:4px 4px 0 #1d1d24; font-family:"Bangers", var(--f-display); font-size:clamp(18px, 2.6vw, 28px); letter-spacing:.04em; padding:2px 12px 4px; transform:rotate(-2deg); line-height:1.05}
+.ov-cap small{display:block; font-family:var(--f-ui); font-size:11.5px; font-weight:700; letter-spacing:0}
+.ov-cap:empty{display:none}
+.ov-live{position:absolute; right:12px; top:50px; z-index:5; background:#e3242b; color:#fff; font-family:var(--f-mono); font-weight:700; font-size:11.5px; padding:3px 9px; border-radius:6px; animation:rec 1.2s steps(2) infinite; pointer-events:none}
+.ov-snd{position:absolute; left:0; top:0; z-index:6; pointer-events:none; font-family:"Bangers", var(--f-display); font-size:clamp(22px, 3.4vw, 36px); color:#1d1d24; background:#ffd23d; border:3px solid #1d1d24; padding:2px 12px; clip-path:polygon(0 18%, 12% 0, 28% 14%, 46% 0, 60% 14%, 80% 0, 88% 18%, 100% 30%, 92% 52%, 100% 74%, 84% 82%, 76% 100%, 56% 86%, 36% 100%, 24% 84%, 6% 92%, 10% 66%, 0 50%); opacity:0; white-space:nowrap}
+.ov-snd.go{animation:snd 1.3s ease-out}
+@keyframes snd{0%{opacity:0; transform:var(--tf) scale(.3) rotate(-14deg)} 18%{opacity:1; transform:var(--tf) scale(1.15) rotate(-6deg)} 75%{opacity:1; transform:var(--tf) scale(1) rotate(-6deg)} 100%{opacity:0; transform:var(--tf) scale(.9) rotate(-6deg)}}
+.ov-label .ov-balloon{position:absolute; left:50%; bottom:calc(100% + 12px); transform:translateX(-50%); background:#fff; color:#1d1d24; border:2.5px solid #1d1d24; border-radius:16px; padding:6px 12px; font-family:"Patrick Hand", var(--f-ui); font-size:18px; font-weight:400; white-space:nowrap; animation:drop .5s cubic-bezier(.2,1.4,.4,1)}
+.ov-label .ov-balloon::after{content:""; position:absolute; left:50%; top:100%; border:9px solid transparent; border-top-color:#1d1d24; transform:translateX(-50%)}
+/* ---------- historietas ---------- */
+.comic-ctl{display:flex; flex-direction:column; gap:10px}
+.comic-ctl select{border:1px solid var(--line); background:var(--paper-2); border-radius:8px; padding:7px 9px; max-width:100%; min-width:0; flex:1}
+.strip{display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:14px; margin-top:16px}
+.cpanel{position:relative; margin:0; background:#fffdf7; border:4px solid #1d1d24; border-radius:4px; box-shadow:6px 6px 0 rgba(29,29,36,.85); padding:10px 10px 8px; display:flex; flex-direction:column; gap:8px; color:#1d1d24}
+.cpanel:nth-child(odd){transform:rotate(-.6deg)} .cpanel:nth-child(even){transform:rotate(.5deg)}
+.cpanel.fut{border-style:dashed; background:#eef1ff}
+.cpanel.past{background:#fbf2df}
+.cpanel.dream{background:#fde9f4; border-radius:30px}
+.cpanel.pop{animation:popc .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes popc{50%{transform:scale(1.04) rotate(0)}}
+.ccap{align-self:flex-start; background:#ffd23d; border:2.5px solid #1d1d24; font-family:"Bangers", var(--f-display); font-size:22px; letter-spacing:.04em; padding:1px 10px 2px; line-height:1.05; box-shadow:3px 3px 0 #1d1d24}
+.cpanel.past .ccap{background:#e9c48a} .cpanel.fut .ccap{background:#9fb4ff} .cpanel.dream .ccap{background:#f6a6cf}
+.ccap small{display:block; font-family:var(--f-ui); font-size:11.5px; font-weight:700; letter-spacing:0}
+.clive{position:absolute; right:10px; top:12px; background:#e3242b; color:#fff; font-family:var(--f-mono); font-size:10.5px; font-weight:700; padding:2px 7px; border-radius:5px}
+.clive.vid{background:#1d1d24}
+.balloon{position:relative; background:#fff; border:2.5px solid #1d1d24; border-radius:18px; padding:8px 12px; font-family:"Patrick Hand", var(--f-ui); font-size:19px; line-height:1.25; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.balloon::after{content:""; position:absolute; left:50%; top:100%; border:10px solid transparent; border-top-color:#1d1d24}
+.balloon .say{background:#fff; color:#1d1d24}
+.balloon .blank-slot{color:var(--velvet); border-bottom-color:var(--velvet)}
+.balloon .p-x,.balloon .p-cmp{color:#3a3f4f} .balloon .p-sub{color:#1d1d24}
+.cart{display:block; width:100%; height:auto; border:2px solid #1d1d24; border-radius:2px; background:#fff}
+.cart .onoma{font-family:"Bangers", Impact, sans-serif; font-size:16px; fill:#1d1d24; letter-spacing:.5px}
+.cart .stampt{font-family:var(--f-mono); font-weight:800; font-size:13px; fill:#fff}
+.cpanel figcaption{font-family:var(--f-mono); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#555}
+.habit3{display:grid; grid-template-columns:repeat(3, 1fr); gap:4px}
+.habit3 div{position:relative} .habit3 span{position:absolute; left:4px; top:2px; font-family:var(--f-mono); font-size:10px; font-weight:700; background:#fff; border:1px solid #1d1d24; padding:0 4px; z-index:1}
+.cq{margin-top:16px}
+/* ---------- juegos ---------- */
+#gCtl{display:flex; flex-direction:column; gap:10px}
+#gCtl select{border:1px solid var(--line); background:var(--paper-2); border-radius:8px; padding:7px 9px}
+.ws-wrap{display:grid; grid-template-columns:auto minmax(0,1fr); gap:18px; align-items:start}
+@media (max-width:760px){ .ws-wrap{grid-template-columns:minmax(0,1fr)} }
+.ws-grid{display:grid; grid-template-columns:repeat(var(--n), minmax(0, 1fr)); gap:3px; width:min(100%, calc(var(--n) * 40px)); background:var(--paper-2); border:2px solid var(--line); border-radius:10px; padding:6px}
+.ws-c{aspect-ratio:1; border:0; border-radius:6px; background:var(--paper); font-weight:800; font-size:clamp(12px, 2.6vw, 17px); padding:0; color:var(--ink)}
+.ws-c.s{background:var(--gilt); color:#161206} .ws-c.f{background:var(--ok); color:var(--paper)} .ws-c.x{background:var(--bad); color:var(--paper)}
+.ws-list{display:flex; flex-direction:column; gap:6px}
+.ws-i{display:flex; justify-content:space-between; gap:10px; border-bottom:1px dashed var(--line); padding:4px 0; font-size:15px}
+.ws-i b{font-family:var(--f-mono); letter-spacing:.1em}
+.ws-i.f b{color:var(--ok)} .ws-i.f span{text-decoration:line-through; color:var(--ink-3)}
+.hm{display:grid; grid-template-columns:minmax(0, 220px) minmax(0,1fr); gap:18px; align-items:start}
+@media (max-width:700px){ .hm{grid-template-columns:minmax(0,1fr)} }
+.hm-sky{position:relative; height:220px; border-radius:14px; background:linear-gradient(#bfe6ff, #eef9ff); border:2px solid var(--line); overflow:hidden}
+.hm-bal{position:absolute; top:14px; left:0; right:0; display:flex; justify-content:center; gap:0; font-size:30px}
+.hm-bal span{display:inline-block; animation:floaty 1.6s ease-in-out infinite alternate}
+.hm-bal span:nth-child(2n){animation-delay:.4s}
+.hm-bal span.pop{animation:popB .35s forwards}
+@keyframes floaty{to{transform:translateY(-6px)}} @keyframes popB{50%{transform:scale(1.6); opacity:.6} to{transform:scale(0); opacity:0}}
+.hm-kid{position:absolute; left:50%; top:96px; transform:translateX(-50%); font-size:52px; transition:top .9s cubic-bezier(.5,0,1,1)}
+.hm-sky.fall .hm-kid{top:160px}
+.hm-word{font-family:var(--f-mono); font-size:clamp(24px, 5vw, 36px); font-weight:800; letter-spacing:.12em; margin:8px 0 12px; word-break:break-all}
+.hm-keys{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px}
+.hm-k{width:38px; height:42px; border:1px solid var(--line); background:var(--paper-2); border-radius:8px; font-weight:800; font-size:16px}
+.hm-k.hit{background:var(--ok); color:var(--paper)} .hm-k.miss{opacity:.35; text-decoration:line-through}
+.mem{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:10px; max-width:640px}
+.mem-c{aspect-ratio:4/3; border:0; padding:0; background:transparent; perspective:600px}
+.mem-in{position:relative; display:block; width:100%; height:100%; transition:transform .4s; transform-style:preserve-3d}
+.mem-c.open .mem-in{transform:rotateY(180deg)}
+.mem-b,.mem-f{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; border-radius:10px; border:2px solid var(--ink); backface-visibility:hidden; font-weight:800; padding:4px; text-align:center}
+.mem-b{background:var(--velvet); color:var(--paper); font-size:28px}
+.mem-f{background:var(--paper); transform:rotateY(180deg); font-size:clamp(13px, 2.4vw, 18px)}
+.mem-c.q .mem-f{background:var(--gilt-soft); font-family:var(--f-mono)}
+.mem-c.ok .mem-f{background:var(--ok-soft); border-color:var(--ok)}
 </style>
 </head>
 <body>
@@ -439,6 +536,8 @@ footer{max-width:1500px; margin:0 auto; padding-block:0 30px; padding-left:max(1
     </div>
     <nav class="tabs" id="tabs" aria-label="Secciones">
       <button data-view="scene" class="on">Escena</button>
+      <button data-view="comic">Historietas</button>
+      <button data-view="games">Juegos</button>
       <button data-view="fabrique">Fábrica de verbos</button>
       <button data-view="pp">Participios</button>
       <button data-view="train">Entrenar</button>
@@ -470,6 +569,9 @@ footer{max-width:1500px; margin:0 auto; padding-block:0 30px; padding-left:max(1
         <div class="ov-count" data-ov="count"></div>
         <div class="ov-flash" data-ov="flash"></div>
         <div class="ov-fade" data-ov="fade"></div>
+        <div class="ov-cap" data-ov="cap"></div>
+        <div class="ov-live" data-ov="live" hidden>● EN DIRECT</div>
+        <div class="ov-snd" data-ov="snd"></div>
         <div class="surtitle" id="surtitle"><div class="sur-fr" id="surFr"></div><div class="sur-es" id="surEs"></div></div>
         <div class="timeline" id="timeline"></div>
         <div class="stage-fallback" id="stageFallback" hidden><b>Tu navegador no muestra 3D</b><span>Todo lo demás funciona igual: frases, fichas, fábrica y ejercicios.</span></div>
@@ -486,6 +588,27 @@ footer{max-width:1500px; margin:0 auto; padding-block:0 30px; padding-left:max(1
       </div>
     </div>
     <aside class="lesson" id="lesson" aria-label="Ficha del tiempo"></aside>
+  </section>
+
+  <!-- ============ HISTORIETAS ============ -->
+  <section class="view" id="v-comic">
+    <div class="vhead"><div><h2>Historietas del tiempo</h2><p>Cada viñeta tiene un cartel que dice CUÁNDO pasa. Mira el dibujo: el pasado muestra la acción ya hecha, el presente la muestra pasando y el futuro la muestra como una idea que todavía no pasa.</p></div></div>
+    <div class="panel comic-ctl">
+      <div class="ctl-row"><span class="ctl-lab">Historia</span><div class="chips" id="cStrip"></div></div>
+      <div class="ctl-row"><span class="ctl-lab">¿Quién?</span><div class="chips" id="cPers"></div></div>
+      <div class="ctl-row"><span class="ctl-lab">¿Qué hace?</span><select id="cAct" aria-label="Acción"></select><button class="btn ghost sm" type="button" id="cRand">🎲 Otra al azar</button></div>
+      <div class="ctl-row"><span class="ctl-lab">Modo</span><div class="chips" id="cMode"></div></div>
+      <p class="cat-help" id="stripHelp"></p>
+    </div>
+    <div class="strip" id="strip"></div>
+    <div id="cQuiz"></div>
+  </section>
+
+  <!-- ============ JUEGOS ============ -->
+  <section class="view" id="v-games">
+    <div class="vhead"><div><h2>Juegos</h2><p>Sopa de letras, ahorcado y memoria con las formas de cada tiempo. Cada palabra que encuentras se escucha en voz alta con su sujeto.</p></div></div>
+    <div class="panel" id="gCtl"></div>
+    <div class="panel" id="gBoard" style="margin-top:14px"></div>
   </section>
 
   <!-- ============ FÁBRICA ============ -->
@@ -1396,7 +1519,7 @@ const Stage = (() => {
   const JN = ['hips','spine','head','shL','shR','elL','elR','hipL','hipR','knL','knR'];
   function basePose(){ return {hipsY:0.95, y:0, dx:0, dz:0, face:0, rz:0, rx:0, mouth:'smile', eyes:1, brow:0,
     hips:[0,0,0], spine:[0,0,0], head:[0,0,0], shL:[0,0,-0.1], shR:[0,0,0.1], elL:[-0.12,0,0], elR:[-0.12,0,0], hipL:[0,0,0], hipR:[0,0,0], knL:[0,0,0], knR:[0,0,0]}; }
-  function idle(P, t){ P.spine[0] = Math.sin(t*2)*0.02; P.head[1] = Math.sin(t*0.7)*0.18; P.head[0] = Math.sin(t*1.1)*0.04; P.shL[2] = -0.1 - Math.sin(t*2)*0.03; P.shR[2] = 0.1 + Math.sin(t*2)*0.03; }
+  function idle(P, t){ P.hips[2] = Math.sin(t*0.9)*0.035; P.spine[2] = -Math.sin(t*0.9)*0.03; P.spine[0] = Math.sin(t*2)*0.02; P.head[1] = Math.sin(t*0.7)*0.18; P.head[0] = Math.sin(t*1.1)*0.04; P.shL[2] = -0.1 - Math.sin(t*2)*0.03; P.shR[2] = 0.1 + Math.sin(t*2)*0.03; }
   function legsWalk(P, ph, amp){ amp = amp || 0.6; const s = Math.sin(ph), c = Math.cos(ph); P.hipL[0] = s*amp; P.hipR[0] = -s*amp; P.knL[0] = 0.1 + Math.max(0, -c)*amp*1.4; P.knR[0] = 0.1 + Math.max(0, c)*amp*1.4; P.y = Math.abs(c)*0.04; }
   function armsWalk(P, ph, amp){ amp = amp || 0.5; const s = Math.sin(ph); P.shL[0] = -s*amp; P.shR[0] = s*amp; P.elL[0] = P.elR[0] = -0.35; }
   function sit(P, seat){ P.hipsY = seat + 0.12; P.hipL = [-1.5, 0, -0.06]; P.hipR = [-1.5, 0, 0.06]; P.knL = [1.5, 0, 0]; P.knR = [1.5, 0, 0]; }
@@ -1833,6 +1956,8 @@ const Stage = (() => {
     if(T.style === 'double') b = 'en même temps';
     EL.banner.textContent = b; EL.banner.hidden = !b || S.quiz;
     EL.stamp.className = 'ov-stamp';
+    const c = S.lastCfg && S.lastCfg.cap; EL.cap.innerHTML = c && !S.quiz ? `${c[0]}<small>${c[1]}</small>` : (c && S.quiz ? c[0] : '');
+    EL.live.hidden = !(S.lastCfg && S.lastCfg.live); S.sndT = 1.2;
   }
 
   /* ---------- bucle ---------- */
@@ -1844,6 +1969,7 @@ const Stage = (() => {
     S.dt = dt; S.clock += dt;
     if(!S.tense){ R.render(scene, camera); return; }
     if(!S.hold) S.t += dt;
+    if(!S.hold && S.lastCfg && S.lastCfg.snd && EL.snd){ S.sndT -= dt; if(S.sndT <= 0){ S.sndT = 3.2; const A0 = S.actors[0]; if(A0){ const p = A0.J.head.localToWorld(new THREE.Vector3(0.5, 0.5, 0)); const [x, y] = proj(p.x, p.y, p.z); EL.snd.textContent = S.lastCfg.snd; EL.snd.style.setProperty('--tf', `translate(${Math.round(x)}px, ${Math.round(y) - 30}px)`); EL.snd.classList.remove('go'); void EL.snd.offsetWidth; EL.snd.classList.add('go'); } } }
     S.actors.forEach(A => { const P = basePose(); drive(P, A, Math.max(0, S.t - A.phaseOff), false); pose(A, P, dt); });
     S.ghosts.forEach(G => { const P = basePose(); drive(P, G, S.t, true); pose(G, P, dt, true); G.root.visible = !S.hold; });
     if(S.visitor && S.visitor.root.visible){
@@ -1879,7 +2005,7 @@ const Stage = (() => {
     positionLabels(gx);
   }
   function pose(A, P, dt, ghost){
-    const J = A.J, k = Math.min(1, dt*9);
+    const J = A.J, k = Math.min(1, dt*6.5);
     JN.forEach(n => { const r = J[n].rotation, v = P[n]; r.x += (v[0] - r.x)*k; r.y += (v[1] - r.y)*k; r.z += (v[2] - r.z)*k; });
     J.hips.position.y += (P.hipsY - J.hips.position.y)*k;
     A.dxs += (P.dx - A.dxs)*Math.min(1, dt*(Math.abs(P.dx - A.dxs) > 1 ? 14 : 6)); A.dzs += (P.dz - A.dzs)*k; A.ys += (P.y - A.ys)*k;
@@ -1901,7 +2027,7 @@ const Stage = (() => {
   /* ---------- API ---------- */
   function init(wrap){
     EL.wrap = wrap;
-    ['stamp','flash','count','rec','prog','banner','grain','vig','book','label','fade'].forEach(k => EL[k] = wrap.querySelector('[data-ov="' + k + '"]'));
+    ['stamp','flash','count','rec','prog','banner','grain','vig','book','label','fade','cap','live','snd'].forEach(k => EL[k] = wrap.querySelector('[data-ov="' + k + '"]'));
     S.reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
     try{ R = new THREE.WebGLRenderer({antialias:true, preserveDrawingBuffer:false}); if(!R.getContext()) throw new Error('no gl'); }catch(e){ return false; }
     R.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
@@ -1946,7 +2072,7 @@ const Stage = (() => {
 'use strict';
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const store = (() => { let d = {}; try{ d = JSON.parse(localStorage.getItem('tdt.v1') || '{}') || {}; }catch(e){} return {get:(k, def) => (d[k] === undefined ? def : d[k]), set:(k, v) => { d[k] = v; try{ localStorage.setItem('tdt.v1', JSON.stringify(d)); }catch(e){} }}; })();
-const ST = {view:'scene', level:store.get('level','A2'), tense:'pc', action:'boire', pk:'elle', pol:'aff', qs:'inv', cmode:store.get('cmode','write'), me:store.get('me', Math.random() < 0.5 ? 'camille' : 'hugo'), cast:null, recast:false, aview:'group', acat:'all', asit:'chambre', tcat:'all', round:null, showTable:false, ltab:'idea', conjVerb:'', fabTense:'impf', fabStep:99, mode:'see'};
+const ST = {view:'scene', level:store.get('level','A2'), tense:'pc', action:'boire', pk:'elle', pol:'aff', qs:'inv', cmode:store.get('cmode2','auto'), me:store.get('me', Math.random() < 0.5 ? 'camille' : 'hugo'), cast:null, recast:false, aview:'group', acat:'all', asit:'chambre', tcat:'all', round:null, showTable:false, ltab:'idea', conjVerb:'', fabTense:'impf', fabStep:99, mode:'see'};
 const lvlIdx = l => LEVELS.indexOf(l);
 const inLevel = T => lvlIdx(T.lvl) <= lvlIdx(ST.level);
 const stats = store.get('stats', {});
@@ -2008,6 +2134,8 @@ function go(view){
   else if(wrap.parentElement !== $('#sceneCenter')){ $('#sceneCenter').prepend(wrap); }
   if(was === 'train' && view !== 'train'){ wrap.classList.remove('quiz'); renderScene(true); }
   if(view === 'fabrique') renderFab();
+  if(view === 'comic') renderComic();
+  if(view === 'games') renderGames();
   if(view === 'pp') renderPP();
   if(view === 'train') renderTrain();
   if(view === 'map') renderMap();
@@ -2055,10 +2183,11 @@ $('#btnReplay').addEventListener('click', () => { if(Stage.ok) Stage.replay(); }
 $('#btnSay').addEventListener('click', () => say(ST.lastText || ''));
 
 /* ---------- escena ---------- */
+const CAPS = {pres:['MAINTENANT','Ahora · está pasando'], imper:['ALLEZ !','Una orden'], train:['EN CE MOMENT','Justo ahora'], recent:['IL Y A UNE SECONDE…','Acaba de pasar'], pc:['HIER…','Ayer · ya pasó, una vez'], impf:['AVANT…','Antes · era costumbre'], duel:['HIER, PENDANT CE TEMPS…','Estaba pasando… y de pronto'], pqp:['AVANT, DÉJÀ…','El pasado del pasado'], ps:['IL ÉTAIT UNE FOIS…','En un cuento'], pa:['IL ÉTAIT UNE FOIS…','Justo antes, en un cuento'], proche:['DANS 5 MINUTES…','Va a pasar ya'], fut:['DEMAIN…','Mañana · todavía no pasa'], futant:['DEMAIN À MIDI…','Ya estará hecho'], cond:['ET SI… ?','Lo imagina, no es real'], condpasse:['SI J’AVAIS SU…','No pasó'], si:['ET SI… ?','Una condición'], subj:['IL FAUT QUE…','Deseo o necesidad'], subjpasse:['QUELLE JOIE QUE…','Emoción'], subjimpf:['JADIS…','Literario'], ger:['EN MÊME TEMPS','Dos cosas a la vez'], passif:['L’OBJET D’ABORD','Voz pasiva'], infpasse:['APRÈS…','Primero esto, luego…'], indirect:['IL A DIT QUE…','Lo que alguien dijo']};
 function sceneCfg(T, A, cast){
   const vis = shuffle(Object.keys(GENDER)).find(k => !cast.keys.includes(k)) || 'theo';
   if(T.id === 'pqp') T.frame.tail = `quand ${NAMES[vis]} est arrivé${GENDER[vis] === 'f' ? 'e' : ''}`;
-  return {tense:T, action:A, cast:cast.keys, visitor:vis};
+  return {tense:T, action:A, cast:cast.keys, visitor:vis, cap:CAPS[T.id], snd:(COMIC[A.id] || [])[1], live: T.cat === 'present' && T.id !== 'imper'};
 }
 function setSurtitle(T, A, p, r){
   const txt = toText(r.toks);
@@ -2077,7 +2206,11 @@ function renderTimeline(T){
 /* ---------- reto: la persona produce la forma, el actor espera ---------- */
 const POLS = [['aff','Afirmativa'],['neg','Negativa'],['q','Pregunta'],['qneg','Pregunta negativa']];
 const QSTY = [['inv','Inversión'],['estce','Est-ce que'],['into','Entonación']];
-const CMODES = [['write','✍️ Escribir'],['tiles','🧩 Construir'],['pick','👆 Reconocer'],['watch','👀 Solo mirar']];
+const CMODES = [['auto','⭐ Escalera automática'],['copy','Copiar'],['pick2','Elegir entre 2'],['pick','Elegir entre 4'],['tiles','Armar'],['gap','Completar'],['write','Escribir'],['watch','👀 Solo mirar']];
+/* Escalera: se sube con aciertos a la primera y se baja si cuesta */
+const LEVELS_UP = [null, {m:'copy', n:'Copiar', need:2}, {m:'pick2', n:'Elegir entre 2', need:3}, {m:'pick', n:'Elegir entre 4', need:3}, {m:'tiles', n:'Armar con fichas', need:3}, {m:'gap', n:'Completar la pieza clave', need:3}, {m:'write', n:'Escribir todo', need:99}];
+const lvState = store.get('lv', {});
+const tl = id => lvState[id] || (lvState[id] = {l:1, s:0, f:0});
 const QNAME = {estce:'pregunta con est-ce que', inv:'pregunta con inversión', into:'pregunta por entonación'};
 const SUBJ_SLOT = ['je','tu','il / elle','nous','vous','ils / elles'];
 const KEYNAME = {pres:'presente', impf:'imparfait', fut:'futuro simple', cond:'condicional', subj:'subjuntivo', pc:'passé composé', pqp:'plus-que-parfait', futant:'futur antérieur', condpasse:'condicional pasado', subjpasse:'subjuntivo pasado', proche:'futur proche', recent:'passé récent', ps:'passé simple', train:'être en train de', imper:'imperativo', ger:'gerundio', infpasse:'infinitivo pasado', subjimpf:'subjuntivo imperfecto', pa:'passé antérieur'};
@@ -2142,6 +2275,7 @@ function buildChallenge(T, A, p, polIn){
   const otherQ = [];
   if(pol.q && T.id !== 'passif') ['estce','inv','into'].filter(x => x !== pol.q).forEach(x => { const y = phrase(S.v, S.key, S.p, {...S.o, q:x}); if(y && y.length) otherQ.push({t: toText(y), name: QNAME[x]}); });
   const okSet = [...variants(coreText), ...variants(fullText.replace(/,/g, ''))];
+  if(!pol.q && T.id !== 'passif' && !['imper','ger','infpasse'].includes(T.id)){ const ns = phrase(S.v, S.key, S.p, {...S.o, noSub:true}); if(ns && ns.length) okSet.push(...variants(toText(ns))); }
   return {T, A, p, r, S, pol, J, coreJ, coreText, fullText, M, otherQ, okSet};
 }
 function accWhy(P, wrong){
@@ -2206,7 +2340,20 @@ function setupTiles(C){
   C.built = [];
 }
 function builtText(C){ return C.built.map((id, k) => { const t = C.tiles[id]; return (k && !t.j ? ' ' : '') + t.t; }).join(''); }
-function setupPick(C){ C.opts = shuffle([{t:C.coreText, ok:1}, ...shuffle(C.M).slice(0, 3)]); }
+function setupPick(C, n){ C.opts = shuffle([{t:C.coreText, ok:1}, ...(n === 2 ? C.M.slice(0, 1) : shuffle(C.M).slice(0, 3))]); }
+const GAPC = {simple:['ter','irr'], comp:['aux','acc'], peri:['aux']};
+function setupGap(C){
+  const key = C.S.key, want = COMPK.has(key) ? GAPC.comp : ['proche','recent','train'].includes(key) ? GAPC.peri : GAPC.simple;
+  const segs = [];
+  C.coreJ.forEach((t, i) => {
+    const g = want.includes(t.c), prev = segs[segs.length - 1];
+    if(g && prev && prev.gap && t.j) prev.ans += t.t;
+    else segs.push({t:t.t, j: i ? !!t.j : false, gap:g, ans: g ? t.t : ''});
+  });
+  if(!segs.some(x => x.gap)){ C.mode = 'tiles'; setupTiles(C); return; }
+  C.segs = segs;
+}
+function gapText(){ const ins = $$('[data-gap]'); let k = 0; return CH.segs.map((x, i) => (i && !x.j ? ' ' : '') + (x.gap ? (ins[k++] ? ins[k - 1].value.trim() : '') : x.t)).join(''); }
 function renderPolChips(){
   const T = TK[ST.tense];
   $('#pols').innerHTML = POLS.map(([k, n]) => `<button type="button" class="chip ${k === ST.pol ? 'on' : ''}" data-pol="${k}" ${polAllowed(T, k) ? '' : 'disabled'}>${n}</button>`).join('');
@@ -2215,7 +2362,7 @@ function renderPolChips(){
 }
 $('#pols').addEventListener('click', e => { const b = e.target.closest('[data-pol]'); if(!b || b.disabled) return; ST.pol = b.dataset.pol; ST.round = null; renderScene(true); });
 $('#qstyles').addEventListener('click', e => { const b = e.target.closest('[data-qs]'); if(!b) return; ST.qs = b.dataset.qs; ST.round = null; renderScene(true); });
-$('#cmodes').addEventListener('click', e => { const b = e.target.closest('[data-cm]'); if(!b) return; ST.cmode = b.dataset.cm; store.set('cmode', ST.cmode); renderScene(true); });
+$('#cmodes').addEventListener('click', e => { const b = e.target.closest('[data-cm]'); if(!b) return; ST.cmode = b.dataset.cm; store.set('cmode2', ST.cmode); renderScene(true); });
 function renderScene(play){
   normalizePol();
   const T = TK[ST.tense], A = AK[ST.action];
@@ -2224,9 +2371,12 @@ function renderScene(play){
   ST.recast = false;
   const p = castPerson(effPk, ST.cast), cfg = sceneCfg(T, A, ST.cast);
   CH = buildChallenge(T, A, p, polObj());
-  Object.assign(CH, {tries:0, hints:0, done: ST.cmode === 'watch', mode: ST.cmode});
+  const L = tl(T.id), mode = ST.cmode === 'auto' ? LEVELS_UP[L.l].m : ST.cmode;
+  Object.assign(CH, {tries:0, hints:0, done: mode === 'watch', mode});
   if(CH.mode === 'tiles') setupTiles(CH);
-  if(CH.mode === 'pick') setupPick(CH);
+  if(CH.mode === 'pick') setupPick(CH, 4);
+  if(CH.mode === 'pick2') setupPick(CH, 2);
+  if(CH.mode === 'gap') setupGap(CH);
   ST.lastText = CH.fullText;
   paintSurtitle();
   $('#sceneNote').innerHTML = CH.r.note ? `<p class="note">${CH.r.note}</p>` : '';
@@ -2236,9 +2386,10 @@ function renderScene(play){
 function paintSurtitle(){
   const {T, A, p, r} = CH;
   $('#surFr').innerHTML = CH.done ? `<span>${toHTML(r.toks)}</span>${sayBtn(CH.fullText)}` : `<span>${toHTMLBlank(r.toks)}</span>`;
+  const balloon = CH.done && CH.mode !== 'watch' ? `<span class="ov-balloon">${esc(piecesText(CH.coreJ))} !</span>` : '';
   $('#surEs').textContent = `${A.es} · ${T.es}${CH.pol.neg || CH.pol.q ? ' · ' + polName(CH.pol) : ''}`;
   $('#ovTag').innerHTML = `<span class="lvp">${T.lvl}</span><b>${T.fr}</b><span class="mt">${T.tag}</span>`;
-  $('[data-ov="label"]').textContent = T.id === 'passif' ? 'par ' + DISJ[p.k] : CH.S.p.k + ' · ' + (CH.S.p.who || '');
+  $('[data-ov="label"]').innerHTML = esc(T.id === 'passif' ? 'par ' + DISJ[p.k] : CH.S.p.k + ' · ' + (CH.S.p.who || '')) + balloon;
   renderTimeline(T);
 }
 function chHead(){
@@ -2250,15 +2401,18 @@ function renderChallenge(){
   const el = $('#challenge');
   if(!CH) return;
   if(CH.mode === 'watch'){ el.innerHTML = chHead() + `<p class="ch-inst">La escena te da la respuesta. Para aprenderla de verdad, cambia a <b>Escribir</b>, <b>Construir</b> o <b>Reconocer</b>: Marco solo actuará cuando tú conjugues bien.</p>` + roundGrid(); return; }
-  const inst = {write:'Escribe lo que falta en la frase, <b>con el sujeto</b>. Marco no se mueve hasta que aciertes.', tiles:'Arma la forma tocando las fichas en orden. Hay fichas trampa: no todas sirven.', pick:'¿Cuál es la forma correcta? Las otras tres son errores típicos.'}[CH.mode];
+  const inst = {copy:'Primero, mírala y cópiala tal cual. Así tu mano y tus ojos la aprenden. Escúchala con 🔊.', pick2:'¿Cuál de las dos es la correcta? Una tiene un error típico.', write:'Escribe lo que falta en la frase, con el sujeto (por ejemplo «elle a bu»).', tiles:'Arma la forma tocando las fichas en orden. Hay fichas trampa: no todas sirven.', pick:'¿Cuál es la forma correcta? Las otras tres son errores típicos.', gap:'Ya casi está hecha: escribe solo la pieza que falta en cada hueco.'}[CH.mode];
   let body = '';
+  if(CH.mode === 'copy') body = `<div class="model">${piecesHTML(CH.coreJ)} ${sayBtn(CH.fullText)}</div><div class="ch-row"><input id="chIn" autocomplete="off" spellcheck="false" autocapitalize="off" aria-label="Copia la forma"><button class="btn" type="button" data-ch="check">Listo</button></div><div class="accents">${ACC_KEYS.map(c => `<button type="button" data-acc="${c}">${c}</button>`).join('')}</div>`;
+  if(CH.mode === 'gap') body = `<div class="gapline">${CH.segs.map((x, i) => (i && !x.j ? ' ' : '') + (x.gap ? `<input data-gap="${i}" size="${Math.max(3, x.ans.length + 1)}" autocomplete="off" spellcheck="false" autocapitalize="off" aria-label="Pieza que falta">` : `<span>${esc(x.t)}</span>`)).join('')}</div><div class="ch-row"><button class="btn" type="button" data-ch="check">Comprobar</button></div><div class="accents">${ACC_KEYS.map(c => `<button type="button" data-acc="${c}">${c}</button>`).join('')}</div>`;
+  if(CH.mode === 'pick2') body = `<div class="pick" id="chPick">${CH.opts.map((o, i) => `<button type="button" class="opt big" data-pick="${i}">${esc(o.t)}</button>`).join('')}</div>`;
   if(CH.mode === 'write') body = `<div class="ch-row"><input id="chIn" autocomplete="off" spellcheck="false" autocapitalize="off" aria-label="Tu respuesta" placeholder="${CH.pol.q === 'estce' ? 'est-ce que…' : '…'}"><button class="btn" type="button" data-ch="check">Comprobar</button></div><div class="accents">${ACC_KEYS.map(c => `<button type="button" data-acc="${c}">${c}</button>`).join('')}</div>`;
   if(CH.mode === 'tiles') body = `<div class="tiles built" id="chBuilt"></div><div class="tiles" id="chPool"></div><div class="ch-row"><button class="btn" type="button" data-ch="check">Comprobar</button><button class="btn ghost sm" type="button" data-ch="clear">Borrar</button></div>`;
   if(CH.mode === 'pick') body = `<div class="pick" id="chPick">${CH.opts.map((o, i) => `<button type="button" class="opt" data-pick="${i}">${esc(o.t)}</button>`).join('')}</div>`;
-  el.innerHTML = chHead() + `<p class="ch-inst">${inst}</p>` + body + `<div class="ch-row" id="chTools"><button class="btn ghost sm" type="button" data-ch="hint">💡 Pista</button><button class="btn ghost sm" type="button" data-ch="solve">Ver solución</button></div><div id="chFb"></div><div id="chNext"></div>` + roundGrid();
+  el.innerHTML = chHead() + ladderHTML() + `<p class="ch-inst">${inst}</p>` + `<div id="chBody">${body}</div><div id="chGuide"></div>` + `<div class="ch-row" id="chTools"><button class="btn ghost sm" type="button" data-ch="guide">🧒 Ayúdame paso a paso</button><button class="btn ghost sm" type="button" data-ch="hint">💡 Pista</button><button class="btn ghost sm" type="button" data-ch="solve">Ver solución</button></div><div id="chFb"></div><div id="chNext"></div>` + roundGrid();
   if(CH.mode === 'tiles') paintTiles();
   if(CH.done) afterDone();
-  const i = $('#chIn'); if(i && ST.view === 'scene' && window.innerWidth > 900) i.focus({preventScroll:true});
+  const i = $('#chIn') || $('[data-gap]'); if(i && ST.view === 'scene' && window.innerWidth > 900) i.focus({preventScroll:true});
 }
 function paintTiles(){
   $('#chBuilt').innerHTML = CH.built.map((id, k) => { const t = CH.tiles[id]; return `<button type="button" class="tile ${k && t.j ? 'glue' : ''}" data-unt="${k}">${esc(t.t)}</button>`; }).join('');
@@ -2276,17 +2430,26 @@ function attempt(text){
   let extra = '';
   if(CH.tries === 2) extra = `<div class="hint" style="margin-top:8px">💡 ${explain(CH.S.v, CH.S.key, CH.S.p)} ${polTip(CH.pol, CH.S.key)}</div>`;
   if(CH.tries >= 3) extra = `<div class="hint" style="margin-top:8px">Mira la forma: <span class="skel">${esc(skeleton(CH))}</span></div>`;
-  fb(`<div class="fb-box no"><b>${d.near ? 'Casi.' : 'Todavía no.'}</b> ${d.why}</div>${extra}`);
+  fb(`<div class="fb-box no"><b>${d.near ? 'Casi.' : 'Todavía no.'}</b> ${d.why}</div>${extra}${d.near ? '' : `<div class="ch-row" style="margin-top:8px"><button class="btn" type="button" data-ch="guide">🧒 Vamos paso a paso</button></div>`}`);
 }
 function finish(ok){
   CH.done = true;
   const first = ok && CH.tries === 0 && CH.hints === 0;
   record(CH.T.id, first);
+  let lvMsg = '';
+  if(ST.cmode === 'auto' && CH.mode !== 'watch'){
+    const L = tl(CH.T.id);
+    if(first){ L.s++; L.f = 0; if(L.s >= LEVELS_UP[L.l].need && L.l < 6){ L.l++; L.s = 0; lvMsg = `<div class="lvup">🎉 ¡Subiste al nivel ${L.l}: <b>${LEVELS_UP[L.l].n}</b>!</div>`; } }
+    else { L.s = 0; L.f++; if(L.f >= 2 && L.l > 1){ L.l--; L.f = 0; lvMsg = `<div class="lvdown">Bajamos al nivel ${L.l} (<b>${LEVELS_UP[L.l].n}</b>) para afianzar. ¡Así se aprende!</div>`; } }
+    store.set('lv', lvState);
+  }
+  CH.lvMsg = lvMsg;
   if(ST.round) ST.round.res[ST.round.i] = first ? 'ok' : ok ? 'mid' : 'bad';
   paintSurtitle();
   if(Stage.ok){ Stage.release(); if(ok) Stage.cheerFx(); }
   say(CH.fullText);
   const why = `${explain(CH.S.v, CH.S.key, CH.S.p)} ${polTip(CH.pol, CH.S.key)}`;
+  setTimeout(() => { const f = $('#chFb'); if(f && CH.lvMsg) f.insertAdjacentHTML('beforeend', CH.lvMsg); const lad = $('#chLadder'); if(lad) lad.outerHTML = ladderHTML(); }, 0);
   fb(ok ? `<div class="fb-box ok"><b>${first ? '¡Perfecto!' : '¡Bien!'}</b> ${piecesHTML(CH.coreJ)} ${sayBtn(CH.fullText)}<br><span style="font-size:13px">${why}</span></div>` : `<div class="fb-box no"><b>Era así:</b> ${piecesHTML(CH.coreJ)} ${sayBtn(CH.fullText)}<br><span style="font-size:13px">${why}</span></div>`);
   afterDone();
   const g = $('#chGrid'); if(g) g.outerHTML = roundGrid();
@@ -2309,7 +2472,7 @@ function startRound(){
   const persons = T.id === 'imper' ? ['tu','nous','vous'] : T.id === 'passif' ? ['je','tu','il','nous'] : PERSONS.map(x => x.k);
   const pols = ['aff','neg','q'].filter(k => polAllowed(T, k));
   ST.round = {persons, pols, list: pols.flatMap(pl => persons.map(pk => ({pk, pol:pl}))), i:0, res:{}};
-  if(ST.cmode === 'watch'){ ST.cmode = 'write'; store.set('cmode', 'write'); }
+  if(ST.cmode === 'watch'){ ST.cmode = 'auto'; store.set('cmode2', 'auto'); }
   loadRoundItem();
 }
 function loadRoundItem(){
@@ -2331,7 +2494,7 @@ function endRound(){
 }
 $('#challenge').addEventListener('click', e => {
   const a = e.target.closest('[data-acc]');
-  if(a){ const i = $('#chIn'); if(i && !i.disabled){ const s = i.selectionStart ?? i.value.length; i.value = i.value.slice(0, s) + a.dataset.acc + i.value.slice(i.selectionEnd ?? s); i.focus(); i.setSelectionRange(s + 1, s + 1); } return; }
+  if(a){ const i = $('#chIn') || CH._lastGap; if(i && !i.disabled){ const s = i.selectionStart ?? i.value.length; i.value = i.value.slice(0, s) + a.dataset.acc + i.value.slice(i.selectionEnd ?? s); i.focus(); i.setSelectionRange(s + 1, s + 1); } return; }
   const tl = e.target.closest('[data-til]');
   if(tl && !CH.done){ const id = +tl.dataset.til; if(!CH.built.includes(id)){ CH.built.push(id); paintTiles(); } return; }
   const un = e.target.closest('[data-unt]');
@@ -2340,7 +2503,8 @@ $('#challenge').addEventListener('click', e => {
   if(pk && !CH.done){ const o = CH.opts[+pk.dataset.pick]; if(o.ok){ pk.classList.add('right'); finish(true); } else { CH.tries++; pk.classList.add('wrong'); pk.disabled = true; if(Stage.ok) Stage.react(false); fb(`<div class="fb-box no"><b>Esa no.</b> ${o.why}</div>`); } return; }
   const b = e.target.closest('[data-ch]'); if(!b) return;
   const act = b.dataset.ch;
-  if(act === 'check'){ if(CH.mode === 'write') attempt($('#chIn').value); else attempt(builtText(CH)); }
+  if(act === 'check'){ if(CH.mode === 'write' || CH.mode === 'copy') attempt($('#chIn').value); else if(CH.mode === 'gap') attempt(gapText()); else attempt(builtText(CH)); }
+  if(act === 'guide') startGuide();
   if(act === 'clear'){ CH.built = []; paintTiles(); }
   if(act === 'hint'){ CH.hints++; fb(`<div class="hint">💡 ${explain(CH.S.v, CH.S.key, CH.S.p)} ${polTip(CH.pol, CH.S.key)}${CH.hints > 1 ? `<br>Forma: <span class="skel">${esc(skeleton(CH))}</span>` : ''}</div>`); }
   if(act === 'solve') finish(false);
@@ -2353,8 +2517,10 @@ $('#challenge').addEventListener('click', e => {
   if(act === 'ragain'){ ST.action = pick(ACTIONS.filter(x => x.id !== ST.action)).id; renderActions(); startRound(); }
 });
 $('#challenge').addEventListener('keydown', e => {
-  if(e.key !== 'Enter' || e.target.id !== 'chIn') return;
-  e.preventDefault(); if(!CH.done) attempt(e.target.value);
+  if(e.key !== 'Enter' || !(e.target.id === 'chIn' || e.target.dataset.gap !== undefined)) return;
+  e.preventDefault(); if(CH.done) return;
+  if(CH.mode === 'gap'){ const all = $$('[data-gap]'), i = all.indexOf(e.target); if(all[i + 1] && !all[i + 1].value) all[i + 1].focus(); else attempt(gapText()); }
+  else attempt(e.target.value);
 });
 document.addEventListener('keydown', e => {
   if(e.key !== 'Enter' || ST.view !== 'scene' || !CH || !CH.done || e.target.closest('input,textarea,select')) return;
@@ -2785,6 +2951,347 @@ function renderMap(){
 }
 $('#map').addEventListener('click', e => { const b = e.target.closest('[data-mt]'); if(!b) return; ST.tense = b.dataset.mt; renderProgramme(); go('scene'); renderScene(true); });
 
+/* ---------- escalera visible y modo paso a paso ---------- */
+$('#challenge').addEventListener('focusin', e => { if(CH && e.target.dataset && e.target.dataset.gap !== undefined) CH._lastGap = e.target; });
+function ladderHTML(){
+  if(!CH || CH.mode === 'watch') return '<div id="chLadder"></div>';
+  if(ST.cmode !== 'auto') return `<div id="chLadder" class="ladder"><span class="lad-t">Modo fijo: <b>${CMODES.find(m => m[0] === ST.cmode)[1]}</b>. Con «Escalera automática» la dificultad sube sola.</span></div>`;
+  const L = tl(CH.T.id), need = LEVELS_UP[L.l].need;
+  return `<div id="chLadder" class="ladder"><div class="steps6">${[1,2,3,4,5,6].map(i => `<span class="${i < L.l ? 'did' : i === L.l ? 'cur' : ''}" title="${LEVELS_UP[i].n}">${i}</span>`).join('')}</div><span class="lad-t">Nivel ${L.l} · <b>${LEVELS_UP[L.l].n}</b>${L.l < 6 ? ` · ${L.s}/${need} aciertos a la primera para subir` : ' · ¡nivel máximo!'}</span></div>`;
+}
+const ROOTEXP = {pres:'En presente, la raíz depende del grupo: grupo 1 y 2 = infinitivo sin -er / -ir; el grupo 3 cambia.', impf:'La raíz del imparfait es la de «nous» en presente, sin -ons (nous buvons → buv-).', fut:'La raíz del futuro es el infinitivo (sin la -e final) o una raíz irregular que termina en -r.', cond:'La raíz del condicional es la misma del futuro.', subj:'La raíz del subjuntivo sale de «ils» en presente sin -ent; nous y vous copian el imparfait.', ps:'Depende del tipo de passé simple: -a, -i, -u o -in.', subjimpf:'Sale del passé simple.'};
+function guideSteps(C){
+  const {v, key, p:P} = C.S, pol = C.pol, steps = [];
+  const uniq = a => a.filter((x, i) => x && a.indexOf(x) === i);
+  const txt = pcs => pcs.map(x => x.t).join('');
+  const mk = (q, correct, wrongs, why, tip) => { const o = uniq([correct, ...wrongs]).slice(0, 4); if(o.length < 2) return; steps.push({q, tip, why, opts: shuffle(o).map(t => ({t, ok: t === correct}))}); };
+  if(COMPK.has(key) && key !== 'infpasse'){
+    const A = getVerb(v.aux === 'être' ? 'être' : 'avoir'), at = COMP[key];
+    mk(`¿Qué auxiliar usa «${v.full}»?`, v.aux, [v.aux === 'être' ? 'avoir' : 'être'], v.aux === 'être' ? (v.refl ? 'Es pronominal (lleva se): los pronominales usan être.' : `«${v.inf}» está en la casa de être (verbos de movimiento): usa être.`) : `«${v.inf}» no está en la casa de être ni es pronominal: usa avoir.`, 'Casi todos los verbos usan <b>avoir</b>. Solo usan <b>être</b> los de la casa de être (aller, venir, partir, arriver, tomber, rester…) y los que llevan <b>se</b>.');
+    const forms = [0,1,2,3,4,5].map(x => txt(conjSimple(A, at, x)));
+    mk(`Ahora conjuga «${v.aux}» en ${KEYNAME[at]} con «${P.sub}»`, forms[P.slot], forms.filter((f, i) => i !== P.slot), `Con «${P.sub}» es «${forms[P.slot]}».`, `La tabla de ${v.aux}: ${TABLE_P.map((x, i) => x.sub + ' <b>' + forms[i] + '</b>').join(' · ')}`);
+    const reg = v.inf.endsWith('er') ? v.stem + 'é' : v.inf.endsWith('ir') ? v.stem + 'i' : v.stem + 'u';
+    mk(`¿Cuál es el participio de «${v.inf}»?`, v.pp, [reg, v.P[2], v.inf], FAMK[ppFamily(v.pp)].rule, 'Piensa en su familia: los -er hacen <b>-é</b>, el grupo 2 <b>-i</b>, muchos irregulares <b>-u</b>, y hay raros como pris, fait, écrit, ouvert.');
+    if(v.aux === 'être' && !C.S.o.noAcc && P.acc !== undefined && !/\(/.test(P.acc)) mk(`Con être, el participio cambia como un adjetivo. «${P.sub}» ${P.who ? '= ' + esc(P.who) : ''}. ¿Cómo queda?`, v.pp + P.acc, ['', 'e', 's', 'es'].map(a => v.pp + a), accWhy(P, P.acc === '' ? 'e' : ''), 'Masculino: igual · femenino: <b>+e</b> · plural: <b>+s</b> · femenino plural: <b>+es</b> · grupo mixto: <b>+s</b>.');
+  } else if(['pres','impf','fut','cond','subj','ps','subjimpf'].includes(key)){
+    const pcs = conjSimple(v, key, P.slot);
+    if(pcs.length > 1){
+      const stem = pcs[0].t, end = pcs[pcs.length - 1].t;
+      mk(`¿Cuál es la raíz del ${KEYNAME[key]} de «${v.inf}»?`, stem + '-', uniq([v.stem, v.futStem, v.impfStem, v.inf, ...v.P2.map(x => x[0])]).filter(x => x !== stem).slice(0, 3).map(x => x + '-'), ROOTEXP[key], ROOTEXP[key]);
+      const ends = [0,1,2,3,4,5].map(x => { const q = conjSimple(v, key, x); return q.length > 1 ? q[q.length - 1].t : null; });
+      mk(`¿Qué terminación va con «${P.sub}»?`, '-' + end, ends.filter(e => e && e !== end).map(e => '-' + e), `Con «${P.sub}» la terminación es -${end}.`, `Terminaciones: ${TABLE_P.map((x, i) => x.sub + ' <b>-' + (ends[i] || '') + '</b>').join(' · ')}`);
+    } else {
+      const forms = [0,1,2,3,4,5].map(x => txt(conjSimple(v, key, x)));
+      mk(`«${v.inf}» es irregular aquí. ¿Cuál es la forma de «${P.sub}»?`, forms[P.slot], forms.filter((f, i) => i !== P.slot), 'Esta forma hay que memorizarla: repítela en voz alta tres veces.', `La tabla: ${TABLE_P.map((x, i) => x.sub + ' <b>' + forms[i] + '</b>').join(' · ')}`);
+    }
+  } else if(['proche','recent','train'].includes(key)){
+    const H = getVerb({proche:'aller', recent:'venir', train:'être'}[key]), forms = [0,1,2,3,4,5].map(x => txt(conjSimple(H, 'pres', x)));
+    mk(`Primero, «${H.inf}» en presente con «${P.sub}»`, forms[P.slot], forms.filter((f, i) => i !== P.slot), `Con «${P.sub}»: ${forms[P.slot]}.`, `La tabla de ${H.inf}: ${TABLE_P.map((x, i) => x.sub + ' <b>' + forms[i] + '</b>').join(' · ')}`);
+    mk(`Y después, ¿cómo va «${v.inf}»?`, v.full, [v.P[P.slot], v.pp].filter(x => x !== v.full), 'El segundo verbo va en infinitivo: sin conjugar.', 'Dos verbos seguidos: el primero se conjuga y el segundo se queda en <b>infinitivo</b>.');
+  }
+  const coreT = C.coreText;
+  if(pol.neg){
+    const noNe = piecesText(C.coreJ.filter(t => !(t.c === 'ne' && t.t !== 'pas')));
+    const b = C.coreJ.filter(t => t.t !== 'pas'); b.push({t:'pas', c:'ne'}); const pasEnd = piecesText(b);
+    mk('¿Dónde van <b>ne</b> y <b>pas</b>?', coreT, [noNe, pasEnd], 'ne va antes del verbo conjugado (o del auxiliar) y pas justo después.', 'La negación es un sándwich: <b>ne</b> + verbo conjugado + <b>pas</b>. Delante de vocal, ne → n’.');
+  }
+  if(pol.q === 'inv' && C.S.p.k !== 'je'){
+    const noT = piecesText(C.coreJ.filter(t => t.t !== '-t')), spaced = coreT.replace(/-t-/g, ' ').replace(/-/g, ' ');
+    mk('¿Cómo se forma la pregunta con inversión?', coreT, [noT, spaced], 'El pronombre pasa detrás del verbo con guion, y entre dos vocales se pone -t-.', 'Inversión: <b>verbo-pronombre</b> (manges-tu, a-t-elle).');
+  }
+  if(!steps.length) mk('¿Cuál es la forma correcta?', coreT, C.M.slice(0, 3).map(m => m.t), 'Mira la ficha del tiempo para repasar la regla.', '');
+  return steps;
+}
+function startGuide(){
+  if(!CH || CH.done) return;
+  CH.hints++; CH.g = {i:0, steps: guideSteps(CH), built:[]};
+  $('#chBody').hidden = true; $('#chTools').hidden = true; fb('');
+  paintGuide();
+}
+function paintGuide(){
+  const G = CH.g, el = $('#chGuide');
+  if(G.i >= G.steps.length){ el.innerHTML = ''; $('#chBody').hidden = false; finish(true); return; }
+  const st = G.steps[G.i];
+  el.innerHTML = `<div class="guide"><div class="g-prog">${G.steps.map((x, i) => `<span class="${i < G.i ? 'did' : i === G.i ? 'cur' : ''}">${i + 1}</span>`).join('')}</div>
+    ${G.built.length ? `<div class="g-built">Vamos armando: ${G.built.map(b => `<b>${esc(b)}</b>`).join(' + ')}</div>` : ''}
+    <p class="g-q">${st.q}</p>${st.tip ? `<p class="g-tip">💡 ${st.tip}</p>` : ''}
+    <div class="pick">${st.opts.map((o, i) => `<button type="button" class="opt big" data-gopt="${i}">${esc(o.t)}</button>`).join('')}</div><div id="gFb"></div></div>`;
+}
+$('#challenge').addEventListener('click', e => {
+  const b = e.target.closest('[data-gopt]'); if(!b || !CH || !CH.g) return;
+  const st = CH.g.steps[CH.g.i], o = st.opts[+b.dataset.gopt];
+  if(o.ok){ b.classList.add('right'); say(o.t.replace(/^-|-$/g, '')); CH.g.built.push(o.t); setTimeout(() => { CH.g.i++; paintGuide(); }, 650); }
+  else { b.classList.add('wrong'); b.disabled = true; $('#gFb').innerHTML = `<div class="fb-box no"><b>Esa no.</b> ${st.why}</div>`; if(Stage.ok) Stage.react(false); }
+});
+/* =====================================================================
+   HISTORIETAS: tiras de 2-3 viñetas que muestran CUÁNDO pasa la acción
+   ===================================================================== */
+const KID = {
+  marco:{skin:'#f1c7a5', hair:'#3b2414', style:'short', top:'#1f3c88', stripes:1, bottom:'#2b2f3a', beret:1},
+  theo:{skin:'#8d5a3b', hair:'#15100c', style:'curly', top:'#f08a3c', bottom:'#34495e'},
+  hugo:{skin:'#c58c63', hair:'#2a1a10', style:'short', top:'#2f7d6d', bottom:'#3b3b46', glasses:1},
+  lea:{skin:'#d9a37e', hair:'#24150f', style:'long', top:'#2f9e6b', bottom:'#d9a37e', skirt:1},
+  ines:{skin:'#f3cfb3', hair:'#b5652b', style:'bun', top:'#8a5cd6', bottom:'#2c3e66'},
+  camille:{skin:'#f0c4a8', hair:'#7a3b1d', style:'bob', top:'#e0525f', bottom:'#2c3e66'}
+};
+/* acción → objeto, onomatopeya y resultado (lo que queda después) */
+const COMIC = {
+  reveiller:['⏰','DRIIING !','☀️'], lever:['🛏️','HOP !','🌅'], habiller:['👕','ZIIIP !','✨'], musique:['🎧','LA LA LA ♪','🎶'], dormir:['🛏️','ZZZ…','😌'], coucher:['🛏️','OUAAAH…','🌙'],
+  laver:['🧼','FLIC FLAC','✨'], brosser:['🪥','FROTT FROTT','😁'], manger:['🍎','CRONCH !','😋'], faire:['🍳','PSHHH !','🍲'], avoir:['🍽️','GRRR…','😩'], remplir:['🥛','GLOU GLOU','🥛'], mettre:['🍴','CLING !','🍽️'],
+  tele:['📺','HA HA !','📺'], lire:['📖','FLIP !','📚'], jouer:['🎸','TWANG !','🎶'], finir:['🧩','CLIC !','🏆'], rester:['🏠','AHHH…','🛋️'], ouvrir:['🚪','CRIIIC !','🚪'],
+  boire:['☕','SLURP !','😌'], parler:['💬','BLA BLA','💬'], entrer:['🚪','DING !','☕'], aller:['🎬','TAP TAP','🍿'], attendre:['🚏','TIC TAC','🚌'], tomber:['🍌','BOUM !','🤕'], etre:['⌚','VITE !','😱'],
+  depecher:['⏱️','VITE VITE !','💦'], sortir:['👋','SALUT !','🌃'], prendre:['📷','CLIC !','🖼️'], voir:['🗼','WAOUH !','😍'], courir:['👟','TAP TAP TAP','💦'], promener:['🌳','CUI CUI','😌'],
+  partir:['🧳','TCHOU TCHOU','✈️'], arriver:['🚉','PSHHH','👋'], acheter:['🥖','MERCI !','🥖'], choisir:['🍰','HMMM…','🍰'], ecrire:['✉️','GRATT GRATT','✉️'], commencer:['💻','TAC TAC','✅'],
+  reussir:['📝','YOUPI !','🎓'], nager:['🌊','SPLASH !','🏖️'], danser:['💃','BOUM BOUM','🎉'], chanter:['🎤','LA LA LAAA','🎶'], venir:['🎈','COUCOU !','🎉'], applaudir:['👏','CLAP CLAP','👏'], recevoir:['🎁','OH !','😍'], amuser:['🥳','HA HA HA','🎉']
+};
+function kidSVG(k, pose, x, s, flip){
+  const L = KID[k] || KID.marco, st = '#1d1d24', sw = 2.4;
+  const arms = {wait:'M34 74 L28 108 M66 74 L72 108', think:'M34 74 L30 106 M66 74 L60 92 L52 66', do:'M34 74 L20 60 M66 74 L84 58', done:'M34 76 L30 94 L46 98 M66 76 L70 94 L54 98', cheer:'M34 72 L16 40 M66 72 L84 40', surprise:'M34 74 L18 66 M66 74 L82 66', sad:'M34 74 L32 108 M66 74 L68 108'}[pose] || 'M34 74 L28 108 M66 74 L72 108';
+  const legs = pose === 'do' || pose === 'cheer' ? 'M44 112 L38 150 M56 112 L64 150' : 'M44 112 L42 150 M56 112 L58 150';
+  const eyes = pose === 'done' || pose === 'cheer' ? `<path d="M39 41 q4 -5 8 0 M53 41 q4 -5 8 0" fill="none" stroke="${st}" stroke-width="2.2" stroke-linecap="round"/>`
+    : pose === 'surprise' ? `<circle cx="43" cy="40" r="4" fill="#fff" stroke="${st}" stroke-width="1.8"/><circle cx="57" cy="40" r="4" fill="#fff" stroke="${st}" stroke-width="1.8"/><circle cx="43" cy="40" r="1.6" fill="${st}"/><circle cx="57" cy="40" r="1.6" fill="${st}"/>`
+    : pose === 'think' || pose === 'wait' ? `<circle cx="45" cy="38" r="2.3" fill="${st}"/><circle cx="59" cy="38" r="2.3" fill="${st}"/>`
+    : `<circle cx="43" cy="40" r="2.3" fill="${st}"/><circle cx="57" cy="40" r="2.3" fill="${st}"/>`;
+  const mouth = pose === 'do' || pose === 'surprise' ? `<ellipse cx="50" cy="53" rx="4" ry="${pose === 'surprise' ? 5 : 3.5}" fill="#7a2626"/>`
+    : pose === 'done' || pose === 'cheer' ? `<path d="M41 50 q9 9 18 0" fill="#7a2626" stroke="${st}" stroke-width="1.6"/>`
+    : pose === 'sad' ? `<path d="M43 55 q7 -6 14 0" fill="none" stroke="${st}" stroke-width="2"/>`
+    : pose === 'think' ? `<path d="M45 53 h9" stroke="${st}" stroke-width="2" stroke-linecap="round"/>` : `<path d="M44 51 q6 4 12 0" fill="none" stroke="${st}" stroke-width="2" stroke-linecap="round"/>`;
+  const hair = {short:`<path d="M26 40 q0 -22 24 -22 q24 0 24 22 q-6 -10 -24 -10 q-18 0 -24 10z" fill="${L.hair}"/>`,
+    long:`<path d="M24 44 q0 -26 26 -26 q26 0 26 26 l2 30 q-8 4 -10 -2 l-2 -22 q-16 -12 -32 0 l-2 22 q-2 6 -10 2z" fill="${L.hair}"/>`,
+    curly:[...Array(9)].map((_, i) => `<circle cx="${30 + i*5}" cy="${22 + Math.abs(4 - i)*1.6}" r="7" fill="${L.hair}"/>`).join(''),
+    bun:`<path d="M26 40 q0 -22 24 -22 q24 0 24 22 q-6 -10 -24 -10 q-18 0 -24 10z" fill="${L.hair}"/><circle cx="50" cy="14" r="8" fill="${L.hair}"/>`,
+    bob:`<path d="M23 50 q-2 -32 27 -32 q29 0 27 32 q-4 2 -6 -6 q-2 -14 -21 -16 q-19 2 -21 16 q-2 8 -6 6z" fill="${L.hair}"/>`}[L.style];
+  const stripes = L.stripes ? [0,1,2,3].map(i => `<line x1="33" x2="67" y1="${76 + i*9}" y2="${76 + i*9}" stroke="#f4f4f0" stroke-width="4"/>`).join('') : '';
+  const skirt = L.skirt ? `<path d="M32 98 L26 122 L74 122 L68 98z" fill="${L.top}" stroke="${st}" stroke-width="${sw}"/>` : '';
+  const legc = L.skirt ? L.skin : L.bottom;
+  return `<g transform="translate(${x},0) scale(${s}) ${flip ? 'translate(100,0) scale(-1,1)' : ''}">
+    <path d="${legs}" stroke="${legc}" stroke-width="9" stroke-linecap="round"/><path d="${legs}" stroke="${st}" stroke-width="1.2" fill="none" opacity=".35"/>
+    <ellipse cx="38" cy="152" rx="8" ry="4" fill="${st}"/><ellipse cx="62" cy="152" rx="8" ry="4" fill="${st}"/>
+    <rect x="32" y="66" width="36" height="48" rx="13" fill="${L.top}" stroke="${st}" stroke-width="${sw}"/>${stripes}${skirt}
+    <path d="${arms}" stroke="${L.skin}" stroke-width="8" stroke-linecap="round" fill="none"/><path d="${arms}" stroke="${st}" stroke-width="1" fill="none" opacity=".35"/>
+    <circle cx="50" cy="42" r="24" fill="${L.skin}" stroke="${st}" stroke-width="${sw}"/>${hair}
+    ${L.beret ? `<ellipse cx="54" cy="19" rx="18" ry="6" fill="#c0283a" transform="rotate(-12 54 19)"/><circle cx="58" cy="12" r="2.5" fill="#c0283a"/>` : ''}
+    ${eyes}${mouth}<circle cx="35" cy="48" r="4" fill="#f29a9a" opacity=".6"/><circle cx="65" cy="48" r="4" fill="#f29a9a" opacity=".6"/>
+    ${L.glasses ? `<circle cx="43" cy="40" r="7" fill="none" stroke="${st}" stroke-width="2"/><circle cx="57" cy="40" r="7" fill="none" stroke="${st}" stroke-width="2"/><path d="M50 40 h0" stroke="${st}"/>` : ''}
+  </g>`;
+}
+function burst(x, y, text, rot){
+  const pts = [...Array(18)].map((_, i) => { const r = i % 2 ? 20 : 31, a = i/18*Math.PI*2; return `${(x + Math.cos(a)*r*1.5).toFixed(1)},${(y + Math.sin(a)*r).toFixed(1)}`; }).join(' ');
+  return `<g transform="rotate(${rot || -8} ${x} ${y})"><polygon points="${pts}" fill="#ffd23d" stroke="#1d1d24" stroke-width="2.5"/><text x="${x}" y="${y + 5}" text-anchor="middle" class="onoma" font-size="15">${esc(text)}</text></g>`;
+}
+function scene(keys, pose, act, mood){
+  const n = keys.length, s = n === 1 ? 1.15 : n === 2 ? 0.98 : 0.82, w = 100*s, gapx = n === 1 ? 0 : 6;
+  const total = n*w + (n - 1)*gapx, x0 = 150 - total/2;
+  const [prop, snd, after] = COMIC[act] || ['❓','…','✓'];
+  let art = '';
+  if(mood === 'past') art += `<rect x="0" y="0" width="300" height="210" fill="url(#dotsPast)"/>`;
+  if(mood === 'now') art += `<rect x="0" y="0" width="300" height="210" fill="url(#dotsNow)"/><circle cx="262" cy="34" r="20" fill="#ffd23d" stroke="#1d1d24" stroke-width="2"/>`;
+  if(mood === 'fut') art += `<rect x="0" y="0" width="300" height="210" fill="#1d2b5e"/>${[...Array(18)].map((_, i) => `<circle cx="${(i*53) % 300}" cy="${(i*37) % 120}" r="${1 + i % 2}" fill="#fff"/>`).join('')}<path d="M248 22 a16 16 0 1 0 14 24 a12 12 0 1 1 -14 -24z" fill="#f5f1d8"/>`;
+  if(mood === 'dream') art += `<rect x="0" y="0" width="300" height="210" fill="#f7d9ec"/>`;
+  art += `<line x1="0" y1="${210 - 8}" x2="300" y2="${210 - 8}" stroke="#1d1d24" stroke-width="2.5"/>`;
+  const yoff = 210 - 8 - 156*s;
+  art += `<g transform="translate(0 ${yoff.toFixed(1)})">${keys.map((k, i) => kidSVG(k, pose, x0 + i*(w + gapx), s, i % 2 === 1 && n > 1)).join('')}</g>`;
+  if(pose === 'do') art += burst(56, 30, snd, -10) + `<text x="${x0 + total + 6}" y="${yoff + 70*s}" font-size="34">${prop}</text>`;
+  if(pose === 'done' || pose === 'cheer') art += `<text x="${x0 + total + 4}" y="${yoff + 64*s}" font-size="34">${after}</text><g transform="rotate(-12 54 44)"><rect x="18" y="28" width="74" height="30" rx="5" fill="#14894b" stroke="#fff" stroke-width="2.5"/><text x="55" y="49" text-anchor="middle" class="stampt">✓ FINI</text></g>`;
+  if(pose === 'think' || pose === 'wait'){ const bx = Math.min(255, x0 + total + 34); art += `<circle cx="${bx - 34}" cy="${yoff + 20}" r="4" fill="#fff" stroke="#1d1d24" stroke-width="2"/><circle cx="${bx - 22}" cy="${yoff + 6}" r="6" fill="#fff" stroke="#1d1d24" stroke-width="2"/><ellipse cx="${bx}" cy="${Math.max(30, yoff - 22)}" rx="34" ry="24" fill="#fff" stroke="#1d1d24" stroke-width="2.5" stroke-dasharray="${mood === 'fut' ? '5 4' : '0'}"/><text x="${bx}" y="${Math.max(30, yoff - 22) + 11}" text-anchor="middle" font-size="28">${prop}</text>`; }
+  if(pose === 'surprise') art += burst(238, 30, 'DRIIING !', 8) + `<text x="232" y="120" font-size="34">☎️</text>`;
+  if(pose === 'sad') art += `<text x="230" y="70" font-size="34">⌛</text>`;
+  return `<svg class="cart" viewBox="0 0 300 210" role="img" aria-label="viñeta">${art}</svg>`;
+}
+const COMIC_DEFS = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="dotsPast" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#f1dfb8"/><circle cx="4" cy="4" r="1.4" fill="#d9bf8a"/></pattern>
+  <pattern id="dotsNow" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#fff4cf"/><circle cx="4" cy="4" r="1.3" fill="#ffe08a"/></pattern></defs></svg>`;
+const STRIPS = [
+  {id:'ppf', n:'Pasado · Presente · Futuro', lvl:'A1', es:'La misma acción en tres momentos. Fíjate en el dibujo: en el pasado ya está HECHO, en el presente está PASANDO y en el futuro TODAVÍA NO pasa.'},
+  {id:'habit', n:'Costumbre o una vez', lvl:'A2', es:'El imparfait cuenta lo que pasaba siempre (como un video que se repite). El passé composé cuenta algo que pasó una vez (como una foto).'},
+  {id:'video', n:'Estaba… cuando ¡PUM!', lvl:'A2', es:'El imparfait pone el fondo (lo que estaba pasando). El passé composé es lo que interrumpe de golpe.'},
+  {id:'cond', n:'Lo real y lo soñado', lvl:'B1', es:'El presente cuenta la realidad. El condicional cuenta lo que pasaría en un mundo imaginario.'}
+];
+const CM = {strip:'ppf', act:'manger', pk:'elle', quiz:false, cast:null, q:null, score:0};
+function cTok(v, key, p, pre, A, post, o){
+  const T = [];
+  if(pre) T.push(W(pre, 'x', {el: /que$/.test(pre) ? 1 : 0}));
+  T.push(...phrase(v, key, p, o || {}).map(t => ({...t, core:1})), ...compToks(A, o && o.neg));
+  if(post) T.push(W(post, 'evt'));
+  T.push(W('.', 'x', {j:1}));
+  return cap(T);
+}
+function stripPanels(){
+  const A = AK[CM.act], v = getVerb(A.v), keys = CM.cast.keys, P = castPerson(CM.pk, CM.cast), lvlA1 = lvlIdx(ST.level) < 1;
+  const av = getVerb('avoir');
+  if(CM.strip === 'ppf') return [
+    {cls:'past', cap:'HIER', es:'Ayer · ya pasó', pose:'done', mood:'past', key:'pc', name:'passé composé', toks:cTok(v, 'pc', P, 'Hier,', A)},
+    {cls:'now', cap:'MAINTENANT', es:'Ahora · está pasando', pose:'do', mood:'now', key:'pres', name:'présent', live:1, toks:cTok(v, 'pres', P, 'Maintenant,', A)},
+    lvlA1 ? {cls:'fut', cap:'DANS 5 MINUTES', es:'Pronto · todavía no', pose:'think', mood:'fut', key:'proche', name:'futur proche', toks:cTok(v, 'proche', P, 'Dans cinq minutes,', A)}
+          : {cls:'fut', cap:'DEMAIN', es:'Mañana · todavía no', pose:'think', mood:'fut', key:'fut', name:'futur simple', toks:cTok(v, 'fut', P, 'Demain,', A)}];
+  if(CM.strip === 'habit') return [
+    {cls:'past habit', cap:'AVANT… TOUS LES JOURS', es:'Antes · se repetía', pose:'do', mood:'past', key:'impf', name:'imparfait = costumbre (video)', toks:cTok(v, 'impf', P, 'Avant,', A, 'tous les jours'), habit:1},
+    {cls:'past', cap:'HIER, UNE FOIS', es:'Ayer · una sola vez', pose:'done', mood:'past', key:'pc', name:'passé composé = una vez (foto)', toks:cTok(v, 'pc', P, 'Hier,', A)}];
+  if(CM.strip === 'video') return [
+    {cls:'past video', cap:'HIER, PENDANT CE TEMPS…', es:'Lo que estaba pasando', pose:'do', mood:'past', key:'impf', name:'imparfait = el fondo', toks:(() => { const t = cTok(v, 'impf', P, '', A); t.pop(); t.push(W('…', 'x', {j:1})); return cap(t); })()},
+    {cls:'past', cap:'… ET SOUDAIN !', es:'Lo que pasó de golpe', pose:'surprise', mood:'past', key:'pcfix', name:'passé composé = el evento', toks:cap([W('…quand le téléphone', 'x'), W('a', 'aux', {core:1}), W('sonné', 'pp', {core:1, j:0}), W('!', 'x')])}];
+  return [
+    {cls:'now', cap:'EN VRAI', es:'La realidad', pose:'sad', mood:'now', key:'presneg', name:'présent (negativo)', toks:cap([...phrase(av, 'pres', P, {neg:true}).map(t => ({...t, core:1})), W('le temps.', 'x')])},
+    {cls:'dream', cap:'ET SI… ?', es:'Lo imaginado', pose:'cheer', mood:'dream', key:'cond', name:'conditionnel', toks:cap([W('Si', 'x', {el:'si'}), ...phrase(av, 'impf', P), W('le temps,', 'x'), ...phrase(v, 'cond', P).map(t => ({...t, core:1})), ...compToks(A), W('.', 'x', {j:1})])}];
+}
+function renderComic(){
+  if(!CM.cast || CM.cast.pk !== CM.pk) CM.cast = rollCast(CM.pk, AK[CM.act]);
+  $('#cStrip').innerHTML = STRIPS.map(s => `<button type="button" class="chip ${s.id === CM.strip ? 'on' : ''}" data-cs="${s.id}">${s.n} <small>${s.lvl}</small></button>`).join('');
+  $('#cPers').innerHTML = PERSONS.map(p => `<button type="button" class="chip sm ${p.k === CM.pk ? 'on' : ''}" data-cp="${p.k}">${p.k}</button>`).join('');
+  $('#cAct').innerHTML = SITS.map(si => `<optgroup label="${si.emo} ${si.fr}">${ACTIONS.filter(a => a.sit === si.id).map(a => `<option value="${a.id}" ${a.id === CM.act ? 'selected' : ''}>${getVerb(a.v).full} ${a.c} · ${a.es}</option>`).join('')}</optgroup>`).join('');
+  $('#cMode').innerHTML = [['read','📖 Leer y escuchar'],['quiz','✏️ Completa los globos']].map(([k, n]) => `<button type="button" class="chip ${(k === 'quiz') === CM.quiz ? 'on' : ''}" data-cm2="${k}">${n}</button>`).join('');
+  const S0 = STRIPS.find(s => s.id === CM.strip), panels = stripPanels();
+  if(CM.quiz && (!CM.q || CM.q.sig !== CM.strip + CM.act + CM.pk)){ const i = Math.floor(Math.random()*panels.length); CM.q = {sig: CM.strip + CM.act + CM.pk, i, done:false, opts:null}; }
+  $('#stripHelp').innerHTML = S0.es;
+  $('#strip').innerHTML = COMIC_DEFS + panels.map((pn, i) => {
+    const txt = toText(pn.toks), blank = CM.quiz && CM.q.i === i && !CM.q.done;
+    const art = pn.habit ? `<div class="habit3">${['lun.','mar.','mié.'].map(d => `<div><span>${d}</span>${scene(CM.cast.keys, 'do', CM.act, 'past')}</div>`).join('')}</div>` : scene(CM.cast.keys, pn.pose, CM.act, pn.mood);
+    return `<figure class="cpanel ${pn.cls}"><div class="ccap">${pn.cap}<small>${pn.es}</small></div>${pn.live ? '<span class="clive">● EN DIRECT</span>' : ''}${pn.cls.includes('video') ? '<span class="clive vid">▶ VIDEO</span>' : ''}
+      <div class="balloon ${blank ? 'blank' : ''}">${blank ? toHTMLBlank(pn.toks) : toHTML(pn.toks)} ${blank ? '' : sayBtn(txt)}</div>${art}<figcaption>${pn.name}</figcaption></figure>`;
+  }).join('');
+  renderComicQuiz(panels);
+}
+function renderComicQuiz(panels){
+  const box = $('#cQuiz');
+  if(!CM.quiz){ box.innerHTML = `<p class="guess">Toca 🔊 en cada globo para oír la frase. Luego pasa a «Completa los globos» para practicar.</p>`; return; }
+  const pn = panels[CM.q.i], J = joinTokens(pn.toks), core = piecesText(J.filter(t => t.core));
+  if(!CM.q.opts){
+    const A = AK[CM.act], v = getVerb(A.v), P = castPerson(CM.pk, CM.cast), alts = new Set();
+    ['pres','impf','pc','fut','cond','proche'].forEach(k => { const t = phrase(v, k, P); if(t) alts.add(toText(t)); });
+    if(pn.key === 'pcfix') ['sonnait','sonne','sonnera'].forEach(f => alts.add(f));
+    if(pn.key === 'presneg') ['a','n’a','avait'].forEach(f => alts.add(f));
+    const wrong = [...alts].filter(a => norm(a) !== norm(core));
+    const fixed = pn.key === 'pcfix' ? ['a sonné','sonnait','sonnera'] : pn.key === 'presneg' ? [core, 'n’avait pas', 'a'] : null;
+    CM.q.opts = shuffle(fixed || [core, ...shuffle(wrong).slice(0, 2)]);
+  }
+  box.innerHTML = `<div class="panel cq"><p class="g-q">¿Qué va en el globo vacío? <small>(${pn.name})</small></p><div class="pick">${CM.q.opts.map((o, i) => `<button type="button" class="opt big" data-cq="${i}" ${CM.q.done ? 'disabled' : ''}>${esc(o)}</button>`).join('')}</div><div id="cqFb"></div>${CM.q.done ? `<div class="ch-row" style="margin-top:8px"><button class="btn" type="button" id="cqNext">Otra historieta ▶</button></div>` : ''}</div>`;
+  box.dataset.core = core;
+}
+$('#v-comic').addEventListener('click', e => {
+  const t = e.target.closest('[data-cs],[data-cp],[data-cm2],[data-cq],#cRand,#cqNext'); if(!t) return;
+  if(t.dataset.cs){ CM.strip = t.dataset.cs; CM.q = null; }
+  if(t.dataset.cp){ CM.pk = t.dataset.cp; CM.cast = null; CM.q = null; }
+  if(t.dataset.cm2){ CM.quiz = t.dataset.cm2 === 'quiz'; CM.q = null; }
+  if(t.id === 'cRand' || t.id === 'cqNext'){ CM.act = pick(ACTIONS).id; CM.pk = pick(PERSONS).k; CM.cast = null; CM.q = null; if(t.id === 'cqNext') CM.strip = pick(STRIPS.filter(s => lvlIdx(s.lvl) <= lvlIdx(ST.level))).id; }
+  if(t.dataset.cq !== undefined){
+    const o = CM.q.opts[+t.dataset.cq], core = $('#cQuiz').dataset.core;
+    if(norm(o) === norm(core)){ CM.q.done = true; CM.score++; renderComic(); const f = $('#cqFb'); if(f) f.innerHTML = `<div class="fb-box ok"><b>¡BRAVO !</b> Mira el globo completo y escúchalo.</div>`; const b = $('.balloon:not(.blank) [data-say]', ); const panel = $$('.cpanel')[CM.q.i]; if(panel){ panel.classList.add('pop'); const sb = panel.querySelector('[data-say]'); if(sb) say(sb.dataset.say); } return; }
+    t.classList.add('wrong'); t.disabled = true; $('#cqFb').innerHTML = `<div class="fb-box no"><b>Esa no.</b> Mira el cartel de arriba de la viñeta (${esc($$('.cpanel .ccap')[CM.q.i].firstChild.textContent)}): te dice cuándo pasa. ${esc(stripPanels()[CM.q.i].name)}.</div>`; return;
+  }
+  renderComic();
+});
+$('#cAct').addEventListener('change', e => { CM.act = e.target.value; CM.cast = null; CM.q = null; renderComic(); });
+/* =====================================================================
+   JUEGOS: sopa de letras, ahorcado de globos, memoria
+   ===================================================================== */
+const GM = {game:'ws', tense:'impf', verb:'finir', stars:store.get('gstars', 0), st:null};
+const GT = [['pres','Présent'],['impf','Imparfait'],['fut','Futur'],['cond','Conditionnel'],['subj','Subjonctif'],['pp','Participios']];
+const GAMES = [['ws','🔍 Sopa de letras'],['hm','🎈 Ahorcado'],['mem','🃏 Memoria']];
+const GVERBS = ['parler','manger','finir','choisir','boire','prendre','faire','aller','venir','avoir','être','dormir','lire','écrire','voir','partir','vouloir','pouvoir','attendre','danser','chanter','jouer','acheter','commencer'];
+const up = s => s.toLocaleUpperCase('fr');
+function gEntries(){
+  if(GM.tense === 'pp'){ const vs = shuffle(PP_POOL.filter(x => !/^s(e |’)/.test(x))).slice(0, 6); return vs.map(x => { const v = getVerb(x); return {form:v.pp, clue:`${v.inf} → participio`, say: toText(phrase(v, 'pc', PK.je)), slots:[]}; }); }
+  const v = getVerb(GM.verb), out = [];
+  TABLE_P.forEach(p => { const f = conjSimple(v, GM.tense, p.slot).map(x => x.t).join(''); const e = out.find(o => o.form === f); if(e) e.subs.push(p.sub); else out.push({form:f, subs:[p.sub], slot:p.slot}); });
+  return out.map(o => ({form:o.form, clue:`${o.subs.join(' · ')} ___`, say: TABLE_P.filter(p => o.subs.includes(p.sub)).map(p => toText(phrase(v, GM.tense, PK[p.k]))).join(', ')}));
+}
+function gHead(){
+  return `<div class="ctl-row"><span class="ctl-lab">Juego</span><div class="chips">${GAMES.map(([k, n]) => `<button type="button" class="chip ${k === GM.game ? 'on' : ''}" data-gg="${k}">${n}</button>`).join('')}</div></div>
+  <div class="ctl-row"><span class="ctl-lab">Tiempo</span><div class="chips">${GT.map(([k, n]) => `<button type="button" class="chip sm ${k === GM.tense ? 'on' : ''}" data-gt="${k}">${n}</button>`).join('')}</div></div>
+  ${GM.tense === 'pp' ? '' : `<div class="ctl-row"><span class="ctl-lab">Verbo</span><select id="gVerb">${GVERBS.map(x => `<option ${x === GM.verb ? 'selected' : ''}>${x}</option>`).join('')}</select><span class="hintline">${esc(getVerb(GM.verb).es)}</span></div>`}
+  <div class="ctl-row"><button class="btn" type="button" data-gnew>🎲 Nuevo juego</button><span class="score"><span>Estrellas <b>${GM.stars}</b> ⭐</span></span></div>`;
+}
+function star(n){ GM.stars += n || 1; store.set('gstars', GM.stars); }
+function renderGames(){
+  $('#gCtl').innerHTML = gHead();
+  if(!GM.st || GM.st.game !== GM.game || GM.st.sig !== GM.tense + GM.verb) newGame();
+  ({ws:paintWS, hm:paintHM, mem:paintMem})[GM.game]();
+}
+function newGame(){
+  const E = gEntries();
+  GM.st = {game:GM.game, sig:GM.tense + GM.verb, E};
+  if(GM.game === 'ws') buildWS(GM.st);
+  if(GM.game === 'hm'){ const e = pick(E); Object.assign(GM.st, {e, word: up(e.form), guessed: new Set(), miss:0, over:false}); }
+  if(GM.game === 'mem'){ const pairs = E.slice(0, 6); GM.st.cards = shuffle(pairs.flatMap((e, i) => [{id:i, txt:e.clue.replace(' ___', '').replace(' → participio', ''), kind:'q'}, {id:i, txt:e.form, kind:'a'}])); Object.assign(GM.st, {open:[], matched:new Set(), tries:0}); }
+}
+/* --- sopa de letras --- */
+function buildWS(st){
+  const words = st.E.map(e => up(e.form)).filter(w => /^[A-ZÀ-ÖØ-ÝŒ]+$/.test(w)), N = Math.min(12, Math.max(9, ...words.map(w => w.length + 1)));
+  const dirs = lvlIdx(ST.level) >= 2 ? [[0,1],[1,0],[1,1]] : [[0,1],[1,0]];
+  const G = Array.from({length:N}, () => Array(N).fill('')), placed = [];
+  words.sort((a, b) => b.length - a.length).forEach(w => {
+    for(let t = 0; t < 300; t++){
+      const [dr, dc] = pick(dirs), r = Math.floor(Math.random()*(N - dr*(w.length - 1))), c = Math.floor(Math.random()*(N - dc*(w.length - 1)));
+      let ok = true; for(let i = 0; i < w.length; i++){ const ch = G[r + dr*i][c + dc*i]; if(ch && ch !== w[i]){ ok = false; break; } }
+      if(!ok) continue;
+      for(let i = 0; i < w.length; i++) G[r + dr*i][c + dc*i] = w[i];
+      placed.push({w, cells:[...Array(w.length)].map((_, i) => (r + dr*i)*N + c + dc*i)}); break;
+    }
+  });
+  const fill = 'AAEEEEIIOOUUSSRRNNTTLLMMCDPVBFGÉ';
+  for(let r = 0; r < N; r++) for(let c = 0; c < N; c++) if(!G[r][c]) G[r][c] = fill[Math.floor(Math.random()*fill.length)];
+  Object.assign(st, {N, G, placed, found:new Set(), sel:null, flash:null});
+}
+function paintWS(){
+  const st = GM.st, foundCells = new Set(st.placed.filter(p => st.found.has(p.w)).flatMap(p => p.cells));
+  const done = st.found.size === st.placed.length;
+  $('#gBoard').innerHTML = `<div class="ws-wrap"><div class="ws-grid" style="--n:${st.N}">${st.G.flat().map((ch, i) => `<button type="button" class="ws-c ${foundCells.has(i) ? 'f' : ''} ${st.sel === i ? 's' : ''} ${st.flash && st.flash.includes(i) ? 'x' : ''}" data-ws="${i}">${ch}</button>`).join('')}</div>
+    <div class="ws-list"><div class="sec-h">${GM.tense === 'pp' ? 'Encuentra los participios' : `Encuentra «${GM.verb}» en ${GT.find(g => g[0] === GM.tense)[1]}`}</div>${st.E.map(e => { const w = up(e.form), f = st.found.has(w); return `<div class="ws-i ${f ? 'f' : ''}"><span>${esc(e.clue)}</span><b>${f ? esc(e.form) : '·'.repeat(e.form.length)}</b></div>`; }).join('')}
+    <p class="hintline">Toca la primera letra y luego la última. Las palabras van → ↓${lvlIdx(ST.level) >= 2 ? ' ↘' : ''}.</p>${done ? `<div class="fb-box ok"><b>¡Sopa completa! ⭐</b> Ahora dila en voz alta: ${sayBtn(st.E.map(e => e.say).join('. '))}</div>` : ''}</div></div>`;
+}
+function wsPick(i){
+  const st = GM.st;
+  if(st.sel === null){ st.sel = i; paintWS(); return; }
+  const a = st.sel, N = st.N, r1 = Math.floor(a/N), c1 = a % N, r2 = Math.floor(i/N), c2 = i % N; st.sel = null;
+  const dr = Math.sign(r2 - r1), dc = Math.sign(c2 - c1), len = Math.max(Math.abs(r2 - r1), Math.abs(c2 - c1)) + 1;
+  if(!(r1 === r2 || c1 === c2 || Math.abs(r2 - r1) === Math.abs(c2 - c1))){ paintWS(); return; }
+  const cells = [...Array(len)].map((_, k) => (r1 + dr*k)*N + c1 + dc*k), w = cells.map(x => st.G[Math.floor(x/N)][x % N]).join('');
+  const hit = st.placed.find(p => (p.w === w || p.w === [...w].reverse().join('')) && !st.found.has(p.w));
+  if(hit){ st.found.add(hit.w); const e = st.E.find(x => up(x.form) === hit.w); say(e ? e.say : w); if(st.found.size === st.placed.length) star(3); }
+  else { st.flash = cells; setTimeout(() => { st.flash = null; paintWS(); }, 500); }
+  paintWS();
+}
+/* --- ahorcado de globos --- */
+const HM_KEYS = 'AZERTYUIOPQSDFGHJKLMWXCVBN'.split('');
+function hmShown(st){ return [...st.word].map(ch => /[A-Z]/.test(ch) ? (st.guessed.has(ch) || st.over ? ch : '_') : ch).join(' '); }
+function paintHM(){
+  const st = GM.st, win = [...st.word].every(ch => !/[A-Z]/.test(ch) || st.guessed.has(ch)), lives = 7 - st.miss;
+  if((win || lives <= 0) && !st.over){ st.over = true; st.won = win; if(win) star(2); say(st.e.say); }
+  const v = getVerb(GM.verb);
+  $('#gBoard').innerHTML = `<div class="hm"><div class="hm-sky ${lives <= 0 ? 'fall' : ''}"><div class="hm-bal">${[...Array(7)].map((_, i) => `<span class="${i < st.miss ? 'pop' : ''}">🎈</span>`).join('')}</div><div class="hm-kid">${GM.tense === 'pp' ? '🧑‍🎓' : '🧒'}</div></div>
+    <div class="hm-r"><div class="sec-h">Pista</div><p class="g-q">${GM.tense === 'pp' ? esc(st.e.clue) : `${esc(st.e.clue.replace(' ___', ''))} · <b>${esc(GM.verb)}</b> (${esc(v.es)}) · ${GT.find(g => g[0] === GM.tense)[1]}`}</p>
+    <p class="hintline">Las letras con acento ya aparecen solas: fíjate dónde están.</p>
+    <div class="hm-word">${esc(hmShown(st))}</div>
+    <div class="hm-keys">${HM_KEYS.map(k => `<button type="button" class="hm-k ${st.guessed.has(k) ? (st.word.includes(k) ? 'hit' : 'miss') : ''}" data-hk="${k}" ${st.guessed.has(k) || st.over ? 'disabled' : ''}>${k}</button>`).join('')}</div>
+    ${st.over ? `<div class="fb-box ${st.won ? 'ok' : 'no'}"><b>${st.won ? '¡Salvado! ⭐⭐' : '¡Se reventaron los globos!'}</b> Era «${esc(st.e.form)}»: ${esc(st.e.say)} ${sayBtn(st.e.say)}<br><span style="font-size:13px">${GM.tense === 'pp' ? FAMK[ppFamily(st.e.form)] ? FAMK[ppFamily(st.e.form)].rule : '' : explain(v, GM.tense, PK.je)}</span></div><div class="ch-row" style="margin-top:8px"><button class="btn" type="button" data-gagain>Otra palabra ▶</button></div>` : `<button class="btn ghost sm" type="button" data-ghint>💡 Pista de la regla</button><div id="hmHint"></div>`}</div></div>`;
+}
+function hmGuess(k){ const st = GM.st; if(st.over || st.guessed.has(k)) return; st.guessed.add(k); if(!st.word.includes(k)) st.miss++; paintHM(); }
+/* --- memoria --- */
+function paintMem(){
+  const st = GM.st, done = st.matched.size === Math.min(6, st.E.length);
+  $('#gBoard').innerHTML = `<p class="hintline">Une cada ${GM.tense === 'pp' ? 'verbo con su participio' : 'sujeto con su forma'}. Intentos: ${st.tries}</p><div class="mem">${st.cards.map((c, i) => { const open = st.open.includes(i) || st.matched.has(c.id); return `<button type="button" class="mem-c ${open ? 'open' : ''} ${st.matched.has(c.id) ? 'ok' : ''} ${c.kind}" data-mc="${i}"><span class="mem-in"><span class="mem-b">?</span><span class="mem-f">${esc(c.txt)}</span></span></button>`; }).join('')}</div>${done ? `<div class="fb-box ok"><b>¡Memoria completa! ⭐⭐</b> ${sayBtn(st.E.map(e => e.say).join('. '))} Escucha toda la tabla.</div>` : ''}`;
+}
+function memFlip(i){
+  const st = GM.st; if(st.open.length === 2 || st.open.includes(i) || st.matched.has(st.cards[i].id)) return;
+  st.open.push(i); paintMem();
+  if(st.open.length === 2){
+    st.tries++; const [a, b] = st.open.map(x => st.cards[x]);
+    const same = a.kind !== b.kind && (a.id === b.id || (a.kind === 'a' ? a.txt : b.txt) === st.E[(a.kind === 'q' ? a : b).id].form);
+    setTimeout(() => { if(same){ st.matched.add(a.kind === 'q' ? a.id : b.id); st.matched.add(a.id); st.matched.add(b.id); const e = st.E[(a.kind === 'q' ? a : b).id]; say(e.say); if(st.matched.size >= Math.min(6, st.E.length)) star(2); } st.open = []; paintMem(); }, same ? 400 : 900);
+  }
+}
+$('#v-games').addEventListener('click', e => {
+  const t = e.target.closest('[data-gg],[data-gt],[data-gnew],[data-ws],[data-hk],[data-gagain],[data-ghint],[data-mc]'); if(!t) return;
+  if(t.dataset.gg){ GM.game = t.dataset.gg; GM.st = null; renderGames(); return; }
+  if(t.dataset.gt){ GM.tense = t.dataset.gt; GM.st = null; renderGames(); return; }
+  if(t.dataset.gnew !== undefined || t.dataset.gagain !== undefined){ if(t.dataset.gnew !== undefined && GM.tense !== 'pp') GM.verb = pick(GVERBS.filter(x => x !== GM.verb)); GM.st = null; renderGames(); return; }
+  if(t.dataset.ws !== undefined) wsPick(+t.dataset.ws);
+  if(t.dataset.hk) hmGuess(t.dataset.hk);
+  if(t.dataset.ghint !== undefined){ const v = getVerb(GM.verb); $('#hmHint').innerHTML = `<p class="hint">${GM.tense === 'pp' ? 'Piensa en las familias: -é, -i, -u, -is, -it, -ert.' : ROOTEXP[GM.tense] || explain(v, GM.tense, PK.je)}</p>`; }
+  if(t.dataset.mc !== undefined) memFlip(+t.dataset.mc);
+});
+$('#v-games').addEventListener('change', e => { if(e.target.id === 'gVerb'){ GM.verb = e.target.value; GM.st = null; renderGames(); } });
+document.addEventListener('keydown', e => { if(ST.view !== 'games' || GM.game !== 'hm' || e.target.closest('input,select,textarea')) return; const k = up(e.key); if(/^[A-Z]$/.test(k)) hmGuess(k); });
 /* ---------- arranque ---------- */
 $('#verbList').innerHTML = DATALIST.map(v => `<option value="${esc(v)}"></option>`).join('');
 renderLevel(); renderProgramme(); renderPersons(); renderActions();
@@ -2793,5 +3300,6 @@ if(!okGL){ $('#stageFallback').hidden = false; }
 renderScene(true);
 })();
 </script>
+
 </body>
 </html>
