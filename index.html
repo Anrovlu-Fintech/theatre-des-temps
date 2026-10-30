@@ -709,6 +709,153 @@ footer{max-width:1500px; margin:0 auto; padding-block:0 30px; padding-left:max(1
 .pquit-bar[hidden]{display:none}
 @media (max-width:600px){ .phud-t{display:none} .pdots span{width:26px; height:26px; font-size:12px} .pdots{gap:3px} }
 [hidden]{display:none!important}
+
+/* ============ LOBBY Y ARCADE ============ */
+#v-lobby{max-width:880px; margin:0 auto}
+.tabs button.dot, .lic.dot{position:relative}
+.tabs button.dot::after, .lic.dot::after{content:""; position:absolute; top:2px; right:2px; width:10px; height:10px; border-radius:50%; background:#ff3b5c; box-shadow:0 0 0 2px var(--top); animation:dotPulse 1.2s ease-in-out infinite}
+.lic.dot::after{top:6px; right:10px; box-shadow:0 0 0 2px var(--paper)}
+@keyframes dotPulse{50%{transform:scale(1.35)}}
+.cchip, .gchip{font-family:var(--f-mono)} .rchip{border-color:var(--rc)!important}
+@media (max-width:760px){ .rname{display:none} }
+.lob-top{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px}
+.lob-me{display:flex; align-items:center; gap:12px; min-width:0}
+.lob-me small{color:var(--ink-3); font-size:12px}
+.lob-rank{font-size:18px; color:var(--rc)}
+.bar.rk{width:170px; margin:4px 0}
+.lob-cur{display:flex; gap:6px}
+.lob-cur span{background:var(--paper); border:1px solid var(--line); border-radius:999px; padding:6px 12px; font-family:var(--f-mono); font-size:14px}
+.ava{width:58px; height:58px; flex:none; border-radius:50%; display:grid; place-items:center; font-size:32px; background:var(--paper-2); border:3px solid var(--line); position:relative}
+.ava.sm{width:44px; height:44px; font-size:24px}
+.fr-bronze{border-color:#c37b45; box-shadow:0 0 0 3px #7a4b29}
+.fr-neon{border-color:#3fe0ff; box-shadow:0 0 12px #3fe0ff, inset 0 0 8px #3fe0ff; animation:neon 1.6s ease-in-out infinite alternate}
+@keyframes neon{to{box-shadow:0 0 22px #ff4fd8, inset 0 0 10px #ff4fd8; border-color:#ff4fd8}}
+.fr-gold{border-color:#f2b833; box-shadow:0 0 0 3px #a9781a, 0 0 16px rgba(242,184,51,.7)}
+.fr-dragon{border:0; background:conic-gradient(from var(--a, 0deg), #ff3b3b, #ffb020, #ffe66d, #ff3b3b); animation:spinA 3s linear infinite; padding:4px}
+.fr-dragon::after{content:"🐉"; position:absolute; font-size:20px; right:-8px; bottom:-6px}
+.fr-season{border-color:#b07cff; box-shadow:0 0 0 3px #3ab7ff, 0 0 18px #b07cff}
+@property --a{syntax:'<angle>'; inherits:false; initial-value:0deg}
+@keyframes spinA{to{--a:360deg}}
+.lob-banners{display:flex; gap:10px; overflow-x:auto; scroll-snap-type:x mandatory; padding-bottom:6px; margin-bottom:12px; scrollbar-width:none}
+.bnr{flex:0 0 min(78%, 300px); scroll-snap-align:start; border-radius:16px; padding:12px 14px; color:#fff; display:flex; flex-direction:column; gap:2px; background:linear-gradient(135deg, #ff4f7a, #7b2ff7)}
+.bnr.ev{background:linear-gradient(135deg, var(--c), #1d1d3a)}
+.bnr.ps{background:linear-gradient(135deg, #f7971e, #b0306a)}
+.bnr.fw{background:linear-gradient(135deg, #11998e, #1d4ed8)}
+.bnr small{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.06em; opacity:.9} .bnr > b{font-family:var(--f-display); font-weight:400; font-size:22px; line-height:1.1} .bnr span{font-size:13px; opacity:.92}
+.lob-play{width:100%; display:flex; align-items:center; gap:14px; border:0; border-radius:22px; padding:18px 20px; color:#fff; text-align:left; background:linear-gradient(135deg, #ff3b5c, #ff8a00); box-shadow:0 7px 0 #a8203a, 0 14px 30px rgba(255,59,92,.35); margin-bottom:12px; transition:transform .1s, box-shadow .1s; position:relative; overflow:hidden}
+.lob-play::before{content:""; position:absolute; inset:0; background:linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 45%, transparent 60%); transform:translateX(-100%); animation:shine 2.6s ease-in-out infinite}
+@keyframes shine{60%, 100%{transform:translateX(100%)}}
+.lob-play:active{transform:translateY(6px); box-shadow:0 1px 0 #a8203a}
+.lp-ico{font-size:40px} .lob-play b{display:block; font-family:"Bangers", var(--f-display); font-size:clamp(28px, 6vw, 40px); letter-spacing:.04em; line-height:1} .lob-play small{font-size:13.5px; opacity:.95}
+.lp-go{margin-left:auto; font-size:30px}
+.lob-row{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px}
+.lob-btn{border:0; border-radius:18px; padding:14px; color:#fff; text-align:left; display:flex; flex-direction:column; gap:3px; transition:transform .1s}
+.lob-btn:active{transform:translateY(3px)}
+.lob-btn b{font-size:18px} .lob-btn small{font-size:12.5px; opacity:.92}
+.lob-btn.rk{background:linear-gradient(135deg, #1d2b5e, #3a4fd1); box-shadow:0 5px 0 #121b3f}
+.lob-btn.adv{background:linear-gradient(135deg, #14894b, #1b8467); box-shadow:0 5px 0 #0c5530}
+.lob-icons{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px}
+.lic{display:flex; flex-direction:column; align-items:center; gap:4px; border:1px solid var(--line); background:var(--paper); border-radius:16px; padding:10px 4px; font-size:12.5px; font-weight:700; color:var(--ink)}
+.lic span{font-size:28px; transition:transform .15s} .lic:hover span{transform:scale(1.15) rotate(-6deg)}
+/* hoja modal */
+.sheet-bg{position:fixed; inset:0; z-index:85; background:rgba(8,10,18,.6); display:flex; align-items:flex-end; justify-content:center; animation:fadeIn .15s}
+@media (min-width:700px){ .sheet-bg{align-items:center} }
+.sheet{background:var(--paper); color:var(--ink); width:min(100%, 480px); max-height:88vh; overflow:auto; border-radius:22px 22px 0 0; padding:0 16px calc(18px + env(safe-area-inset-bottom,0px)); animation:sheetUp .28s cubic-bezier(.2,1.2,.4,1)}
+.sheet.wide{width:min(100%, 640px)}
+@media (min-width:700px){ .sheet{border-radius:22px} }
+@keyframes sheetUp{from{transform:translateY(40px); opacity:0}}
+.sheet-h{position:sticky; top:0; background:var(--paper); display:flex; justify-content:space-between; align-items:center; padding:14px 0 10px; z-index:1}
+.sheet-h b{font-size:19px} .sheet-x{border:0; background:var(--paper-2); width:34px; height:34px; border-radius:50%; font-size:15px; color:var(--ink)}
+.sheet-b{display:flex; flex-direction:column; gap:10px}
+.chk{display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:8px}
+.chk-d{border:2px solid var(--line); border-radius:14px; padding:8px 4px; text-align:center; display:flex; flex-direction:column; gap:2px; font-size:12px}
+.chk-d b{font-size:26px} .chk-d.big{grid-column:span 2; background:linear-gradient(135deg, color-mix(in srgb, var(--gilt) 30%, var(--paper)), var(--paper))}
+.chk-d.got{opacity:.5} .chk-d.got b::after{content:" ✓"; font-size:14px; color:var(--ok)}
+.chk-d.now{border-color:var(--velvet); box-shadow:0 0 0 3px color-mix(in srgb, var(--velvet) 30%, transparent); animation:nodePulse 1s ease-in-out infinite alternate}
+.pass-top{display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap} .pass-top > div{flex:1; min-width:200px} .pass-top small{color:var(--ink-3)}
+.pass{display:grid; grid-template-columns:repeat(auto-fill, minmax(84px, 1fr)); gap:8px}
+.pt{border:2px solid var(--line); background:var(--paper-2); border-radius:12px; padding:6px 4px; display:flex; flex-direction:column; align-items:center; gap:2px; font-size:11px; color:var(--ink)}
+.pt b{font-size:22px} .pt small{font-family:var(--f-mono); color:var(--ink-3)}
+.pt.open{border-color:var(--ok); background:var(--ok-soft); animation:nodePulse 1s ease-in-out infinite alternate}
+.pt.got{opacity:.45} .pt.ex{border-style:dashed; border-color:#b07cff} .pt:disabled{cursor:default}
+.chest-box{text-align:center; display:flex; flex-direction:column; gap:10px; align-items:center; position:relative; overflow:hidden; padding:6px 0}
+.chest-big{font-size:96px; line-height:1; filter:drop-shadow(0 8px 20px rgba(0,0,0,.25))}
+.chest-big.shake{animation:chestShake 1.3s ease-in}
+@keyframes chestShake{0%{transform:scale(1)} 20%, 60%{transform:rotate(-8deg) scale(1.05)} 40%, 80%{transform:rotate(8deg) scale(1.1)} 95%{transform:scale(1.4); filter:drop-shadow(0 0 40px var(--c)) brightness(1.6)} 100%{transform:scale(.2); opacity:0}}
+.reveal .rays{position:absolute; inset:-50%; background:repeating-conic-gradient(from 0deg, color-mix(in srgb, var(--c) 35%, transparent) 0 10deg, transparent 10deg 20deg); animation:spinR 8s linear infinite; z-index:0}
+@keyframes spinR{to{transform:rotate(360deg)}}
+.loot{position:relative; z-index:1; background:var(--paper); border:3px solid var(--c); border-radius:20px; padding:14px 22px; display:flex; flex-direction:column; align-items:center; gap:4px; box-shadow:0 0 30px var(--c); animation:popc .6s cubic-bezier(.2,1.6,.4,1)}
+.loot small{font-family:var(--f-mono); font-weight:800; text-transform:uppercase; letter-spacing:.12em; color:var(--c)} .loot b{font-size:56px; line-height:1.1} .loot em{font-size:12px; color:var(--ink-3); max-width:28ch}
+.reveal .ch-row{position:relative; z-index:1}
+.sw{display:inline-block; width:56px; height:16px; border-radius:8px; vertical-align:middle; box-shadow:0 0 12px rgba(0,0,0,.2)}
+.odds{display:flex; gap:6px; flex-wrap:wrap; justify-content:center} .odds span{font-size:12px; font-weight:700; color:var(--c); border:1px solid var(--c); border-radius:999px; padding:2px 8px}
+.wheel-box{display:flex; flex-direction:column; align-items:center; gap:12px; position:relative}
+.wheel{width:min(78vw, 290px); aspect-ratio:1; border-radius:50%; border:6px solid #1d1d24; box-shadow:0 0 0 4px #ffd23d, 0 10px 30px rgba(0,0,0,.3); position:relative; transition:transform 3.6s cubic-bezier(.12,.75,.15,1)}
+.wheel{--r:calc(min(78vw, 290px) * 0.33)}
+.wheel span{position:absolute; left:50%; top:50%; transform:translate(-50%, -50%) rotate(var(--a)) translateY(calc(var(--r) * -1)); font-weight:900; font-size:14px; color:#1d1d24; white-space:nowrap}
+.wheel-pin{font-size:30px; color:#ff3b5c; margin-bottom:-22px; z-index:1; filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
+.shop{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:10px}
+.sitem, .aitem{border:2px solid var(--line); border-radius:16px; padding:10px; display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; font-size:12.5px; background:var(--paper-2); color:var(--ink)}
+.sitem b, .aitem b{font-size:34px; line-height:1.2} .sitem small{font-family:var(--f-mono); font-weight:800; text-transform:uppercase; font-size:10.5px}
+.sitem.wide{flex-direction:row; justify-content:space-between}
+.r-c{border-color:#9aa5b1} .r-r{border-color:#3ab7ff} .r-e{border-color:#b07cff} .r-l{border-color:#ffb020; box-shadow:0 0 14px rgba(255,176,32,.4)}
+.r-c small{color:#7b8794} .r-r small{color:#3ab7ff} .r-e small{color:#b07cff} .r-l small{color:#ffb020}
+.ars{display:grid; grid-template-columns:repeat(auto-fill, minmax(92px, 1fr)); gap:8px}
+.aitem.on{outline:3px solid var(--ok); outline-offset:2px} .aitem.lockd{opacity:.4}
+.lg{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:4px}
+.lg li{display:grid; grid-template-columns:40px 1fr auto; gap:8px; align-items:center; padding:8px 10px; border-radius:10px; background:var(--paper-2)}
+.lg li.top{background:color-mix(in srgb, var(--gilt) 18%, var(--paper-2))} .lg li.me{outline:2px solid var(--velvet); font-weight:800}
+.lg-p{font-family:var(--f-mono); text-align:center} .lg-s{font-family:var(--f-mono)}
+.lg-prize{background:var(--gilt-soft); border-radius:12px; padding:10px; display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+/* racha global y anunciador */
+#comboPill{position:fixed; left:14px; bottom:calc(16px + env(safe-area-inset-bottom,0px)); z-index:75; display:none; align-items:center; gap:6px; background:linear-gradient(135deg, #ff8a00, #ff3b5c); color:#fff; border-radius:999px; padding:8px 14px; font-size:16px; box-shadow:0 6px 20px rgba(255,59,92,.4); animation:popc .35s cubic-bezier(.2,1.6,.4,1)}
+#comboPill.on{display:flex} #comboPill b{font-size:20px} #comboPill small{font-size:12px; opacity:.9}
+#comboPill.hot{background:linear-gradient(135deg, #ffd23d, #ff3b5c, #b07cff); animation:popc .35s cubic-bezier(.2,1.6,.4,1), hotGlow .6s ease-in-out infinite alternate}
+@keyframes hotGlow{to{box-shadow:0 0 30px #ffd23d}}
+.announce{position:fixed; inset:0; z-index:90; display:flex; align-items:center; justify-content:center; pointer-events:none}
+.bl-wrap .announce{position:absolute}
+.announce span{font-family:"Bangers", var(--f-display); font-size:clamp(40px, 10vw, 88px); letter-spacing:.04em; color:#fff36b; -webkit-text-stroke:3px #1d1d24; text-shadow:0 6px 0 #ff3b5c, 0 0 40px rgba(255,59,92,.7); animation:slam 1.3s cubic-bezier(.2,1.6,.4,1) forwards; text-align:center}
+@keyframes slam{0%{transform:scale(3) rotate(-8deg); opacity:0} 15%{transform:scale(1) rotate(-4deg); opacity:1} 75%{transform:scale(1.05) rotate(-4deg); opacity:1} 100%{transform:scale(.9) translateY(-30px); opacity:0}}
+/* Verb Blaster */
+.bl{display:flex; flex-direction:column; gap:8px}
+.bl-hud{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.bl-time{font-family:var(--f-mono); font-weight:800; font-size:20px} .bl-time.low{color:#ff3b5c; animation:nodePulse .5s infinite alternate}
+.bl-sh i{font-style:normal; font-size:18px; filter:grayscale(1); opacity:.3} .bl-sh i.on{filter:none; opacity:1}
+.bl-mult{font-weight:900; color:#ff6b00} .bl-score{margin-left:auto; font-family:var(--f-mono); font-weight:900; font-size:24px}
+.bl-q{background:var(--paper); border:2px solid var(--line); border-radius:14px; padding:10px 12px 0; overflow:hidden; font-size:clamp(17px, 3.6vw, 22px)}
+.bl-qt{display:block; padding-bottom:8px} .bl-qt small{color:var(--ink-3); font-size:13px}
+.bl-tn{color:var(--c); font-weight:800} .bl-pol{color:var(--velvet); font-weight:700}
+.bl-ev{font-size:11px; font-weight:900; background:#ff3b5c; color:#fff; border-radius:6px; padding:2px 6px; vertical-align:middle}
+.bl-tb{display:block; height:5px; margin:0 -12px; background:var(--paper-2)} .bl-tb b{display:block; height:100%; width:100%; background:linear-gradient(90deg, #3ddc84, #ffd23d, #ff3b5c)}
+.bl-wrap{position:relative; border-radius:16px; overflow:hidden; border:2px solid #2a1840; touch-action:none; user-select:none; -webkit-user-select:none}
+.bl-wrap canvas{display:block; width:100%; cursor:crosshair}
+@media (hover:hover){ .bl-wrap canvas{cursor:none} }
+.bl-start{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; text-align:center; padding:18px; color:#fff; background:rgba(12,6,30,.6)}
+.bl-start p{max-width:44ch; font-size:14.5px}
+.bl-logo{font-family:"Bangers", var(--f-display); font-size:clamp(46px, 11vw, 80px); line-height:.9; letter-spacing:.05em; color:#fff36b; -webkit-text-stroke:2px #1d1d24; text-shadow:0 5px 0 #ff3b5c, 0 0 30px #ff4fd8; transform:rotate(-4deg)}
+.bl-feed{display:flex; flex-direction:column; gap:3px; min-height:24px; font-size:13.5px}
+.bl-feed div{padding:4px 10px; border-radius:8px; animation:roundIn .25s} .bl-feed .ok{background:var(--ok-soft)} .bl-feed .no{background:var(--bad-soft)}
+.bl-feed div:nth-child(n+2){opacity:.6}
+.blres .cer-in{gap:8px}
+.newrec{font-family:"Bangers", var(--f-display); font-size:30px; color:#ff3b5c; letter-spacing:.05em; animation:slamIn .6s cubic-bezier(.2,1.6,.4,1)}
+@keyframes slamIn{from{transform:scale(2.5); opacity:0}}
+.bl-big{font-family:var(--f-mono); font-weight:900; font-size:56px; line-height:1}
+.bl-stats, .bl-rw{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; font-size:14px}
+.bl-rw span{background:var(--paper-2); border-radius:999px; padding:4px 10px; font-weight:800} .bl-rw small{font-weight:600; color:var(--velvet)}
+.bl-rank{width:100%; display:flex; flex-direction:column; gap:4px} .bl-rank b{color:var(--rc); font-size:18px} .bl-rank .up{color:var(--ok); font-weight:900} .bl-rank .down{color:var(--bad); font-weight:900}
+.bl-rank .bar i{background:var(--rc)}
+@media (max-width:1100px){
+  .top-in{padding-block:8px; gap:8px 10px}
+  .brand p{display:none} .brand svg{width:30px; height:30px} .brand h1{font-size:20px}
+  .brand{order:1} .meta{order:2; margin-left:auto; gap:5px} .level{order:3; margin-left:0} .level > span{display:none}
+  .tabs{order:4; width:100%; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; margin:0 -4px; padding:2px 4px}
+  .tabs::-webkit-scrollbar{display:none}
+  .tabs button{flex:none; padding:6px 11px}
+  .meta .mchip{padding:4px 8px; font-size:12.5px}
+  main{padding-block:12px 60px}
+}
+@media (max-width:520px){ .brand h1{font-size:17px} .brand svg{display:none} .meta .xpbox, .meta [data-go="me"].mchip{display:none} }
+.bl.stage [data-bquit]{display:none}
 </style>
 </head>
 <body>
@@ -720,7 +867,8 @@ footer{max-width:1500px; margin:0 auto; padding-block:0 30px; padding-left:max(1
       <div><h1>Théâtre des Temps</h1><p>Los tiempos verbales del francés en la vida diaria · A1 → C1</p></div>
     </div>
     <nav class="tabs" id="tabs" aria-label="Secciones">
-      <button data-view="play" class="on">🗺️ Aventura</button>
+      <button data-view="lobby" class="on">🏠 Lobby</button>
+      <button data-view="play">🗺️ Aventura</button>
       <button data-view="scene">🎭 Escena libre</button>
       <button data-view="games">🎮 Juegos</button>
       <button data-view="comic">💬 Historietas</button>
@@ -739,7 +887,13 @@ footer{max-width:1500px; margin:0 auto; padding-block:0 30px; padding-left:max(1
 <main>
   <!-- ============ ESCENA ============ -->
   <!-- ============ AVENTURA ============ -->
-  <section class="view on" id="v-play">
+  <!-- ============ LOBBY ============ -->
+  <section class="view on" id="v-lobby">
+    <div id="lobHome"></div>
+    <div id="lobPlay" hidden></div>
+  </section>
+
+  <section class="view" id="v-play">
     <div id="playMap"></div>
     <div id="playStage" hidden></div>
   </section>
@@ -2275,7 +2429,7 @@ const Stage = (() => {
 'use strict';
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const store = (() => { let d = {}; try{ d = JSON.parse(localStorage.getItem('tdt.v1') || '{}') || {}; }catch(e){} return {get:(k, def) => (d[k] === undefined ? def : d[k]), set:(k, v) => { d[k] = v; try{ localStorage.setItem('tdt.v1', JSON.stringify(d)); }catch(e){} }}; })();
-const ST = {view:'play', level:store.get('level','A2'), tense:'pc', action:'boire', pk:'elle', pol:'aff', qs:'inv', cmode:store.get('cmode2','auto'), me:store.get('me', Math.random() < 0.5 ? 'camille' : 'hugo'), cast:null, recast:false, aview:'group', acat:'all', asit:'chambre', tcat:'all', round:null, showTable:false, ltab:'idea', conjVerb:'', fabTense:'impf', fabStep:99, mode:'see'};
+const ST = {view:'lobby', level:store.get('level','A2'), tense:'pc', action:'boire', pk:'elle', pol:'aff', qs:'inv', cmode:store.get('cmode2','auto'), me:store.get('me', Math.random() < 0.5 ? 'camille' : 'hugo'), cast:null, recast:false, aview:'group', acat:'all', asit:'chambre', tcat:'all', round:null, showTable:false, ltab:'idea', conjVerb:'', fabTense:'impf', fabStep:99, mode:'see'};
 const lvlIdx = l => LEVELS.indexOf(l);
 const inLevel = T => lvlIdx(T.lvl) <= lvlIdx(ST.level);
 const stats = store.get('stats', {});
@@ -2346,6 +2500,7 @@ function go(view){
   if(view === 'map') renderMap();
   if(was === 'play' && view !== 'play'){ PLAY.waitScene = false; restoreScene(); }
   if(view === 'play') renderPlay();
+  if(view === 'lobby') renderLobby();
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
@@ -2652,7 +2807,7 @@ function finish(ok){
   }
   CH.lvMsg = lvMsg;
   const xp = first ? 10 : ok && CH.tries <= 1 && CH.hints <= 1 ? 5 : 2;
-  SFX.play(ok ? 'correct' : 'reveal'); if(ok) haptic(15);
+  SFX.play(ok ? 'correct' : 'reveal'); if(ok){ haptic(15); HIT(); } else MISS();
   award(xp); if(ok) bump('scene:ok'); if(first) bump('first'); if(CH.g) bump('guide:end');
   recordVerb(CH.S.v.full, first ? 'first' : ok ? 'help' : 'miss');
   if(ST.round) ST.round.res[ST.round.i] = first ? 'ok' : ok ? 'mid' : 'bad';
@@ -3021,7 +3176,7 @@ function renderTrain(){
 }
 $('#modes').addEventListener('click', e => { const b = e.target.closest('[data-m]'); if(!b) return; ST.mode = b.dataset.m; renderTrain(); });
 function renderScore(){ $('#score').innerHTML = `<span>Aciertos <b>${SC.ok}/${SC.n}</b></span><span>Racha <b>${SC.streak}</b></span><span>Mejor racha <b>${SC.best}</b></span>`; }
-function scoreIt(ok, id){ SFX.play(ok ? 'correct' : 'wrong'); award(ok ? 10 : 2); if(ok) bump('train:ok'); SC.n++; if(ok){ SC.ok++; SC.streak++; if(SC.streak > SC.best){ SC.best = SC.streak; store.set('best', SC.best); } } else SC.streak = 0; if(id) record(id, ok); renderScore(); if(ST.mode === 'see' && Stage.ok) Stage.react(ok); }
+function scoreIt(ok, id){ SFX.play(ok ? 'correct' : 'wrong'); if(ok) HIT(); else MISS(); award(ok ? 10 : 2); if(ok) bump('train:ok'); SC.n++; if(ok){ SC.ok++; SC.streak++; if(SC.streak > SC.best){ SC.best = SC.streak; store.set('best', SC.best); } } else SC.streak = 0; if(id) record(id, ok); renderScore(); if(ST.mode === 'see' && Stage.ok) Stage.react(ok); }
 function norm(s){ return String(s).toLowerCase().replace(/[’`´]/g, "'").replace(/\s+/g, ' ').replace(/[.!?¡¿]+$/,'').replace(/\s*'\s*/g, "'").trim(); }
 function variants(s){
   let out = [s];
@@ -3284,7 +3439,14 @@ const SFX = (() => {
     countdown: () => tone('square', 440, 0, 0.15, 0.05),
     go: () => { tone('square', 880, 0, 0.45, 0.05); tone('square', 1760, 0, 0.45, 0.025); },
     finish: () => [523, 659, 784, 1047].forEach((f, i) => tone('triangle', f, 0, i === 3 ? 0.6 : 0.12, 0.11, i*0.1)),
-    tick: () => tone('sine', 1400, 0, 0.018, 0.04)
+    tick: () => tone('sine', 1400, 0, 0.018, 0.04),
+    laser: () => { tone('sawtooth', 1800, 220, 0.12, 0.05); noise(0.05, 4000, 1, 0.04); },
+    boom: () => { noise(0.35, 380, 0.6, 0.22); tone('sine', 160, 40, 0.3, 0.16); tone('triangle', 1319, 0, 0.08, 0.06, 0.02); },
+    hurt: () => { tone('square', 180, 70, 0.28, 0.07); noise(0.2, 700, 0.8, 0.1); },
+    combo: n => { const f = 440*Math.pow(2, Math.min(n, 24)/12); tone('triangle', f, f*1.5, 0.12, 0.08); },
+    announce: () => { [523, 784, 1047, 1568].forEach((f, i) => tone('square', f, 0, 0.18, 0.05, i*0.06)); noise(0.3, 2500, 0.7, 0.06); },
+    chest: () => { [0, 0.25, 0.5, 0.75, 1].forEach((d, i) => { noise(0.07, 900 + i*200, 1, 0.08, d); tone('sine', 300 + i*120, 0, 0.06, 0.05, d); }); },
+    power: () => { tone('sine', 400, 1600, 0.35, 0.09); tone('triangle', 800, 2400, 0.3, 0.05, 0.05); }
   };
   function play(name, arg){
     if(!on || !init()) return;
@@ -3433,7 +3595,7 @@ function errKind(why){
   if(/sujeto/.test(w)) return 'subj';
   return null;
 }
-function recordErr(why){ const k = errKind(why); if(!k) return; META.errs[k] = (META.errs[k] || 0) + 1; saveMeta(); }
+function recordErr(why){ MISS(); const k = errKind(why); if(!k) return; META.errs[k] = (META.errs[k] || 0) + 1; saveMeta(); }
 
 /* ---------- karaoke y voz lenta ---------- */
 function karaoke(container, rate){
@@ -3477,7 +3639,8 @@ document.addEventListener('click', e => {
 
 /* ---------- tarjetas «¿Cómo funciona?» la primera vez ---------- */
 const COACH = {
-  play:['Esto es tu aventura: cada parada del mapa es un tiempo verbal, en orden de A1 a C1.','Cada nivel tiene 8 rondas de juego: historieta, escena 3D, carrera, armar la forma, memoria, burbujas, ahorcado y un jefe final.','Ganas estrellas según cuántas rondas haces perfectas, y así se abre la siguiente parada.'],
+  lobby:['⚡ Partida rápida: 60 segundos disparando a la forma correcta. Cada acierto suma tiempo; cada error te quita un escudo 🛡️.','🏆 Clasificatoria: sube de Bronce a Leyenda. 🗺️ Aventura: los niveles por tiempo verbal.','Los puntos rojos avisan de premios: recompensa diaria, ruleta, cofres, pase y liga.'],
+  play:['Esto es tu aventura: cada parada del mapa es un tiempo verbal, en orden de A1 a C1.','Cada nivel tiene 8 rondas de juego: historieta, escena 3D, carrera, armar la forma, memoria, Verb Blaster, ahorcado y un jefe final.','Ganas estrellas según cuántas rondas haces perfectas, y así se abre la siguiente parada.'],
   scene:['Elige un tiempo a la izquierda, quién lo hace y una acción. El personaje espera pensando ❓ hasta que respondas.','La escalera ⭐ empieza fácil (copiar) y sube sola cuando aciertas a la primera.','Si te equivocas dos veces, la correcta brilla: tócala. Puedes usar las teclas 1 a 4 y «🧒 Paso a paso».'],
   comic:['Lee cada viñeta y fíjate en el cartel amarillo: dice cuándo pasa.','Toca 🔊 para oír el globo y 🐢 para oírlo despacio: las palabras se iluminan.','En «Completa los globos» eliges la forma que falta.'],
   games:['Cuatro juegos: carrera de formas, sopa de letras, ahorcado y memoria.','Elige el tiempo y el verbo arriba. Cada acierto da XP ⭐ para subir de nivel.','La carrera se maneja con ← → o tocando los botones.'],
@@ -3489,7 +3652,7 @@ function coach(view){
   const box = document.createElement('div'); box.className = 'coach';
   box.innerHTML = `<b>¿Cómo funciona?</b><ol>${COACH[view].map(x => `<li>${x}</li>`).join('')}</ol><button class="btn sm" type="button">¡Entendido!</button>`;
   box.querySelector('button').addEventListener('click', () => { META.coach[view] = 1; saveMeta(); box.remove(); SFX.play('tap'); });
-  if(view === 'scene' || view === 'play') host.insertBefore(box, host.firstChild); else host.insertBefore(box, host.children[1] || null);
+  if(view === 'scene' || view === 'play' || view === 'lobby') host.insertBefore(box, host.firstChild); else host.insertBefore(box, host.children[1] || null);
 }
 /* ---------- hoja de resultados ---------- */
 function results({title, stars, xp, lines, again, againLabel}){
@@ -3506,7 +3669,8 @@ function results({title, stars, xp, lines, again, againLabel}){
 /* ---------- cabecera: nivel, misión y sonido ---------- */
 function renderMeta(){
   const I = levelInfo(META.xp), D = daily(), done = D.tasks.filter(t => t.p >= MK[t.id].goal).length;
-  $('#meta').innerHTML = `<button class="mchip" type="button" data-go="me" title="Misión del día">🎯 ${done}/3</button><button class="xpbox" type="button" data-go="me" title="Tu nivel"><span class="xpring" style="--p:${I.pct.toFixed(3)}"><b>${I.L}</b></span><span class="xptxt"><b>${I.title}</b><small>${I.into} / ${I.need} XP</small></span></button><button class="mchip" type="button" id="sndBtn" aria-label="Sonidos">${SFX.on ? '🔊' : '🔇'}</button>`;
+  $('#meta').innerHTML = `<button class="mchip" type="button" data-go="me" title="Misión del día">🎯 ${done}/3</button><button class="xpbox" type="button" data-go="me" title="Tu nivel"><span class="xpring" style="--p:${I.pct.toFixed(3)}"><b>${I.L}</b></span><span class="xptxt"><b>${I.title}</b><small>${I.into} / ${I.need} XP</small></span></button>${arcadeChips()}<button class="mchip" type="button" id="sndBtn" aria-label="Sonidos">${SFX.on ? '🔊' : '🔇'}</button>`;
+  paintDots();
 }
 $('#meta').addEventListener('click', e => {
   if(e.target.closest('#sndBtn')){ SFX.on = !SFX.on; renderMeta(); if(SFX.on) SFX.play('correct'); return; }
@@ -3700,7 +3864,7 @@ $('#v-comic').addEventListener('click', e => {
   if(t.id === 'cRand' || t.id === 'cqNext'){ CM.act = pick(ACTIONS).id; CM.pk = pick(PERSONS).k; CM.cast = null; CM.q = null; if(t.id === 'cqNext') CM.strip = pick(STRIPS.filter(s => lvlIdx(s.lvl) <= lvlIdx(ST.level))).id; }
   if(t.dataset.cq !== undefined){
     const o = CM.q.opts[+t.dataset.cq], core = $('#cQuiz').dataset.core;
-    if(norm(o) === norm(core)){ CM.q.done = true; CM.score++; SFX.play('correct'); award(CM.q.miss ? 5 : 10); bump('comic:ok'); renderComic(); const f = $('#cqFb'); if(f) f.innerHTML = `<div class="fb-box ok"><b>¡BRAVO !</b> Mira el globo completo y escúchalo.</div>`; const b = $('.balloon:not(.blank) [data-say]', ); const panel = $$('.cpanel')[CM.q.i]; if(panel){ panel.classList.add('pop'); const sb = panel.querySelector('[data-say]'); if(sb) say(sb.dataset.say); } return; }
+    if(norm(o) === norm(core)){ CM.q.done = true; CM.score++; SFX.play('correct'); HIT(); award(CM.q.miss ? 5 : 10); bump('comic:ok'); renderComic(); const f = $('#cqFb'); if(f) f.innerHTML = `<div class="fb-box ok"><b>¡BRAVO !</b> Mira el globo completo y escúchalo.</div>`; const b = $('.balloon:not(.blank) [data-say]', ); const panel = $$('.cpanel')[CM.q.i]; if(panel){ panel.classList.add('pop'); const sb = panel.querySelector('[data-say]'); if(sb) say(sb.dataset.say); } return; }
     CM.q.miss = (CM.q.miss || 0) + 1; SFX.play('wrong'); t.classList.add('wrong', 'shake'); t.disabled = true; $('#cqFb').innerHTML = `<div class="fb-box no"><b>Esa no.</b> Mira el cartel de arriba de la viñeta (${esc($$('.cpanel .ccap')[CM.q.i].firstChild.textContent)}): te dice cuándo pasa. ${esc(stripPanels()[CM.q.i].name)}.</div>`; return;
   }
   renderComic();
@@ -3799,8 +3963,8 @@ function raceLoop(st, now){
     if(st.gate.z <= 0.02){
       const g = st.gate, good = Math.round(st.lane) === g.lane;
       st.results.push({ok:good, form:g.correct});
-      if(good){ st.ok++; st.boost = 1.1; SFX.play('gate'); haptic(18); st.msg.innerHTML = `<span class="okc">✓ ${esc(g.correct)}</span>`; award(8); }
-      else { SFX.play('brrr'); st.msg.innerHTML = `<span class="noc">Era: ${esc(g.correct)}</span>`; }
+      if(good){ st.ok++; st.boost = 1.1; SFX.play('gate'); haptic(18); HIT(); st.msg.innerHTML = `<span class="okc">✓ ${esc(g.correct)}</span>`; award(8); }
+      else { SFX.play('brrr'); MISS(); st.msg.innerHTML = `<span class="noc">Era: ${esc(g.correct)}</span>`; }
       say(g.say); st.gate = null; st.gap = 1.0; paintLanes(st);
       st.s.textContent = `Puerta ${st.n} de ${st.total} · ✓ ${st.ok}`;
       if(st.n >= st.total){ st.phase = 'over'; ACTIVE_RACE = null; setTimeout(() => { SFX.play('finish'); st.onEnd(st); }, 700); }
@@ -4023,7 +4187,7 @@ const PLACE = {present:['Paris','🗼'], passe:['Versailles','🏰'], futur:['Mo
 META.stages = META.stages || {};
 const ROUNDS = [
   {id:'intro', ico:'📖', n:'Historieta'}, {id:'scene', ico:'🎭', n:'Escena'}, {id:'race', ico:'🏃', n:'Carrera'}, {id:'build', ico:'🧩', n:'Arma la forma'},
-  {id:'memory', ico:'🃏', n:'Memoria'}, {id:'bubbles', ico:'🫧', n:'Burbujas'}, {id:'hang', ico:'🎈', n:'Ahorcado'}, {id:'boss', ico:'👾', n:'Jefe final'}
+  {id:'memory', ico:'🃏', n:'Memoria'}, {id:'blaster', ico:'🎯', n:'Verb Blaster'}, {id:'hang', ico:'🎈', n:'Ahorcado'}, {id:'boss', ico:'👾', n:'Jefe final'}
 ];
 const PLAY = {active:false, T:null, i:0, firsts:[], combo:0, xp0:0, race:null, waitScene:false, prevMode:null};
 const stageStars = id => META.stages[id] || 0;
@@ -4080,7 +4244,7 @@ function runRound(){
   $('#pFoot').innerHTML = ''; hud(); restoreScene(); PLAY.waitScene = false; PLAY.race = null;
   host.innerHTML = `<div class="round-title"><span>${r.ico}</span> Ronda ${PLAY.i + 1} de ${ROUNDS.length} · ${r.n}</div><div id="pBody"></div>`;
   const body = $('#pBody');
-  ({intro:introRound, scene:sceneRound, race:raceRound, build:buildRound, memory:memRound, bubbles:bubblesRound, hang:hangRound, boss:bossRound})[r.id](body, T);
+  ({intro:introRound, scene:sceneRound, race:raceRound, build:buildRound, memory:memRound, blaster:blasterRound, hang:hangRound, boss:bossRound})[r.id](body, T);
   window.scrollTo({top: $('#v-play').offsetTop - 8, behavior:'smooth'});
 }
 function roundEnd(first, note){
@@ -4095,7 +4259,7 @@ function nextRound(){ if(PLAY.i >= ROUNDS.length - 1){ endStage(); return; } PLA
 function endStage(){
   const T = PLAY.T, n = PLAY.firsts.length, good = PLAY.firsts.filter(Boolean).length, ratio = n ? good/n : 0;
   const stars = ratio >= 0.85 ? 3 : ratio >= 0.6 ? 2 : 1, prevStars = stageStars(T.id);
-  META.stages[T.id] = Math.max(prevStars, stars); saveMeta(); bump('stage:done');
+  META.stages[T.id] = Math.max(prevStars, stars); saveMeta(); bump('stage:done'); grant({keys:1, coins:40*stars}); setTimeout(() => toast(`🎁 +1 cofre y ${40*stars} 🪙 por terminar el nivel`), 1500);
   playCleanup();
   const ni = ADV.indexOf(T.id) + 1, next = ADV[ni];
   results({title:`¡${T.fr} superado!`, stars, xp: 50 + 10*stars, lines:[`Rondas excelentes: <b>${good} de ${n}</b>.`, prevStars === 0 && next ? `🔓 Desbloqueaste <b>${TK[next].fr}</b>.` : stars < 3 ? 'Vuelve a jugarlo para conseguir las 3 estrellas.' : '¡Nivel con 3 estrellas!'],
@@ -4164,7 +4328,7 @@ function buildRound(host, T){
     const f = host.querySelector('input'); if(f && innerWidth > 900) f.focus({preventScroll:true});
   };
   const text = () => C.mode === 'tiles' ? C.built.map((id, k) => { const t = C.tiles[id]; return (k && !t.j ? ' ' : '') + t.t; }).join('') : C.mode === 'gap' ? (() => { const ins = [...host.querySelectorAll('[data-pgap]')]; let k = 0; return C.segs.map((x, i) => (i && !x.j ? ' ' : '') + (x.gap ? (ins[k++] || {value:''}).value.trim() : x.t)).join(''); })() : host.querySelector('#pWrite').value;
-  const done = (first, ok) => { C.done = true; const fbx = host.querySelector('[data-x="fb"]'); fbx.innerHTML = `<div class="fb-box ${ok ? 'ok' : 'no'}"><b>${ok ? (first ? '¡Perfecto!' : '¡Bien!') : 'Era así:'}</b> ${piecesHTML(C.coreJ)} ${sayBtn(C.fullText)}<br><span style="font-size:13px">${explain(C.S.v, C.S.key, C.S.p)} ${polTip(C.pol, C.S.key)}</span></div>`; host.querySelector('.balloon').outerHTML = `<div class="balloon">${toHTML(C.r.toks)} ${sayBtn(C.fullText)}</div>`; say(C.fullText); SFX.play(ok ? 'correct' : 'reveal'); award(first ? 10 : ok ? 5 : 2); recordVerb(C.S.v.full, first ? 'first' : ok ? 'help' : 'miss'); roundEnd(first); };
+  const done = (first, ok) => { C.done = true; const fbx = host.querySelector('[data-x="fb"]'); fbx.innerHTML = `<div class="fb-box ${ok ? 'ok' : 'no'}"><b>${ok ? (first ? '¡Perfecto!' : '¡Bien!') : 'Era así:'}</b> ${piecesHTML(C.coreJ)} ${sayBtn(C.fullText)}<br><span style="font-size:13px">${explain(C.S.v, C.S.key, C.S.p)} ${polTip(C.pol, C.S.key)}</span></div>`; host.querySelector('.balloon').outerHTML = `<div class="balloon">${toHTML(C.r.toks)} ${sayBtn(C.fullText)}</div>`; say(C.fullText); SFX.play(ok ? 'correct' : 'reveal'); if(ok) HIT(); award(first ? 10 : ok ? 5 : 2); recordVerb(C.S.v.full, first ? 'first' : ok ? 'help' : 'miss'); roundEnd(first); };
   host.onclick = e => {
     if(C.done) return;
     const t = e.target.closest('[data-btil],[data-bunt],[data-bcheck],[data-bclear],[data-bsolve],[data-pacc]'); if(!t) return;
@@ -4199,7 +4363,7 @@ function memRound(host, T){
     const [x, y] = S.open.map(k => cards[k]), same = x.kind !== y.kind && pairs[(x.kind === 'q' ? x : y).id].a === (x.kind === 'a' ? x : y).txt;
     if(!same){ const partner = cards.findIndex((z, k) => k !== S.open[0] && z.id === cards[S.open[0]].id); if(S.seen.has(partner)) S.slips++; }
     S.open.forEach(k => S.seen.add(k));
-    setTimeout(() => { if(same){ S.matched.add(x.id); S.matched.add(y.id); SFX.play('note', S.matched.size); say(pairs[(x.kind === 'q' ? x : y).id].say); award(3); } else SFX.play('miss'); S.open = []; paint();
+    setTimeout(() => { if(same){ S.matched.add(x.id); S.matched.add(y.id); SFX.play('note', S.matched.size); HIT(); say(pairs[(x.kind === 'q' ? x : y).id].say); award(3); } else SFX.play('miss'); S.open = []; paint();
       if(pairs.every((p, k) => S.matched.has(k))){ SFX.play('finish'); roundEnd(S.slips === 0, `Despistes: ${S.slips}`); } }, same ? 400 : 1000);
   };
 }
@@ -4273,7 +4437,7 @@ function hangRound(host, T){
     S.g.add(k);
     if(W.includes(k)){ SFX.play('letter', [...W].indexOf(k)); }
     else { S.miss++; SFX.play('sizzle'); if(S.miss >= 6){ const m = [...W].filter(ch => /[A-Z]/.test(ch) && !S.g.has(ch)); if(m.length) S.g.add(m[0]); S.miss = 3; S.helps++; toast('☁️ La nube te ayudó con una letra'); } }
-    if([...W].every(ch => !/[A-Z]/.test(ch) || S.g.has(ch))){ S.over = true; SFX.play('finish'); say(w); award(10); paint(); roundEnd(S.miss <= 2 && !S.helps, `«${esc(w)}»`); return; }
+    if([...W].every(ch => !/[A-Z]/.test(ch) || S.g.has(ch))){ S.over = true; SFX.play('finish'); HIT(); say(w); award(10); paint(); roundEnd(S.miss <= 2 && !S.helps, `«${esc(w)}»`); return; }
     paint();
   };
 }
@@ -4304,7 +4468,7 @@ function bossRound(host, T){
     if(o.ok){
       b.classList.add('right'); [...host.querySelectorAll('[data-bo]')].forEach(z => z.disabled = true);
       if(B.tries === 0) B.firsts++;
-      B.hp--; el('hp').style.width = (B.hp/5*100) + '%'; SFX.play('stamp'); SFX.play('correct'); haptic(30);
+      B.hp--; el('hp').style.width = (B.hp/5*100) + '%'; SFX.play('stamp'); SFX.play('correct'); HIT(); haptic(30);
       const art = el('art'); art.innerHTML = bossSVG('idle') + '<span class="pow">¡POW!</span>'; art.classList.remove('hit'); void art.offsetWidth; art.classList.add('hit');
       el('say').textContent = '«' + pick(taunts) + '»'; say(B.C.fullText); award(8); recordVerb(B.C.S.v.full, B.tries === 0 ? 'first' : 'help');
       setTimeout(next, 1100);
@@ -4334,6 +4498,499 @@ document.addEventListener('keydown', e => {
   if(e.key === 'Enter'){ const n = $('[data-pnext]'); if(n){ e.preventDefault(); n.click(); } }
   if(/^[1-4]$/.test(e.key)){ const list = $('#pRound .pick'); if(list){ const b = list.querySelectorAll('.opt')[+e.key - 1]; if(b && !b.disabled){ e.preventDefault(); b.click(); } } }
 });
+/* =====================================================================
+   ARCADE: lobby, Verb Blaster (shooter), rachas con anunciador,
+   monedas y gemas, rangos, recompensa diaria, pase de temporada,
+   cofres con rarezas, ruleta, tienda del día, arsenal y liga semanal
+   ===================================================================== */
+META.coins ??= 0; META.gems ??= 0; META.rp ??= 0; META.best ??= 0; META.keys ??= 1; META.matches ??= 0; META.bestCombo ??= 0;
+META.inv ??= ['cross_basic', 'laser_gold', 'fx_spark', 'frame_none'];
+META.eq ??= {cross:'cross_basic', laser:'laser_gold', fx:'fx_spark', frame:'frame_none'};
+META.pity ??= {l:0, e:0}; META.check ??= {last:null, n:0};
+const RAR = {c:['Común', '#9aa5b1'], r:['Raro', '#3ab7ff'], e:['Épico', '#b07cff'], l:['Legendario', '#ffb020']};
+const KIND = {cross:'Mira', laser:'Láser', fx:'Efecto de impacto', frame:'Marco'};
+const ITEMS = [
+  {id:'cross_basic', k:'cross', n:'Mira clásica', r:'c', ico:'⊕'}, {id:'cross_dot', k:'cross', n:'Punto rojo', r:'c', ico:'•'},
+  {id:'cross_ring', k:'cross', n:'Anillo', r:'r', ico:'◎'}, {id:'cross_star', k:'cross', n:'Estrella', r:'e', ico:'✦'},
+  {id:'cross_eiffel', k:'cross', n:'Torre Eiffel', r:'l', ico:'🗼'}, {id:'cross_season', k:'cross', n:'Mira de temporada', r:'e', ico:'❖', pass:1},
+  {id:'laser_gold', k:'laser', n:'Oro', r:'c', col:'#ffd23d'}, {id:'laser_cyan', k:'laser', n:'Cian', r:'c', col:'#3fe0ff'},
+  {id:'laser_pink', k:'laser', n:'Rosa neón', r:'r', col:'#ff4fa8'}, {id:'laser_green', k:'laser', n:'Verde ácido', r:'r', col:'#6dff5c'},
+  {id:'laser_violet', k:'laser', n:'Plasma violeta', r:'e', col:'#a66bff'}, {id:'laser_rainbow', k:'laser', n:'Arcoíris', r:'l', col:'rainbow'},
+  {id:'laser_tri', k:'laser', n:'Tricolor', r:'l', col:'tri'},
+  {id:'fx_spark', k:'fx', n:'Chispas', r:'c', ico:'✨'}, {id:'fx_stars', k:'fx', n:'Estrellas', r:'r', ico:'★'},
+  {id:'fx_hearts', k:'fx', n:'Corazones', r:'r', ico:'❤'}, {id:'fx_croissant', k:'fx', n:'Lluvia de croissants', r:'e', ico:'🥐'},
+  {id:'fx_fire', k:'fx', n:'Fuegos artificiales', r:'e', ico:'🎆'}, {id:'fx_tri', k:'fx', n:'Confeti tricolor', r:'l', ico:'🇫🇷'},
+  {id:'frame_none', k:'frame', n:'Sin marco', r:'c', ico:'○'}, {id:'frame_bronze', k:'frame', n:'Bronce', r:'c', ico:'🟤'},
+  {id:'frame_neon', k:'frame', n:'Neón', r:'r', ico:'💡'}, {id:'frame_gold', k:'frame', n:'Dorado', r:'e', ico:'🟡'},
+  {id:'frame_dragon', k:'frame', n:'Dragón', r:'l', ico:'🐉'}, {id:'frame_season', k:'frame', n:'Marco de temporada', r:'e', ico:'❖', pass:1}
+];
+const IK = Object.fromEntries(ITEMS.map(i => [i.id, i]));
+const owns = id => META.inv.includes(id);
+const giveItem = id => { if(!owns(id)) META.inv.push(id); };
+/* ---------- moneda, recompensas y fechas ---------- */
+function grant(r){
+  if(r.coins) META.coins += r.coins; if(r.gems) META.gems += r.gems; if(r.keys) META.keys += r.keys; if(r.item) giveItem(r.item);
+  saveMeta(); renderMeta(); if(ST.view === 'lobby') renderLobby();
+}
+const rewardText = r => [r.coins ? `${r.coins} 🪙` : '', r.gems ? `${r.gems} 💎` : '', r.keys ? `${r.keys} 🎁` : '', r.item ? IK[r.item].n : ''].filter(Boolean).join(' + ');
+function weekKey(d){ d = d ? new Date(d) : new Date(); d.setDate(d.getDate() - (d.getDay() + 6) % 7); return dayKey(d); }
+const monthKey = () => dayKey().slice(0, 7);
+function untilMidnight(){ const n = new Date(), m = new Date(n); m.setHours(24, 0, 0, 0); return m - n; }
+function untilMonthEnd(){ const n = new Date(); return new Date(n.getFullYear(), n.getMonth() + 1, 1) - n; }
+function untilWeekEnd(){ const n = new Date(), m = new Date(weekKey() + 'T00:00:00'); m.setDate(m.getDate() + 7); return m - n; }
+function fmtLeft(ms){ const s = Math.max(0, Math.floor(ms/1000)), d = Math.floor(s/86400), h = Math.floor(s % 86400/3600), m = Math.floor(s % 3600/60); return d ? `${d} d ${h} h` : h ? `${h} h ${m} min` : `${m} min ${s % 60} s`; }
+const isWeekend = () => [0, 6].includes(new Date().getDay());
+/* ---------- rangos de la clasificatoria ---------- */
+const TIERS = [['Bronce', '🥉', '#c37b45'], ['Plata', '🥈', '#a9b6c2'], ['Oro', '🥇', '#f2b833'], ['Platino', '💠', '#3ccfc0'], ['Diamante', '💎', '#6aa8ff']];
+function rankOf(rp){
+  if(rp >= 2000) return {name:'Leyenda', ico:'👑', col:'#ff5c8a', i:16, floor:2000, next:null};
+  if(rp >= 1500) return {name:'Maestro', ico:'🔱', col:'#b07cff', i:15, floor:1500, next:2000};
+  const d = Math.floor(rp/100), T = TIERS[Math.floor(d/3)];
+  return {name:`${T[0]} ${['III', 'II', 'I'][d % 3]}`, ico:T[1], col:T[2], i:d, floor:d*100, next:(d + 1)*100};
+}
+/* ---------- eventos con cuenta regresiva ---------- */
+function poolTenses(){
+  const L = lvlIdx(ST.level);
+  return ADV.filter((id, i) => unlocked(i) || stageStars(id) || lvlIdx(TK[id].lvl) <= L);
+}
+function eventToday(){ const pool = poolTenses(), r = seeded(dayKey() + ':evt'); return TK[pool[Math.floor(r()*pool.length)]]; }
+/* ---------- rachas con anunciador (en toda la app) ---------- */
+let STREAK = 0;
+const ANN = {3:'¡TRIPLE!', 5:'¡EN RACHA!', 8:'¡IMPARABLE!', 12:'¡MONSTRUOSO!', 16:'¡DIOS DEL VERBO!', 20:'¡LEYENDA!', 30:'¡INCREÍBLE!'};
+function HIT(){
+  STREAK++; const c = 1 + Math.floor(STREAK/3);
+  META.coins += c; if(STREAK > META.bestCombo) META.bestCombo = STREAK; saveMeta();
+  comboPill(c); if(ANN[STREAK]) announce(ANN[STREAK]); else if(STREAK >= 2) SFX.play('combo', STREAK);
+}
+function MISS(){ if(STREAK >= 3) toast(`🔥 Racha de ${STREAK} terminada. ¡A por otra!`); STREAK = 0; comboPill(0); }
+function comboPill(c){
+  let p = $('#comboPill'); if(!p){ p = document.createElement('div'); p.id = 'comboPill'; document.body.appendChild(p); }
+  if(STREAK < 2){ p.className = ''; p.innerHTML = ''; return; }
+  p.className = 'on' + (STREAK >= 8 ? ' hot' : ''); p.innerHTML = `🔥 <b>×${STREAK}</b><small>+${c} 🪙</small>`;
+  p.style.animation = 'none'; void p.offsetWidth; p.style.animation = '';
+  const cc = $('#meta .cchip'); if(cc) cc.innerHTML = `🪙 ${META.coins}`;
+}
+function announce(text, host){
+  const a = document.createElement('div'); a.className = 'announce'; a.innerHTML = `<span>${text}</span>`;
+  (host || document.body).appendChild(a); SFX.play('announce'); haptic([15, 30, 15]); setTimeout(() => a.remove(), 1300);
+}
+/* ---------- cabecera ---------- */
+function arcadeChips(){
+  const R = rankOf(META.rp);
+  return `<button class="mchip cchip" type="button" data-go="lobby" title="Monedas">🪙 ${META.coins || 0}</button><button class="mchip gchip" type="button" data-go="lobby" title="Gemas">💎 ${META.gems || 0}</button><button class="mchip rchip" type="button" data-go="lobby" title="Rango" style="--rc:${R.col}">${R.ico}<span class="rname"> ${R.name}</span></button>`;
+}
+function alerts(){
+  league(); const D = daily(), P = passState();
+  return {check: META.check.last !== dayKey(), spin: META.spin !== dayKey(), chest: META.keys > 0 || META.gems >= 60, pass: P.claimable > 0, mis: missionDone(D) && !D.claimed, league: leagueReward() !== null};
+}
+function paintDots(){
+  const A = alerts(), any = Object.values(A).some(Boolean);
+  const t = $('#tabs [data-view="lobby"]'); if(t) t.classList.toggle('dot', any);
+  $$('[data-lic]').forEach(b => b.classList.toggle('dot', !!A[b.dataset.lic]));
+}
+/* ---------- hoja modal ---------- */
+function sheet(title, html, cls){
+  closeSheet();
+  const o = document.createElement('div'); o.className = 'sheet-bg'; o.id = 'sheet';
+  o.innerHTML = `<div class="sheet ${cls || ''}" role="dialog" aria-label="${esc(title)}"><div class="sheet-h"><b>${title}</b><button class="sheet-x" type="button" data-sx aria-label="Cerrar">✕</button></div><div class="sheet-b">${html}</div></div>`;
+  o.addEventListener('click', e => { if(e.target === o || e.target.closest('[data-sx]')){ closeSheet(); SFX.play('tap'); } });
+  document.body.appendChild(o); SFX.play('whoosh'); return o.querySelector('.sheet-b');
+}
+function closeSheet(){ const s = $('#sheet'); if(s) s.remove(); if(ST.view === 'lobby' && !BL.on) renderLobby(); paintDots(); }
+/* ---------- recompensa diaria (acumulativa: perder un día no reinicia nada) ---------- */
+const CHECK = [{coins:50}, {gems:10}, {coins:100}, {gems:20}, {coins:150}, {keys:1}, {gems:50, keys:1}];
+function checkinSheet(){
+  const C = META.check, today = C.last === dayKey(), cur = today ? (C.n - 1) % 7 : C.n % 7;
+  const b = sheet('📅 Recompensa diaria', `<p class="hintline">Entra cada día y reclama. Si un día no puedes, no pierdes nada: sigues donde ibas.</p><div class="chk">${CHECK.map((r, i) => `<div class="chk-d ${i < cur || (today && i === cur) ? 'got' : ''} ${i === cur && !today ? 'now' : ''} ${i === 6 ? 'big' : ''}"><small>Día ${i + 1}</small><b>${r.keys ? '🎁' : r.gems ? '💎' : '🪙'}</b><span>${rewardText(r)}</span></div>`).join('')}</div><div class="ch-row" style="justify-content:center">${today ? '<button class="btn" type="button" disabled>✓ Reclamado · vuelve mañana</button>' : '<button class="btn big-cta" type="button" data-claim>¡Reclamar!</button>'}</div><p class="hintline" style="text-align:center">Nueva recompensa en ${fmtLeft(untilMidnight())}</p>`);
+  b.addEventListener('click', e => { if(!e.target.closest('[data-claim]')) return; const r = CHECK[C.n % 7]; C.n++; C.last = dayKey(); grant(r); SFX.play('unlock'); confettiDOM(40); toast('📅 ' + rewardText(r)); checkinSheet(); });
+}
+/* ---------- pase de temporada (gratis, sube con la XP) ---------- */
+const PASS_TIERS = 30, PASS_STEP = 120;
+function passReward(i){ if(i === 10) return {item:'cross_season'}; if(i === 30) return {item:'frame_season', gems:100}; if(i % 5 === 0) return {keys:1}; return i % 2 ? {coins:80 + i*10} : {gems:10 + i}; }
+function passState(){
+  if(!META.pass || META.pass.season !== monthKey()) META.pass = {season: monthKey(), xp0: META.xp, claimed: []};
+  const P = META.pass, xp = META.xp - P.xp0, tier = Math.min(PASS_TIERS, Math.floor(xp/PASS_STEP));
+  let claimable = 0; for(let i = 1; i <= tier; i++) if(!P.claimed.includes(i)) claimable++;
+  return {P, xp, tier, into: xp % PASS_STEP, claimable};
+}
+function passSheet(){
+  const S = passState(), M = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][new Date().getMonth()];
+  const b = sheet(`🎫 Pase de temporada · ${M}`, `<div class="pass-top"><div><b>Nivel ${S.tier} de ${PASS_TIERS}</b><div class="bar"><i style="width:${S.tier >= PASS_TIERS ? 100 : Math.round(S.into/PASS_STEP*100)}%"></i></div><small>${S.tier >= PASS_TIERS ? '¡Pase completo!' : `${S.into} / ${PASS_STEP} XP para el nivel ${S.tier + 1}`} · termina en ${fmtLeft(untilMonthEnd())}</small></div>${S.claimable ? `<button class="btn big-cta" type="button" data-pall>Reclamar ${S.claimable}</button>` : ''}</div>
+    <p class="hintline">Toda la XP que ganas jugando sube el pase. Los niveles 10 y 30 traen objetos exclusivos de esta temporada.</p>
+    <div class="pass">${[...Array(PASS_TIERS)].map((_, k) => { const i = k + 1, r = passReward(i), got = S.P.claimed.includes(i), open = i <= S.tier; return `<button type="button" class="pt ${got ? 'got' : open ? 'open' : ''} ${r.item ? 'ex' : ''}" data-pt="${i}" ${open && !got ? '' : 'disabled'}><small>${i}</small><b>${r.item ? (IK[r.item].ico || '★') : r.keys ? '🎁' : r.gems ? '💎' : '🪙'}</b><span>${got ? '✓' : rewardText(r)}</span></button>`; }).join('')}</div>`, 'wide');
+  const claim = i => { const r = passReward(i); S.P.claimed.push(i); grant(r); return r; };
+  b.addEventListener('click', e => {
+    if(e.target.closest('[data-pall]')){ const got = []; for(let i = 1; i <= S.tier; i++) if(!S.P.claimed.includes(i)) got.push(rewardText(claim(i))); SFX.play('unlock'); confettiDOM(60); toast('🎫 ' + got.join(' · ')); passSheet(); return; }
+    const t = e.target.closest('[data-pt]'); if(!t || t.disabled) return; const r = claim(+t.dataset.pt); SFX.play('coin'); toast('🎫 ' + rewardText(r)); passSheet();
+  });
+}
+/* ---------- cofres con rarezas (y garantía: épico cada 10, legendario cada 40) ---------- */
+const CHEST_GEMS = 60, DUPE = {c:40, r:120, e:350, l:900};
+function rollChest(){
+  const p = META.pity; p.l++; p.e++;
+  let r = Math.random(), rar = r < 0.02 ? 'l' : r < 0.12 ? 'e' : r < 0.40 ? 'r' : 'c';
+  if(p.l >= 40) rar = 'l'; else if(p.e >= 10 && rar !== 'l') rar = 'e';
+  if(rar === 'l') p.l = 0; if(rar === 'l' || rar === 'e') p.e = 0;
+  if(rar === 'c' && Math.random() < 0.35) return {rar, reward:{coins: 40 + Math.floor(Math.random()*60)}};
+  const pool = ITEMS.filter(i => i.r === rar && !i.pass && !owns(i.id));
+  if(!pool.length) return {rar, reward:{coins: DUPE[rar]}, dupe:true};
+  return {rar, reward:{item: pick(pool).id}};
+}
+function chestSheet(){
+  const b = sheet('🎁 Cofres', `<div class="chest-box"><div class="chest-big" data-cb>🎁</div><p>Tienes <b>${META.keys}</b> ${META.keys === 1 ? 'cofre' : 'cofres'} · 💎 ${META.gems}</p><div class="ch-row" style="justify-content:center"><button class="btn big-cta" type="button" data-open="key" ${META.keys ? '' : 'disabled'}>Abrir con 🎁</button><button class="btn" type="button" data-open="gem" ${META.gems >= CHEST_GEMS ? '' : 'disabled'}>Abrir por ${CHEST_GEMS} 💎</button></div><div class="odds">${Object.entries(RAR).map(([k, [n, c]]) => `<span style="--c:${c}">${n} ${({c:'60%', r:'28%', e:'10%', l:'2%'})[k]}</span>`).join('')}</div><p class="hintline">Épico garantizado cada 10 cofres (llevas ${META.pity.e}) y legendario cada 40 (llevas ${META.pity.l}). Ganas cofres en la Aventura, el pase, la ruleta y la recompensa diaria.</p></div>`);
+  b.addEventListener('click', e => {
+    const o = e.target.closest('[data-open]'); if(!o || o.disabled) return;
+    if(o.dataset.open === 'key'){ if(!META.keys) return; META.keys--; } else { if(META.gems < CHEST_GEMS) return; META.gems -= CHEST_GEMS; }
+    saveMeta(); openChest();
+  });
+}
+function openChest(){
+  const R = rollChest(), [rn, rc] = RAR[R.rar], it = R.reward.item ? IK[R.reward.item] : null;
+  const b = sheet('🎁 Abriendo…', `<div class="chest-box"><div class="chest-big shake" style="--c:${rc}">🎁</div></div>`);
+  SFX.play('chest');
+  setTimeout(() => {
+    grant(R.reward); const hh = $('#sheet .sheet-h b'); if(hh) hh.textContent = `🎁 ¡${rn}!`;
+    b.innerHTML = `<div class="chest-box reveal" style="--c:${rc}"><div class="rays"></div><div class="loot r-${R.rar}"><small>${rn}</small><b>${it ? itemIcon(it) : '🪙'}</b><span>${it ? `${KIND[it.k]} · ${it.n}` : rewardText(R.reward)}</span>${R.dupe ? '<em>Ya tenías todo lo de esta rareza: te lo damos en monedas.</em>' : ''}</div><div class="ch-row" style="justify-content:center">${it ? `<button class="btn" type="button" data-equip="${it.id}">Equipar</button>` : ''}<button class="btn ${META.keys ? 'big-cta' : 'ghost'}" type="button" data-again ${META.keys || META.gems >= CHEST_GEMS ? '' : 'disabled'}>${META.keys ? `Abrir otro (${META.keys} 🎁)` : `Abrir otro (${CHEST_GEMS} 💎)`}</button></div></div>`;
+    SFX.play(R.rar === 'l' ? 'levelup' : R.rar === 'e' ? 'unlock' : 'coin'); if(R.rar === 'l' || R.rar === 'e') confettiDOM(R.rar === 'l' ? 110 : 60); haptic(R.rar === 'l' ? [30, 50, 30, 50, 90] : 25);
+    b.addEventListener('click', e => {
+      const q = e.target.closest('[data-equip]'); if(q){ META.eq[IK[q.dataset.equip].k] = q.dataset.equip; saveMeta(); toast('✓ Equipado'); q.disabled = true; return; }
+      if(e.target.closest('[data-again]')){ if(META.keys){ META.keys--; } else if(META.gems >= CHEST_GEMS){ META.gems -= CHEST_GEMS; } else return; saveMeta(); openChest(); }
+    });
+  }, 1300);
+}
+function itemIcon(it){
+  if(it.k === 'laser') return `<i class="sw" style="background:${it.col === 'rainbow' ? 'linear-gradient(90deg,#f33,#fd3,#3f6,#3cf,#a6f)' : it.col === 'tri' ? 'linear-gradient(90deg,#1f4fd8 33%,#fff 0 66%,#e53935 0)' : it.col}"></i>`;
+  if(it.k === 'frame') return `<span class="ava sm fr-${it.id.slice(6)}">😎</span>`;
+  return it.ico;
+}
+/* ---------- ruleta diaria ---------- */
+const WHEEL = [[{coins:50}, 22], [{gems:10}, 18], [{coins:150}, 14], [{keys:1}, 9], [{coins:25}, 20], [{gems:30}, 10], [{coins:300}, 5], [{gems:100}, 2]];
+const WCOL = ['#ff6b6b', '#4dabf7', '#ffd43b', '#b07cff', '#69db7c', '#3bc9db', '#ff922b', '#f783ac'];
+function spinSheet(){
+  const free = META.spin !== dayKey(), n = WHEEL.length;
+  const grad = WHEEL.map((_, i) => `${WCOL[i]} ${i/n*360}deg ${(i + 1)/n*360}deg`).join(',');
+  const b = sheet('🎡 Ruleta de la suerte', `<div class="wheel-box"><div class="wheel-pin">▼</div><div class="wheel" style="background:conic-gradient(${grad})">${WHEEL.map(([r], i) => `<span style="--a:${(i + 0.5)/n*360}deg">${r.keys ? '🎁' : r.gems ? r.gems + '💎' : r.coins + '🪙'}</span>`).join('')}</div><div class="ch-row" style="justify-content:center"><button class="btn big-cta" type="button" data-spin ${free || META.gems >= 20 ? '' : 'disabled'}>${free ? '¡Girar gratis!' : 'Girar por 20 💎'}</button></div><p class="hintline" style="text-align:center">${free ? 'Un giro gratis cada día.' : `Giro gratis de nuevo en ${fmtLeft(untilMidnight())}.`}</p></div>`);
+  b.addEventListener('click', e => {
+    const s = e.target.closest('[data-spin]'); if(!s || s.disabled) return;
+    if(free) META.spin = dayKey(); else { if(META.gems < 20) return; META.gems -= 20; }
+    saveMeta(); s.disabled = true;
+    const tot = WHEEL.reduce((a, w) => a + w[1], 0); let r = Math.random()*tot, k = 0; while(r >= WHEEL[k][1]){ r -= WHEEL[k][1]; k++; }
+    const wh = b.querySelector('.wheel'), deg = 360*6 + (360 - (k + 0.5)/n*360) + (Math.random() - 0.5)*(300/n);
+    wh.style.transform = `rotate(${deg}deg)`;
+    let ticks = 0; const iv = setInterval(() => { SFX.play('tick'); if(++ticks > 26) clearInterval(iv); }, 120);
+    setTimeout(() => { const rw = WHEEL[k][0]; grant(rw); SFX.play(k === 7 || k === 3 ? 'levelup' : 'unlock'); confettiDOM(k === 7 ? 100 : 40); toast('🎡 ¡' + rewardText(rw) + '!'); setTimeout(spinSheet, 900); }, 3700);
+  });
+}
+/* ---------- tienda del día y arsenal ---------- */
+const PRICE = {c:150, r:400, e:900, l:2200};
+function shopToday(){ const r = seeded(dayKey() + ':shop'), pool = ITEMS.filter(i => !i.pass && i.r !== 'c'), out = []; while(out.length < 4 && out.length < pool.length){ const it = pool[Math.floor(r()*pool.length)]; if(!out.includes(it)) out.push(it); } return out; }
+function shopSheet(){
+  const b = sheet('🛒 Tienda del día', `<p class="hintline">Cambia en ${fmtLeft(untilMidnight())}. Todo se compra con las monedas que ganas jugando.</p><div class="shop">${shopToday().map(it => `<div class="sitem r-${it.r}"><small>${RAR[it.r][0]}</small><b>${itemIcon(it)}</b><span>${KIND[it.k]}<br>${it.n}</span>${owns(it.id) ? '<button class="btn sm" type="button" disabled>✓ Tuyo</button>' : `<button class="btn sm" type="button" data-buy="${it.id}" ${META.coins >= PRICE[it.r] ? '' : 'disabled'}>${PRICE[it.r]} 🪙</button>`}</div>`).join('')}</div>
+    <div class="sitem wide"><b>💎</b><span>Cambia 300 🪙 por 30 💎</span><button class="btn sm" type="button" data-conv ${META.coins >= 300 ? '' : 'disabled'}>Cambiar</button></div>`, 'wide');
+  b.addEventListener('click', e => {
+    const by = e.target.closest('[data-buy]'); if(by && !by.disabled){ const it = IK[by.dataset.buy]; if(META.coins < PRICE[it.r]) return; META.coins -= PRICE[it.r]; giveItem(it.id); META.eq[it.k] = it.id; saveMeta(); renderMeta(); SFX.play('unlock'); toast(`✓ ${it.n} comprado y equipado`); shopSheet(); return; }
+    if(e.target.closest('[data-conv]')){ if(META.coins < 300) return; META.coins -= 300; grant({gems:30}); SFX.play('coin'); shopSheet(); }
+  });
+}
+function arsenalSheet(){
+  const b = sheet('🎨 Arsenal', Object.keys(KIND).map(k => `<div class="sec-h">${KIND[k]}</div><div class="ars">${ITEMS.filter(i => i.k === k).map(it => { const o = owns(it.id), on = META.eq[k] === it.id; return `<button type="button" class="aitem r-${it.r} ${on ? 'on' : ''} ${o ? '' : 'lockd'}" data-eq="${it.id}" ${o ? '' : 'disabled'} title="${esc(it.n)}"><b>${o ? itemIcon(it) : '?'}</b><span>${o ? it.n : RAR[it.r][0]}</span></button>`; }).join('')}</div>`).join('') + `<p class="hintline">Tienes ${META.inv.length} de ${ITEMS.length}. Los que faltan salen en cofres, en la tienda del día o en el pase.</p>`, 'wide');
+  b.addEventListener('click', e => { const q = e.target.closest('[data-eq]'); if(!q || q.disabled) return; const it = IK[q.dataset.eq]; META.eq[it.k] = it.id; saveMeta(); SFX.play('tap'); arsenalSheet(); renderLobby(); });
+}
+/* ---------- misiones ---------- */
+MISSIONS.push({id:'bl2', es:'Juega 2 partidas rápidas', goal:2, ev:'bl:end'}, {id:'blc8', es:'Haz una racha de 8 en el Blaster', goal:1, ev:'bl:combo8'}, {id:'rk1', es:'Juega una clasificatoria', goal:1, ev:'rk:end'}, {id:'stg1', es:'Termina un nivel de la Aventura', goal:1, ev:'stage:done'});
+MISSIONS.forEach(m => MK[m.id] = m);
+function missionSheet(){
+  const D = daily(), all = missionDone(D);
+  const b = sheet('🎯 Misiones del día', `${D.tasks.map(t => { const m = MK[t.id], ok = t.p >= m.goal; return `<div class="mis ${ok ? 'ok' : ''}"><span class="mis-t">${ok ? '✅' : '🎯'} ${m.es}</span><span class="mis-b"><i style="width:${Math.round(t.p/m.goal*100)}%"></i></span><span class="mis-n">${t.p}/${m.goal}</span></div>`; }).join('')}<div class="ch-row" style="justify-content:center;margin-top:10px"><button class="btn ${all && !D.claimed ? 'big-cta' : 'ghost'}" type="button" data-mclaim ${all && !D.claimed ? '' : 'disabled'}>${D.claimed ? '✓ Cofre reclamado · vuelve mañana' : all ? '🎁 Reclamar: 1 cofre + 30 💎 + 100 XP' : '🎁 Completa las 3 para el premio'}</button></div><p class="hintline" style="text-align:center">Misiones nuevas en ${fmtLeft(untilMidnight())}</p>`);
+  b.addEventListener('click', e => { if(!e.target.closest('[data-mclaim]')) return; const D2 = daily(); if(D2.claimed || !missionDone(D2)) return; D2.claimed = true; grant({keys:1, gems:30}); award(100); SFX.play('unlock'); confettiDOM(60); missionSheet(); });
+}
+/* ---------- liga semanal contra rivales simulados ---------- */
+const BOTS = [['Lulu_Paris', 1400], ['Kévin2008', 2300], ['CroissantKing', 3300], ['Mlle.Verbe', 4400], ['xX_Baguette_Xx', 5600], ['Zoé.B', 7000], ['Tonton_Max', 8600], ['NinaFR', 10500], ['LeGrandMot', 13000]];
+function botScore(week, i, base){ const start = new Date(week + 'T00:00:00'), h = Math.min(168, Math.max(0, (Date.now() - start)/3.6e6)); const r = seeded(week + ':' + i); const j = 0.75 + r()*0.5; return Math.round(base*j*Math.pow(h/168, 0.85)/10)*10; }
+function leagueTable(week, mine){ return [...BOTS.map(([n, b], i) => ({n, s: botScore(week, i, b), bot:1})), {n:'Tú', s: mine, me:1}].sort((a, b) => b.s - a.s); }
+function league(){ const w = weekKey(); if(!META.league || META.league.week !== w){ if(META.league && META.league.score > 0) META.leaguePrev = {week: META.league.week, score: META.league.score, claimed:false}; META.league = {week:w, score:0}; saveMeta(); } return META.league; }
+function leagueReward(){
+  const P = META.leaguePrev; if(!P || P.claimed) return null;
+  const tab = [...BOTS.map(([n, b], i) => ({s: Math.round(b*(0.75 + seeded(P.week + ':' + i)()*0.5)/10)*10})), {s:P.score, me:1}].sort((a, b) => b.s - a.s);
+  const pos = tab.findIndex(x => x.me) + 1; return {pos, gems: [100, 60, 40, 25, 15][pos - 1] || 10};
+}
+function leagueSheet(){
+  const L = league(), tab = leagueTable(L.week, L.score), R = leagueReward();
+  const b = sheet('🏅 Liga semanal', `${R ? `<div class="lg-prize">La semana pasada quedaste <b>#${R.pos}</b>. <button class="btn big-cta" type="button" data-lclaim>Reclamar ${R.gems} 💎</button></div>` : ''}<p class="hintline">Suma los puntos de tus partidas rápidas y clasificatorias de esta semana. Los 3 primeros ganan más gemas. Termina en ${fmtLeft(untilWeekEnd())}. Los rivales son bots simulados.</p><ol class="lg">${tab.map((x, i) => `<li class="${x.me ? 'me' : ''} ${i < 3 ? 'top' : ''}"><span class="lg-p">${i < 3 ? ['🥇', '🥈', '🥉'][i] : i + 1}</span><span class="lg-n">${esc(x.n)}</span><span class="lg-s">${x.s.toLocaleString('es')}</span></li>`).join('')}</ol>`);
+  b.addEventListener('click', e => { if(!e.target.closest('[data-lclaim]')) return; const r = leagueReward(); if(!r) return; META.leaguePrev.claimed = true; grant({gems:r.gems}); SFX.play('unlock'); confettiDOM(50); leagueSheet(); });
+}
+/* =====================================================================
+   VERB BLASTER: dispara a la forma correcta antes de que te disparen
+   ===================================================================== */
+const BL = {on:false};
+function blasterHTML(mode){
+  return `<div class="bl ${mode}"><div class="bl-hud"><button class="btn ghost sm" type="button" data-bquit>✕</button><span class="bl-time" data-b="time">${mode === 'stage' ? '' : '⏱ 60'}</span><span class="bl-sh" data-b="sh"></span><span class="bl-mult" data-b="mult"></span><span class="bl-score" data-b="score">0</span></div>
+    <div class="bl-q" data-b="q"><span class="bl-qt">¡Prepárate!</span><i class="bl-tb"><b data-b="tb"></b></i></div>
+    <div class="bl-wrap" data-b="wrap"><canvas data-b="cv" aria-label="Verb Blaster: toca la forma correcta"></canvas>
+    <div class="bl-start" data-b="start"><div class="bl-logo">VERB<br>BLASTER</div><p>Arriba sale qué forma buscas. <b>Dispara</b> (toca o haz clic) al dron que la lleva. Si fallas o tardas, te disparan a ti 🛡️.<br>Teclas 1-5 también disparan.</p><button class="btn big-cta" type="button" data-bgo>▶ ¡FUEGO!</button></div></div>
+    <div class="bl-feed" data-b="feed"></div></div>`;
+}
+function blaster(host, opts){
+  const mode = opts.mode, el = n => host.querySelector(`[data-b="${n}"]`);
+  const cv = el('cv'), x = cv.getContext('2d'), wrap = el('wrap');
+  const laser = IK[META.eq.laser] || IK.laser_gold, fx = IK[META.eq.fx] || IK.fx_spark, cross = META.eq.cross;
+  const S = BL.cur = {mode, score:0, combo:0, bestCombo:0, hits:0, shots:0, wrong:0, waves:0, time:60, shield:3, targets:[], parts:[], floats:[], cap:null, power:{}, phase:'ready', aim:{x:0, y:0}, recoil:0, shake:0, flash:0, beam:null, last:0, waveT:0, C:null, ev: eventToday(), slot:0};
+  let W = 0, H = 0, dpr = 1;
+  const resize = () => { const w = wrap.clientWidth; if(!w) return; dpr = Math.min(2, devicePixelRatio || 1); W = w; H = Math.round(w < 640 ? Math.min(w*1.15, innerHeight*0.62) : Math.min(w*0.58, innerHeight*0.66)); cv.width = W*dpr; cv.height = H*dpr; cv.style.height = H + 'px'; if(!S.aim.x){ S.aim = {x:W/2, y:H*0.45}; } };
+  new ResizeObserver(resize).observe(wrap); resize();
+  const narrow = () => W < 640;
+  function pickT(){ if(opts.T) return opts.T; const pool = poolTenses().map(id => TK[id]); if(Math.random() < 0.25) return S.ev; return pick(pool); }
+  function polFor(T){ if(mode === 'ranked'){ const o = ['aff']; if(NEG_OK.has(T.id)) o.push('neg', 'neg'); if(Q_OK.has(T.id)) o.push('q'); return polOf(pick(o), pick(['inv', 'estce', 'into'])); } return mode === 'stage' ? randPol(T) : (Math.random() < 0.25 && NEG_OK.has(T.id) ? polOf('neg') : {}); }
+  const ncols = n => narrow() ? 2 : Math.min(3, Math.max(2, Math.ceil(n/2)));
+  function slots(n){
+    const cols = ncols(n), rows = Math.ceil(n/cols), top = H*0.2, bot = H*(narrow() ? 0.64 : 0.7);
+    return [...Array(n)].map((_, i) => { const r = Math.floor(i/cols), c = i % cols, inRow = Math.min(cols, n - r*cols), off = (cols - inRow)/2; return {x: W*(c + off + 0.5)/cols, y: rows === 1 ? (top + bot)/2 : top + (bot - top)*r/(rows - 1)}; });
+  }
+  function newWave(){
+    if(mode === 'stage' && S.waves >= opts.waves){ end(); return; }
+    const T = pickT(), C = playChallenge(T, polFor(T)); S.C = C; S.waves++; S.hint = S.power.eye > 0; if(S.power.eye > 0) S.power.eye--;
+    const n = Math.min(narrow() ? 4 : 5, 3 + Math.floor(S.combo/5) + (mode === 'ranked' ? 1 : 0));
+    let d = shuffle(C.M).slice(0, n - 1).map(m => ({t:m.t, why:m.why}));
+    if(d.length < n - 1) d = d.concat(fillers(C, n - 1 - d.length, [C.coreText, ...d.map(z => z.t)]));
+    const low = t => /^Est-ce/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1);
+    const forms = shuffle([{t:low(C.coreText), ok:1}, ...d.map(m => ({t:low(m.t), why:m.why}))]), sl = slots(forms.length);
+    S.targets = forms.map((f, i) => Object.assign(f, {slot:i, x: sl[i].x, y: -60 - Math.random()*80, ph: Math.random()*6, born: performance.now(), dead:0, hit:0, num:i + 1}));
+    S.waveT = mode === 'stage' ? 0 : Math.max(3.6, 7.5 - S.combo*0.22) * (mode === 'ranked' ? 0.85 : 1); S.waveMax = S.waveT; S.t0 = performance.now(); S.swapAt = performance.now() + 2200;
+    const ev = C.T.id === S.ev.id && mode !== 'stage';
+    el('q').innerHTML = `<span class="bl-qt"><b>${esc(C.S.p.k)}</b> · ${esc(C.S.v.full)} <small>${esc(C.S.v.es)}</small> · <span class="bl-tn c-${C.T.cat}">${C.T.fr}</span>${C.pol.neg || C.pol.q ? ` · <span class="bl-pol">${polName(C.pol)}</span>` : ''}${ev ? ' <span class="bl-ev">EVENTO ×2</span>' : ''}</span><i class="bl-tb"><b data-b="tb"></b></i>`;
+    if(S.combo >= 6 && !S.cap && Math.random() < 0.35) spawnCap();
+    hud();
+  }
+  function spawnCap(){ const k = pick(['slow', 'time', 'eye', 'x2']); if(mode === 'stage' && k === 'time') return; S.cap = {k, ico:{slow:'❄️', time:'⏱️', eye:'🎯', x2:'✖️2'}[k], x:-30, y:H*0.11, dir:1}; }
+  function hud(){
+    el('score').textContent = S.score.toLocaleString('es');
+    if(mode !== 'stage'){ el('time').textContent = '⏱ ' + Math.ceil(S.time); el('time').classList.toggle('low', S.time <= 10); el('sh').innerHTML = [0, 1, 2].map(i => `<i class="${i < S.shield ? 'on' : ''}">🛡️</i>`).join(''); }
+    else el('sh').textContent = `Dron ${Math.min(S.waves, opts.waves)} de ${opts.waves}`;
+    const m = mult(); el('mult').innerHTML = S.combo >= 2 ? `🔥 ${S.combo} · ×${m}` : '';
+  }
+  const mult = () => Math.min(4, 1 + Math.floor(S.combo/3)*0.5) * (S.power.x2 > performance.now() ? 2 : 1);
+  function feed(html, cls){ const f = el('feed'), d = document.createElement('div'); d.className = cls; d.innerHTML = html; f.prepend(d); while(f.children.length > 4) f.lastChild.remove(); }
+  function burst(px, py, col, n, kind){
+    for(let i = 0; i < n; i++){ const a = Math.random()*Math.PI*2, v = 120 + Math.random()*320; S.parts.push({x:px, y:py, vx:Math.cos(a)*v, vy:Math.sin(a)*v - 80, life:0.7 + Math.random()*0.5, t:0, col: col || '#fff', kind, s: 3 + Math.random()*4}); }
+  }
+  function fxBurst(px, py){
+    const id = fx.id;
+    if(id === 'fx_spark') burst(px, py, null, 26, 'rgb');
+    if(id === 'fx_stars') burst(px, py, '#ffd23d', 16, '★');
+    if(id === 'fx_hearts') burst(px, py, '#ff4f7a', 16, '❤');
+    if(id === 'fx_croissant') burst(px, py, null, 12, '🥐');
+    if(id === 'fx_fire'){ burst(px, py, null, 46, 'rgb'); burst(px, py - 30, null, 30, 'rgb'); }
+    if(id === 'fx_tri') burst(px, py, null, 40, 'tri');
+  }
+  function shoot(px, py, viaKey){
+    if(S.phase !== 'play') return;
+    S.aim = {x:px, y:py}; S.shots++; S.recoil = 1; SFX.play('laser');
+    S.beam = {x:px, y:py, t:0.09};
+    if(S.cap && Math.hypot(px - S.cap.x, py - S.cap.y) < 34){ power(S.cap.k); burst(S.cap.x, S.cap.y, '#7df9ff', 30, 'rgb'); S.cap = null; S.hits++; return; }
+    const t = S.targets.find(t => !t.dead && Math.abs(px - t.x) <= t.w/2 + 6 && Math.abs(py - t.y) <= t.h/2 + 8);
+    if(!t){ S.floats.push({x:px, y:py, t:0, txt:'fallo', col:'#ffffffaa', s:16}); return; }
+    if(t.ok){
+      const secs = (performance.now() - S.t0)/1000, speed = Math.max(0, Math.round((4 - secs)*40)), ev = S.C.T.id === S.ev.id && mode !== 'stage' ? 2 : 1;
+      S.combo++; S.bestCombo = Math.max(S.bestCombo, S.combo); S.hits++;
+      const pts = Math.round((100 + speed)*mult()*ev); S.score += pts;
+      t.dead = 1; t.hit = 1; fxBurst(t.x, t.y); S.shake = 0.35; S.flash = 0; haptic(18);
+      SFX.play('boom'); if(ANN[S.combo]){ announce(ANN[S.combo], wrap); } else if(S.combo >= 2) SFX.play('combo', S.combo);
+      S.floats.push({x:t.x, y:t.y - 30, t:0, txt:`+${pts}`, col:'#fff36b', s:28}); if(secs < 1.6) S.floats.push({x:t.x, y:t.y - 62, t:0, txt:'¡RÁPIDO!', col:'#7df9ff', s:20});
+      if(mode !== 'stage') S.time = Math.min(99, S.time + 1.5);
+      feed(`✓ ${esc(S.C.fullText)}`, 'ok'); say(S.C.fullText, 1); recordVerb(S.C.S.v.full, S.wrongWave ? 'help' : 'first');
+      if(S.combo === 8) bump('bl:combo8');
+      S.targets.forEach(o => { if(!o.dead){ o.dead = 1; o.fade = 1; } });
+      S.phase = 'gap'; S.wrongWave = false; setTimeout(() => { if(S.phase === 'gap'){ S.phase = 'play'; newWave(); } }, 380);
+    } else {
+      t.dead = 1; S.wrong++; S.wrongWave = true; burst(t.x, t.y, '#888', 18, 'rgb'); hurt(t.why || 'Esa no era.');
+    }
+    hud();
+  }
+  function hurt(why){
+    S.combo = 0; S.flash = 1; S.shake = 0.6; SFX.play('hurt'); haptic([40, 30, 40]); recordErr(why);
+    if(mode !== 'stage') S.shield--;
+    S.hint = true;
+    feed(`✗ ${String(why).replace(/<[^>]+>/g, '')}`, 'no');
+    if(mode !== 'stage' && S.shield <= 0){ S.shield = 0; hud(); end(); }
+  }
+  function power(k){
+    SFX.play('power'); haptic(20);
+    if(k === 'slow') S.power.slow = performance.now() + 6000;
+    if(k === 'time') S.time += 6;
+    if(k === 'eye'){ S.power.eye = 2; S.hint = true; }
+    if(k === 'x2') S.power.x2 = performance.now() + 8000;
+    announce({slow:'❄️ CÁMARA LENTA', time:'⏱️ +6 s', eye:'🎯 VISIÓN', x2:'✖️2 PUNTOS'}[k], wrap);
+  }
+  function end(){
+    if(S.phase === 'over') return; S.phase = 'over'; BL.on = false; SFX.play('finish');
+    setTimeout(() => opts.onEnd(S), 650);
+  }
+  /* ----- dibujo ----- */
+  function laserCol(t){ if(laser.col === 'rainbow') return `hsl(${(t*400) % 360} 100% 60%)`; if(laser.col === 'tri') return ['#2f5cff', '#ffffff', '#ff3b3b'][Math.floor(t*12) % 3]; return laser.col; }
+  function drawBg(now){
+    const g = x.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#120a2e'); g.addColorStop(0.55, '#4a1d5e'); g.addColorStop(0.78, '#ff7a59'); g.addColorStop(1, '#2a0f3a'); x.fillStyle = g; x.fillRect(0, 0, W, H);
+    x.fillStyle = 'rgba(255,255,255,.8)'; for(let i = 0; i < 40; i++){ const sx = (i*97.3) % W, sy = (i*53.7) % (H*0.5), tw = 0.5 + 0.5*Math.sin(now/400 + i); x.globalAlpha = tw*0.8; x.fillRect(sx, sy, 2, 2); } x.globalAlpha = 1;
+    const hy = H*0.78; x.fillStyle = '#1a0b26';
+    for(let i = 0; i < 14; i++){ const bw = W/12, bh = 30 + ((i*37) % 70); x.fillRect(i*bw - 10, hy - bh, bw - 4, bh); }
+    const ex = W*0.78; x.beginPath(); x.moveTo(ex - 34, hy); x.lineTo(ex - 6, hy - 150); x.lineTo(ex, hy - 190); x.lineTo(ex + 6, hy - 150); x.lineTo(ex + 34, hy); x.closePath(); x.fill();
+    x.strokeStyle = 'rgba(255,90,200,.55)'; x.lineWidth = 1.5; const off = (now/18) % 40;
+    for(let i = 0; i < 12; i++){ const yy = hy + Math.pow(i/12, 2)*(H - hy) + off*(i/12)*0.5; x.beginPath(); x.moveTo(0, yy); x.lineTo(W, yy); x.stroke(); }
+    for(let i = -10; i <= 10; i++){ x.beginPath(); x.moveTo(W/2 + i*24, hy); x.lineTo(W/2 + i*150, H); x.stroke(); }
+  }
+  function rr(px, py, w, h, r){ x.beginPath(); x.moveTo(px + r, py); x.arcTo(px + w, py, px + w, py + h, r); x.arcTo(px + w, py + h, px, py + h, r); x.arcTo(px, py + h, px, py, r); x.arcTo(px, py, px + w, py, r); x.closePath(); }
+  function drawTarget(t, now){
+    const maxW = Math.min(250, W/ncols(S.targets.length) - 18);
+    const w0 = wrapText(x, t.t, maxW - 24, narrow() ? 17 : 21); t.w = maxW; t.h = 30 + w0.lines.length*w0.fs*1.15;
+    const a = t.fade ? Math.max(0, 1 - t.fade) : 1; if(a <= 0) return;
+    x.save(); x.globalAlpha = a; x.translate(t.x, t.y);
+    const sc = t.dead && t.hit ? 1 + (t.fade || 0)*0.6 : 1; x.scale(sc, sc);
+    const spin = now/40;
+    x.strokeStyle = '#d9e2ff'; x.lineWidth = 3; [-1, 1].forEach(s => { x.beginPath(); x.moveTo(s*t.w*0.3, -t.h/2); x.lineTo(s*t.w*0.3, -t.h/2 - 12); x.stroke(); x.beginPath(); x.ellipse(s*t.w*0.3, -t.h/2 - 13, 22*Math.abs(Math.cos(spin + s)), 3, 0, 0, 6.29); x.stroke(); });
+    const glow = S.hint && t.ok && !t.dead;
+    if(glow){ x.shadowColor = '#7df9ff'; x.shadowBlur = 24 + 10*Math.sin(now/120); }
+    rr(-t.w/2, -t.h/2, t.w, t.h, 14); const g = x.createLinearGradient(0, -t.h/2, 0, t.h/2); g.addColorStop(0, t.dead && !t.hit ? '#555' : '#2b3150'); g.addColorStop(1, t.dead && !t.hit ? '#333' : '#151a30'); x.fillStyle = g; x.fill();
+    x.shadowBlur = 0; x.lineWidth = glow ? 4 : 2.5; x.strokeStyle = glow ? '#7df9ff' : '#ff4fd8'; x.stroke();
+    x.fillStyle = '#ff3b5c'; x.beginPath(); x.arc(-t.w/2 + 14, -t.h/2 + 12, 4 + Math.sin(now/150 + t.ph), 0, 6.29); x.fill();
+    x.fillStyle = 'rgba(255,255,255,.5)'; x.font = '700 11px "JetBrains Mono", monospace'; x.textAlign = 'right'; x.textBaseline = 'top'; x.fillText(String(t.num), t.w/2 - 9, -t.h/2 + 6);
+    x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.font = `800 ${w0.fs}px Figtree, Arial`;
+    w0.lines.forEach((l, k) => x.fillText(l, 0, 4 + (k - (w0.lines.length - 1)/2)*w0.fs*1.15));
+    x.restore();
+  }
+  function drawCross(now){
+    const {x:ax, y:ay} = S.aim, c = laserCol(now/1000); x.save(); x.translate(ax, ay); x.strokeStyle = c; x.fillStyle = c; x.lineWidth = 2.5; x.shadowColor = c; x.shadowBlur = 8;
+    if(cross === 'cross_basic'){ x.beginPath(); x.arc(0, 0, 16, 0, 6.29); x.stroke(); [[0, -24, 0, -8], [0, 8, 0, 24], [-24, 0, -8, 0], [8, 0, 24, 0]].forEach(([a, b, c2, d]) => { x.beginPath(); x.moveTo(a, b); x.lineTo(c2, d); x.stroke(); }); }
+    else if(cross === 'cross_dot'){ x.fillStyle = '#ff2b2b'; x.beginPath(); x.arc(0, 0, 5, 0, 6.29); x.fill(); x.globalAlpha = 0.4; x.beginPath(); x.arc(0, 0, 12, 0, 6.29); x.stroke(); }
+    else if(cross === 'cross_ring'){ [10, 20].forEach(r => { x.beginPath(); x.arc(0, 0, r, 0, 6.29); x.stroke(); }); }
+    else if(cross === 'cross_star' || cross === 'cross_season'){ x.rotate(now/600); x.beginPath(); for(let i = 0; i < 10; i++){ const r = i % 2 ? 8 : 20, an = i/10*Math.PI*2; x.lineTo(Math.cos(an)*r, Math.sin(an)*r); } x.closePath(); x.stroke(); }
+    else { x.shadowBlur = 0; x.font = '30px serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText('🗼', 0, 0); x.beginPath(); x.arc(0, 0, 20, 0, 6.29); x.stroke(); }
+    x.restore();
+  }
+  function drawGun(now){
+    const gx = W/2, gy = H + 6, an = Math.atan2(S.aim.y - gy, S.aim.x - gx) + Math.PI/2, rec = S.recoil*14, c = laserCol(now/1000);
+    if(S.beam){ x.save(); x.strokeStyle = c; x.lineWidth = 5; x.shadowColor = c; x.shadowBlur = 18; x.globalAlpha = Math.min(1, S.beam.t*14); x.beginPath(); x.moveTo(gx + Math.sin(an)*90, gy - Math.cos(an)*90); x.lineTo(S.beam.x, S.beam.y); x.stroke(); x.restore(); }
+    x.save(); x.translate(gx, gy); x.rotate(an); x.translate(0, rec); if(narrow()) x.scale(0.7, 0.7);
+    const g = x.createLinearGradient(-22, 0, 22, 0); g.addColorStop(0, '#2a2f45'); g.addColorStop(0.5, '#59628a'); g.addColorStop(1, '#2a2f45');
+    x.fillStyle = g; rr(-22, -96, 44, 110, 10); x.fill(); x.fillStyle = c; x.fillRect(-14, -70, 28, 6); x.fillRect(-14, -50, 28, 4);
+    if(S.recoil > 0.6){ x.fillStyle = c; x.shadowColor = c; x.shadowBlur = 20; x.beginPath(); x.arc(0, -100, 14*S.recoil, 0, 6.29); x.fill(); }
+    x.restore();
+  }
+  function frame(now){
+    if(!cv.isConnected){ BL.on = false; return; }
+    const dt = Math.min(0.06, (now - (S.last || now))/1000); S.last = now;
+    const visible = cv.offsetParent !== null && !document.hidden;
+    const slow = S.power.slow > now ? 0.45 : 1;
+    if(S.phase === 'play' && visible){
+      if(mode !== 'stage'){ S.time -= dt; if(S.time <= 0){ S.time = 0; hud(); end(); } }
+      if(S.waveMax){ S.waveT -= dt*slow; const tb = el('tb'); if(tb) tb.style.width = Math.max(0, S.waveT/S.waveMax*100) + '%';
+        if(S.waveT <= 0 && S.phase === 'play'){ const ok = S.targets.find(t => t.ok); hurt(`¡Te disparó! La forma era «${S.C.coreText}».`); if(S.phase === 'play'){ if(ok){ S.floats.push({x:ok.x, y:ok.y - 40, t:0, txt:S.C.coreText, col:'#7df9ff', s:22}); } S.targets.forEach(t => { t.dead = 1; t.fade = 0.01; }); say(S.C.fullText, 1); S.phase = 'gap'; setTimeout(() => { if(S.phase === 'gap'){ S.phase = 'play'; newWave(); } }, 1100); } } }
+      if(now > S.swapAt && S.targets.length > 2){ const a = S.targets.filter(t => !t.dead); if(a.length >= 2){ const [p, q] = shuffle(a); [p.slot, q.slot] = [q.slot, p.slot]; } S.swapAt = now + Math.max(1100, 2600 - S.combo*90)/slow; }
+      if(S.cap){ S.cap.x += 150*dt*slow; if(S.cap.x > W + 40) S.cap = null; }
+    }
+    const sl = slots(S.targets.length);
+    S.targets.forEach(t => { const s = sl[t.slot] || sl[0]; const tx = s.x + Math.sin(now/700*slow + t.ph)*W*0.025, ty = s.y + Math.cos(now/560*slow + t.ph)*10; t.x += (tx - t.x)*Math.min(1, dt*6*slow); t.y += (ty - t.y)*Math.min(1, dt*5*slow); if(t.fade) t.fade += dt*3; });
+    S.parts.forEach(p => { p.t += dt; p.x += p.vx*dt; p.y += p.vy*dt; p.vy += 600*dt; }); S.parts = S.parts.filter(p => p.t < p.life);
+    S.floats.forEach(f => f.t += dt); S.floats = S.floats.filter(f => f.t < 0.9);
+    S.recoil = Math.max(0, S.recoil - dt*6); S.shake = Math.max(0, S.shake - dt*2.5); S.flash = Math.max(0, S.flash - dt*2.2); if(S.beam){ S.beam.t -= dt; if(S.beam.t <= 0) S.beam = null; }
+    x.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const sh = S.shake*12; x.translate((Math.random() - 0.5)*sh, (Math.random() - 0.5)*sh);
+    drawBg(now); S.targets.forEach(t => drawTarget(t, now));
+    if(S.cap){ x.save(); x.shadowColor = '#7df9ff'; x.shadowBlur = 20; x.fillStyle = 'rgba(30,40,80,.85)'; x.beginPath(); x.arc(S.cap.x, S.cap.y, 26, 0, 6.29); x.fill(); x.strokeStyle = '#7df9ff'; x.lineWidth = 3; x.stroke(); x.shadowBlur = 0; x.font = '24px serif'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillStyle = '#fff'; x.fillText(S.cap.ico, S.cap.x, S.cap.y + 1); x.restore(); }
+    S.parts.forEach(p => { const a = 1 - p.t/p.life; x.globalAlpha = a; if(p.kind === 'rgb' || p.kind === 'tri'){ x.fillStyle = p.kind === 'tri' ? ['#2f5cff', '#fff', '#ff3b3b'][Math.floor(p.s) % 3] : p.col !== '#fff' ? p.col : `hsl(${(p.s*80 + p.vx) % 360} 100% 62%)`; x.fillRect(p.x, p.y, p.s, p.s); } else { x.font = `${10 + p.s*3}px serif`; x.fillStyle = p.col || '#fff'; x.textAlign = 'center'; x.fillText(p.kind, p.x, p.y); } }); x.globalAlpha = 1;
+    S.floats.forEach(f => { x.globalAlpha = 1 - f.t/0.9; x.font = `900 ${f.s}px Figtree, Arial`; x.textAlign = 'center'; x.lineWidth = 4; x.strokeStyle = 'rgba(0,0,0,.6)'; x.strokeText(f.txt, f.x, f.y - f.t*50); x.fillStyle = f.col; x.fillText(f.txt, f.x, f.y - f.t*50); }); x.globalAlpha = 1;
+    drawGun(now); if(S.phase !== 'ready') drawCross(now);
+    if(S.flash){ x.fillStyle = `rgba(255,30,60,${S.flash*0.35})`; x.fillRect(-20, -20, W + 40, H + 40); }
+    if(S.power.slow > now){ x.fillStyle = 'rgba(120,200,255,.12)'; x.fillRect(0, 0, W, H); }
+    requestAnimationFrame(frame);
+  }
+  const pt = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left)*W/r.width, (e.clientY - r.top)*H/r.height]; };
+  cv.addEventListener('pointermove', e => { if(e.pointerType === 'mouse'){ const [px, py] = pt(e); S.aim = {x:px, y:py}; } });
+  cv.addEventListener('pointerdown', e => { e.preventDefault(); const [px, py] = pt(e); shoot(px, py); });
+  host.addEventListener('click', e => {
+    if(e.target.closest('[data-bgo]')){ el('start').hidden = true; S.phase = 'play'; BL.on = true; SFX.play('go'); announce('¡FUEGO!', wrap); newWave(); hud(); return; }
+    if(e.target.closest('[data-bquit]')){ if(S.phase === 'ready'){ opts.onQuit && opts.onQuit(); return; } end(); }
+  });
+  S.key = e => { if(!cv.isConnected || S.phase !== 'play' || (e.target.closest && e.target.closest('input,textarea'))) return; if(/^[1-5]$/.test(e.key)){ const t = S.targets.find(t => t.num === +e.key && !t.dead); if(t){ e.preventDefault(); shoot(t.x, t.y, true); } } };
+  document.addEventListener('keydown', S.key);
+  hud(); requestAnimationFrame(frame);
+  if(opts.autostart) setTimeout(() => host.querySelector('[data-bgo]').click(), 300);
+  return S;
+}
+function fillers(C, k, have){
+  if(C.T.id === 'passif') return [];
+  const {v, key, p, o} = C.S, out = [], seen = new Set(have.map(norm)), ns = /^(imper|ger|infpasse)$/.test(C.T.id);
+  for(const kk of shuffle(['pres', 'impf', 'fut', 'cond', 'pc', 'subj'].filter(z => z !== key))){
+    for(const sl of shuffle([0, 1, 2, 3, 4, 5])){
+      if(out.length >= k) return out;
+      const r = phrase(v, kk, {...p, slot:sl}, {...o, q:null, noSub: ns || undefined}); if(!r || !r.length) continue;
+      const t = toText(r); if(seen.has(norm(t))) continue; seen.add(norm(t));
+      out.push({t, why:`Esa forma es del ${KEYNAME[kk]}${sl !== p.slot ? ` y de «${SUBJ_SLOT[sl]}»` : ''}. Aquí necesitas el ${C.T.fr}.`}); break;
+    }
+  }
+  return out;
+}
+/* ---------- partida rápida / clasificatoria ---------- */
+function startMatch(mode){
+  closeSheet(); go('lobby');
+  $('#lobHome').hidden = true; const host = $('#lobPlay'); host.hidden = false; host.innerHTML = blasterHTML(mode);
+  window.scrollTo({top: host.offsetTop - 6, behavior:'smooth'});
+  blaster(host, {mode, onEnd: S => matchEnd(S, mode), onQuit: () => { host.hidden = true; $('#lobHome').hidden = false; renderLobby(); }});
+}
+function matchEnd(S, mode){
+  document.removeEventListener('keydown', S.key);
+  const rec = S.score > META.best, first = META.firstWin !== dayKey() && S.hits > 0;
+  let coins = Math.round(S.score/30) + S.bestCombo*2; if(first) coins *= 2; if(isWeekend()) coins = Math.round(coins*1.5);
+  const gems = rec && S.score > 0 ? 15 : 0, xp = Math.round(S.score/40) + S.hits*2;
+  const R0 = rankOf(META.rp); let drp = 0;
+  if(mode === 'ranked'){ const par = 500 + 85*R0.i; drp = Math.round((S.score - par)/45); drp = Math.max(R0.i < 3 ? 0 : -15, Math.min(45, drp)); if(S.hits >= 5 && drp < 5) drp = Math.max(drp, R0.i < 3 ? 5 : drp); META.rp = Math.max(0, META.rp + drp); }
+  const R1 = rankOf(META.rp), promo = R1.i > R0.i;
+  if(rec) META.best = S.score; if(first) META.firstWin = dayKey(); META.matches++;
+  league().score += S.score; saveMeta();
+  grant({coins, gems: gems + (promo ? 50 : 0)}); award(xp); bump('bl:end'); if(mode === 'ranked') bump('rk:end');
+  const acc = S.shots ? Math.round(S.hits/S.shots*100) : 0, P = passState();
+  const o = document.createElement('div'); o.className = 'ceremony res blres';
+  o.innerHTML = `<div class="cer-in"><div class="cer-kick">${mode === 'ranked' ? '🏆 Clasificatoria' : '⚡ Partida rápida'} · fin</div>${rec ? '<div class="newrec">¡NUEVO RÉCORD!</div>' : ''}<div class="bl-big">0</div>
+    <div class="bl-stats"><span><b>${S.hits}</b> aciertos</span><span><b>${acc}%</b> precisión</span><span><b>${S.bestCombo}</b> mejor racha</span></div>
+    <div class="bl-rw"><span>🪙 +${coins}${first ? ' <small>×2 primera del día</small>' : ''}${isWeekend() ? ' <small>×1,5 finde</small>' : ''}</span>${gems ? `<span>💎 +${gems}</span>` : ''}<span>⭐ +${xp} XP</span></div>
+    ${mode === 'ranked' ? `<div class="bl-rank" style="--rc:${R1.col}"><b>${R1.ico} ${R1.name}</b> <span class="${drp >= 0 ? 'up' : 'down'}">${drp >= 0 ? '+' : ''}${drp} RP</span><div class="bar"><i style="width:${R1.next ? Math.round((META.rp - R1.floor)/(R1.next - R1.floor)*100) : 100}%"></i></div><small>${R1.next ? `${R1.next - META.rp} RP para subir` : 'Rango máximo'}</small></div>` : `<p class="hintline">Récord: ${META.best.toLocaleString('es')} · ${META.best - S.score > 0 ? `te faltaron ${(META.best - S.score).toLocaleString('es')} puntos` : '¡lo superaste!'}</p>`}
+    <p class="hintline">🎫 Pase nivel ${P.tier} · ${P.into}/${PASS_STEP} XP${P.claimable ? ` · <b>${P.claimable} premios por reclamar</b>` : ''}</p>
+    <div class="ch-row" style="justify-content:center"><button class="btn big-cta" type="button" data-r="again">⚡ ¡Otra!</button><button class="btn ghost" type="button" data-r="lobby">🏠 Lobby</button></div></div>`;
+  document.body.appendChild(o);
+  const big = o.querySelector('.bl-big'); let n = 0; const step = Math.max(7, Math.round(S.score/40)); const iv = setInterval(() => { n = Math.min(S.score, n + step); big.textContent = n.toLocaleString('es'); SFX.play('tick'); if(n >= S.score) clearInterval(iv); }, 30);
+  if(rec || promo) confettiDOM(90); if(promo) setTimeout(() => announce(`${R1.ico} ¡${R1.name.toUpperCase()}!`), 900);
+  setTimeout(() => o.querySelector('[data-r="again"]').focus({preventScroll:true}), 100);
+  o.addEventListener('click', e => { const b = e.target.closest('[data-r]'); if(!b) return; o.remove(); if(b.dataset.r === 'again') startMatch(mode); else { $('#lobPlay').hidden = true; $('#lobHome').hidden = false; renderLobby(); } });
+}
+/* ---------- ronda de la Aventura ---------- */
+function blasterRound(host, T){
+  host.innerHTML = blasterHTML('stage');
+  blaster(host, {mode:'stage', T, waves:6, onEnd: S => { document.removeEventListener('keydown', S.key); roundEnd(S.wrong <= 1, `${S.hits >= 6 ? 6 : S.hits} drones · ${S.wrong} fallos · ${S.score} puntos`); }, onQuit(){}});
+}
+/* ---------- LOBBY ---------- */
+function renderLobby(){
+  if(BL.on) return;
+  const R = rankOf(META.rp), ev = eventToday(), P = passState(), nextI = ADV.findIndex((id, i) => unlocked(i) && !stageStars(id)), next = TK[ADV[nextI >= 0 ? nextI : 0]];
+  const fr = (META.eq.frame || 'frame_none').slice(6);
+  $('#lobHome').innerHTML = `
+  <div class="lob-top"><div class="lob-me"><span class="ava fr-${fr}">😎</span><div><b class="lob-rank" style="--rc:${R.col}">${R.ico} ${R.name}</b><div class="bar rk"><i style="width:${R.next ? Math.round((META.rp - R.floor)/(R.next - R.floor)*100) : 100}%"></i></div><small>${META.rp} RP · récord ${META.best.toLocaleString('es')}</small></div></div>
+    <div class="lob-cur"><span>🪙 <b>${META.coins}</b></span><span>💎 <b>${META.gems}</b></span><span>🎁 <b>${META.keys}</b></span></div></div>
+  <div class="lob-banners">
+    <div class="bnr ev c-${ev.cat}"><small>EVENTO DE HOY · termina en <b data-cd="day">${fmtLeft(untilMidnight())}</b></small><b>Fiebre del ${ev.fr}</b><span>Sus drones valen ×2 en las partidas</span></div>
+    <div class="bnr ps"><small>PASE DE TEMPORADA · ${fmtLeft(untilMonthEnd())}</small><b>Nivel ${P.tier} / ${PASS_TIERS}</b><span>${P.claimable ? `🎁 ${P.claimable} premios esperando` : `${PASS_STEP - P.into} XP para el siguiente premio`}</span></div>
+    <div class="bnr fw"><small>${isWeekend() ? 'FIN DE SEMANA' : 'CADA DÍA'}</small><b>${isWeekend() ? 'Monedas ×1,5' : META.firstWin === dayKey() ? 'Primera victoria ✓' : 'Primera victoria ×2'}</b><span>${isWeekend() ? 'Todo el sábado y el domingo' : META.firstWin === dayKey() ? 'Vuelve mañana por otra' : 'Tu primera partida de hoy da monedas dobles'}</span></div>
+  </div>
+  <button class="lob-play" type="button" data-lob="quick"><span class="lp-ico">⚡</span><span><b>PARTIDA RÁPIDA</b><small>60 segundos · dispara a la forma correcta</small></span><span class="lp-go">▶</span></button>
+  <div class="lob-row"><button class="lob-btn rk" type="button" data-lob="ranked" style="--rc:${R.col}"><b>🏆 Clasificatoria</b><small>${R.ico} ${R.name} · sube de rango</small></button><button class="lob-btn adv" type="button" data-lob="adv"><b>🗺️ Aventura</b><small>${nextI >= 0 ? 'Siguiente: ' + next.fr : '¡Mapa completo!'}</small></button></div>
+  <div class="lob-icons">${[['check', '📅', 'Diario'], ['pass', '🎫', 'Pase'], ['chest', '🎁', 'Cofres'], ['spin', '🎡', 'Ruleta'], ['shop', '🛒', 'Tienda'], ['mis', '🎯', 'Misiones'], ['league', '🏅', 'Liga'], ['ars', '🎨', 'Arsenal']].map(([k, i, n]) => `<button type="button" class="lic" data-lic="${k}"><span>${i}</span>${n}</button>`).join('')}</div>`;
+  paintDots();
+}
+$('#v-lobby').addEventListener('click', e => {
+  const b = e.target.closest('[data-lob],[data-lic]'); if(!b) return; SFX.play('tap');
+  const k = b.dataset.lob || b.dataset.lic;
+  if(k === 'quick' || k === 'ranked') return startMatch(k);
+  if(k === 'adv'){ go('play'); return; }
+  ({check:checkinSheet, pass:passSheet, chest:chestSheet, spin:spinSheet, shop:shopSheet, mis:missionSheet, league:leagueSheet, ars:arsenalSheet})[k]();
+});
+setInterval(() => { const c = $('[data-cd="day"]'); if(c && ST.view === 'lobby') c.textContent = fmtLeft(untilMidnight()); }, 30000);
 /* ---------- arranque ---------- */
 $('#verbList').innerHTML = DATALIST.map(v => `<option value="${esc(v)}"></option>`).join('');
 renderLevel(); renderProgramme(); renderPersons(); renderActions();
@@ -4341,7 +4998,8 @@ const okGL = (typeof THREE !== 'undefined') && Stage.init($('#stageWrap'));
 if(!okGL){ $('#stageFallback').hidden = false; }
 renderScene(true);
 document.body.insertAdjacentHTML('beforeend', COMIC_DEFS);
-renderPlay(); renderMeta(); coach('play');
+renderPlay(); renderLobby(); renderMeta(); coach('lobby');
+if(META.check.last !== dayKey()) setTimeout(() => { if(!$('#sheet')) checkinSheet(); }, 1400);
 })();
 </script>
 
