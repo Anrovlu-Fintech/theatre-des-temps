@@ -866,6 +866,24 @@ footer{max-width:1500px; margin:0 auto; padding-block:0 30px; padding-left:max(1
 @media (hover:hover){ .sq-wrap canvas{cursor:grab} }
 .sq .bl-start{background:rgba(10,30,18,.62)}
 .sq .bl-logo{color:#7dff6b; text-shadow:0 5px 0 #1f5130, 0 0 30px #43d17a}
+
+.sq-sup{position:absolute; right:12px; bottom:12px; width:62px; height:62px; border-radius:50%; border:3px solid rgba(255,255,255,.7); color:#fff; font-size:24px; line-height:1; display:flex; flex-direction:column; align-items:center; justify-content:center; background:conic-gradient(#ffb020 var(--p, 0%), rgba(20,16,40,.75) 0); opacity:.75; touch-action:none; transition:transform .1s}
+.sq-sup small{font-size:9px; font-weight:900; letter-spacing:.06em}
+.sq-sup.ready{opacity:1; border-color:#fff36b; box-shadow:0 0 0 4px rgba(255,210,61,.35), 0 0 24px #ffb020; animation:nodePulse .6s infinite alternate}
+.sq-sup:active{transform:scale(.92)}
+.sq-world{font-weight:900; font-size:17px; background:rgba(255,255,255,.14); border-radius:999px; padding:4px 14px}
+.lob-world{width:100%; display:flex; align-items:center; gap:12px; border:2px solid var(--line); border-radius:16px; background:var(--paper); color:var(--ink); padding:10px 14px; margin-bottom:10px; text-align:left}
+.lob-world > span:nth-child(2){flex:1; display:flex; flex-direction:column} .lob-world small{font-size:11px; font-weight:800; color:var(--ink-3); letter-spacing:.04em} .lob-world b{font-size:18px}
+.lw-ico{font-size:30px} .lw-go{font-size:13px; font-weight:800; color:var(--velvet); white-space:nowrap}
+.w-st{letter-spacing:1px; font-size:15px; white-space:nowrap}
+.worlds{display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:10px}
+.wcard{position:relative; display:flex; flex-direction:column; align-items:center; gap:2px; padding:12px 8px 10px; border-radius:16px; border:2px solid var(--line); background:linear-gradient(180deg, color-mix(in srgb, var(--c) 22%, var(--paper)), var(--paper)); color:var(--ink); text-align:center; transition:transform .1s}
+.wcard:not(.lockd):hover{transform:translateY(-2px)} .wcard.on{border-color:var(--c); box-shadow:0 0 0 3px color-mix(in srgb, var(--c) 40%, transparent)}
+.wcard b{font-size:14px; line-height:1.15} .wcard small{font-size:11.5px; color:var(--ink-3)}
+.wcard.lockd{filter:grayscale(1); opacity:.55}
+.w-ico{font-size:30px} .w-n{position:absolute; top:6px; left:9px; font:800 11px var(--f-mono); color:var(--ink-3)}
+.w-res{display:flex; flex-direction:column; align-items:center; gap:2px; font-weight:800} .w-res .w-big{font-size:30px; letter-spacing:4px} .w-res small{font-weight:600; color:var(--ink-3)}
+.w-unlock{background:linear-gradient(135deg, #ffd23d, #ff8a00); color:#2a1600; font-weight:800; border-radius:14px; padding:10px 14px; animation:roundIn .4s}
 </style>
 </head>
 <body>
@@ -4733,6 +4751,18 @@ function leagueSheet(){
    VERB BLASTER: dispara a la forma correcta antes de que te disparen
    ===================================================================== */
 const BL = {on:false};
+/* ---------- mundos de Escuadrón: uno por tiempo, se abren con estrellas ---------- */
+META.worlds ??= {}; META.world ??= 'pres';
+const WSTAR = [1500, 3000, 5000];
+const wStars = id => (META.worlds[id] || {}).stars || 0;
+const wOpen = i => i <= 0 || (i < ADV.length && wStars(ADV[i - 1]) >= 1);
+const wPlace = id => PLACE[TK[id].cat] || PLACE.present;
+function worldSheet(){
+  const open = ADV.filter((_, i) => wOpen(i)).length;
+  const b = sheet('🌍 Mundos', `<p class="hintline">Cada mundo es un tiempo verbal con su propio escenario: allí todas las preguntas son de ese tiempo. Consigue ⭐ (${WSTAR[0].toLocaleString('es')} puntos) para abrir el siguiente. Llevas <b>${open} de ${ADV.length}</b>.</p><div class="worlds">${ADV.map((id, i) => { const T = TK[id], [pl, ic] = wPlace(id), o = wOpen(i), st = wStars(id), best = (META.worlds[id] || {}).best || 0; return `<button type="button" class="wcard c-${T.cat} ${o ? '' : 'lockd'} ${META.world === id ? 'on' : ''}" data-world="${id}" ${o ? '' : 'disabled'}><span class="w-n">${i + 1}</span><span class="w-ico">${o ? ic : '🔒'}</span><b>${T.fr}</b><small>${pl}</small><span class="w-st">${[0, 1, 2].map(k => k < st ? '⭐' : '☆').join('')}</span><small class="w-sub">${o ? (best ? 'Récord ' + best.toLocaleString('es') : '¡Sin jugar!') : 'Gana ⭐ en ' + TK[ADV[i - 1]].fr}</small></button>`; }).join('')}</div>`, 'wide');
+  b.addEventListener('click', e => { const w = e.target.closest('[data-world]'); if(!w || w.disabled) return; SFX.play('tap'); META.world = w.dataset.world; saveMeta(); startMatch('squad'); });
+  setTimeout(() => { const on = b.querySelector('.wcard.on'); if(on) on.scrollIntoView({block:'center'}); }, 50);
+}
 function blasterHTML(mode){
   return `<div class="bl ${mode}"><div class="bl-hud"><button class="btn ghost sm" type="button" data-bquit>✕</button><span class="bl-time" data-b="time">${mode === 'stage' ? '' : '⏱ 60'}</span><span class="bl-sh" data-b="sh"></span><span class="bl-mult" data-b="mult"></span><span class="bl-score" data-b="score">0</span></div>
     <div class="bl-q" data-b="q"><span class="bl-qt">¡Prepárate!</span><i class="bl-tb"><b data-b="tb"></b></i></div>
@@ -4942,9 +4972,11 @@ function fillers(C, k, have){
 function startMatch(mode){
   closeSheet(); go('lobby');
   $('#lobHome').hidden = true; const host = $('#lobPlay'); host.hidden = false; const sq = mode !== 'quick';
-  host.innerHTML = sq ? squadHTML(mode) : blasterHTML(mode);
+  if(mode === 'squad' && !wOpen(ADV.indexOf(META.world))) META.world = 'pres';
+  const world = mode === 'squad' ? META.world : null;
+  host.innerHTML = sq ? squadHTML(mode, world) : blasterHTML(mode);
   window.scrollTo({top: host.offsetTop - 6, behavior:'smooth'});
-  (sq ? squad : blaster)(host, {mode, onEnd: S => matchEnd(S, mode), onQuit: () => { host.hidden = true; $('#lobHome').hidden = false; renderLobby(); }});
+  (sq ? squad : blaster)(host, {mode, world, onEnd: S => matchEnd(S, mode), onQuit: () => { host.hidden = true; $('#lobHome').hidden = false; renderLobby(); }});
 }
 function matchEnd(S, mode){
   document.removeEventListener('keydown', S.key);
@@ -4954,22 +4986,26 @@ function matchEnd(S, mode){
   const R0 = rankOf(META.rp); let drp = 0;
   if(mode === 'ranked'){ const par = 1400 + 160*R0.i; drp = Math.round((S.score - par)/50); drp = Math.max(R0.i < 3 ? 0 : -15, Math.min(45, drp)); if(S.hits >= 5 && drp < 5) drp = Math.max(drp, R0.i < 3 ? 5 : drp); META.rp = Math.max(0, META.rp + drp); }
   const R1 = rankOf(META.rp), promo = R1.i > R0.i;
+  let wst = 0, wNew = 0, wNext = null;
+  if(S.world){ const W0 = META.worlds[S.world] || {best:0, stars:0}, i = ADV.indexOf(S.world), was = wOpen(i + 1); wst = WSTAR.filter(v => S.score >= v).length; wNew = Math.max(0, wst - W0.stars); W0.best = Math.max(W0.best, S.score); W0.stars = Math.max(W0.stars, wst); META.worlds[S.world] = W0; if(!was && wOpen(i + 1)) wNext = ADV[i + 1]; }
   if(rec) META.best = S.score; if(first) META.firstWin = dayKey(); META.matches++;
   league().score += S.score; saveMeta();
-  grant({coins, gems: gems + (promo ? 50 : 0), keys: S.bossKey ? 1 : 0}); award(xp); bump('bl:end'); if(mode === 'ranked') bump('rk:end');
+  grant({coins, gems: gems + (promo ? 50 : 0) + wNew*15, keys: (S.bossKey ? 1 : 0) + (wNext ? 1 : 0)}); award(xp); bump('bl:end'); if(mode === 'ranked') bump('rk:end');
   const acc = S.shots ? Math.round(S.hits/S.shots*100) : 0, P = passState();
   const o = document.createElement('div'); o.className = 'ceremony res blres';
   o.innerHTML = `<div class="cer-in"><div class="cer-kick">${({ranked:'🏆 Clasificatoria', squad:'👥 Escuadrón', quick:'🎯 Verb Blaster'})[mode]} · fin</div>${rec ? '<div class="newrec">¡NUEVO RÉCORD!</div>' : ''}<div class="bl-big">0</div>
     <div class="bl-stats"><span><b>${S.hits}</b> aciertos</span><span><b>${acc}%</b> precisión</span><span><b>${S.bestCombo}</b> mejor racha</span>${S.kills !== undefined ? `<span><b>${S.kills}</b> Fautes</span><span><b>${S.recruits}</b> reclutas</span>` : ''}</div>
     <div class="bl-rw"><span>🪙 +${coins}${first ? ' <small>×2 primera del día</small>' : ''}${isWeekend() ? ' <small>×1,5 finde</small>' : ''}</span>${gems ? `<span>💎 +${gems}</span>` : ''}<span>⭐ +${xp} XP</span>${S.bossKey ? '<span>🎁 +1 cofre</span>' : ''}</div>
     ${mode === 'ranked' ? `<div class="bl-rank" style="--rc:${R1.col}"><b>${R1.ico} ${R1.name}</b> <span class="${drp >= 0 ? 'up' : 'down'}">${drp >= 0 ? '+' : ''}${drp} RP</span><div class="bar"><i style="width:${R1.next ? Math.round((META.rp - R1.floor)/(R1.next - R1.floor)*100) : 100}%"></i></div><small>${R1.next ? `${R1.next - META.rp} RP para subir` : 'Rango máximo'}</small></div>` : `<p class="hintline">Récord: ${META.best.toLocaleString('es')} · ${META.best - S.score > 0 ? `te faltaron ${(META.best - S.score).toLocaleString('es')} puntos` : '¡lo superaste!'}</p>`}
+    ${S.world ? `<div class="w-res"><span class="w-big">${[0, 1, 2].map(k => k < wst ? '⭐' : '☆').join('')}</span><span>${wPlace(S.world)[1]} Mundo del ${TK[S.world].fr}${wNew ? ` · 💎 +${wNew*15}` : ''}</span>${wst < 3 ? `<small>${(WSTAR[wst] - S.score).toLocaleString('es')} puntos más para ${'⭐'.repeat(wst + 1)}</small>` : '<small>¡Mundo dominado!</small>'}</div>` : ''}
+    ${wNext ? `<div class="w-unlock">🔓 ¡Nuevo mundo! <b>${wPlace(wNext)[1]} ${TK[wNext].fr}</b> · +🎁</div>` : ''}
     <p class="hintline">🎫 Pase nivel ${P.tier} · ${P.into}/${PASS_STEP} XP${P.claimable ? ` · <b>${P.claimable} premios por reclamar</b>` : ''}</p>
-    <div class="ch-row" style="justify-content:center"><button class="btn big-cta" type="button" data-r="again">⚡ ¡Otra!</button><button class="btn ghost" type="button" data-r="lobby">🏠 Lobby</button></div></div>`;
+    <div class="ch-row" style="justify-content:center">${wNext ? `<button class="btn big-cta" type="button" data-r="next">🔓 Ir a ${TK[wNext].fr}</button>` : ''}<button class="btn ${wNext ? '' : 'big-cta'}" type="button" data-r="again">⚡ ¡Otra!</button><button class="btn ghost" type="button" data-r="lobby">🏠 Lobby</button></div></div>`;
   document.body.appendChild(o);
   const big = o.querySelector('.bl-big'); let n = 0; const step = Math.max(7, Math.round(S.score/40)); const iv = setInterval(() => { n = Math.min(S.score, n + step); big.textContent = n.toLocaleString('es'); SFX.play('tick'); if(n >= S.score) clearInterval(iv); }, 30);
-  if(rec || promo) confettiDOM(90); if(promo) setTimeout(() => announce(`${R1.ico} ¡${R1.name.toUpperCase()}!`), 900);
+  if(rec || promo || wNext) confettiDOM(90); if(wNext) setTimeout(() => announce('🔓 ¡NUEVO MUNDO!'), 600); if(promo) setTimeout(() => announce(`${R1.ico} ¡${R1.name.toUpperCase()}!`), 900);
   setTimeout(() => o.querySelector('[data-r="again"]').focus({preventScroll:true}), 100);
-  o.addEventListener('click', e => { const b = e.target.closest('[data-r]'); if(!b) return; o.remove(); if(b.dataset.r === 'again') startMatch(mode); else { $('#lobPlay').hidden = true; $('#lobHome').hidden = false; renderLobby(); } });
+  o.addEventListener('click', e => { const b = e.target.closest('[data-r]'); if(!b) return; o.remove(); if(b.dataset.r === 'next'){ META.world = wNext; saveMeta(); startMatch('squad'); } else if(b.dataset.r === 'again') startMatch(mode); else { $('#lobPlay').hidden = true; $('#lobHome').hidden = false; renderLobby(); } });
 }
 /* ---------- ronda de la Aventura ---------- */
 function blasterRound(host, T){
@@ -4980,7 +5016,7 @@ function blasterRound(host, T){
 function renderLobby(){
   if(BL.on) return;
   const R = rankOf(META.rp), ev = eventToday(), P = passState(), nextI = ADV.findIndex((id, i) => unlocked(i) && !stageStars(id)), next = TK[ADV[nextI >= 0 ? nextI : 0]];
-  const fr = (META.eq.frame || 'frame_none').slice(6);
+  const fr = (META.eq.frame || 'frame_none').slice(6), wW = wOpen(ADV.indexOf(META.world)) ? META.world : 'pres';
   $('#lobHome').innerHTML = `
   <div class="lob-top"><div class="lob-me"><span class="ava fr-${fr}">😎</span><div><b class="lob-rank" style="--rc:${R.col}">${R.ico} ${R.name}</b><div class="bar rk"><i style="width:${R.next ? Math.round((META.rp - R.floor)/(R.next - R.floor)*100) : 100}%"></i></div><small>${META.rp} RP · récord ${META.best.toLocaleString('es')}</small></div></div>
     <div class="lob-cur"><span>🪙 <b>${META.coins}</b></span><span>💎 <b>${META.gems}</b></span><span>🎁 <b>${META.keys}</b></span></div></div>
@@ -4989,7 +5025,8 @@ function renderLobby(){
     <div class="bnr ps"><small>PASE DE TEMPORADA · ${fmtLeft(untilMonthEnd())}</small><b>Nivel ${P.tier} / ${PASS_TIERS}</b><span>${P.claimable ? `🎁 ${P.claimable} premios esperando` : `${PASS_STEP - P.into} XP para el siguiente premio`}</span></div>
     <div class="bnr fw"><small>${isWeekend() ? 'FIN DE SEMANA' : 'CADA DÍA'}</small><b>${isWeekend() ? 'Monedas ×1,5' : META.firstWin === dayKey() ? 'Primera victoria ✓' : 'Primera victoria ×2'}</b><span>${isWeekend() ? 'Todo el sábado y el domingo' : META.firstWin === dayKey() ? 'Vuelve mañana por otra' : 'Tu primera partida de hoy da monedas dobles'}</span></div>
   </div>
-  <button class="lob-play" type="button" data-lob="squad"><span class="lp-ico">👥</span><span><b>ESCUADRÓN</b><small>90 s · las Fautes te persiguen · recluta a tu equipo</small></span><span class="lp-go">▶</span></button>
+  <button class="lob-world" type="button" data-lic="worlds"><span class="lw-ico">${wPlace(wW)[1]}</span><span><small>MUNDO ${ADV.indexOf(wW) + 1} DE ${ADV.length} · ${wPlace(wW)[0]}</small><b>${TK[wW].fr}</b></span><span class="w-st">${[0, 1, 2].map(k => k < wStars(wW) ? '⭐' : '☆').join('')}</span><span class="lw-go">🌍 Cambiar</span></button>
+  <button class="lob-play" type="button" data-lob="squad"><span class="lp-ico">👥</span><span><b>ESCUADRÓN</b><small>90 s · te persiguen · dispara y recluta a tu equipo</small></span><span class="lp-go">▶</span></button>
   <div class="lob-row"><button class="lob-btn rk" type="button" data-lob="ranked" style="--rc:${R.col}"><b>🏆 Clasificatoria</b><small>${R.ico} ${R.name} · sube de rango</small></button><button class="lob-btn vb" type="button" data-lob="quick"><b>🎯 Verb Blaster</b><small>60 s · dispara a la forma</small></button><button class="lob-btn adv" type="button" data-lob="adv"><b>🗺️ Aventura</b><small>${nextI >= 0 ? 'Siguiente: ' + next.fr : '¡Mapa completo!'}</small></button></div>
   <div class="lob-icons">${[['check', '📅', 'Diario'], ['pass', '🎫', 'Pase'], ['chest', '🎁', 'Cofres'], ['spin', '🎡', 'Ruleta'], ['shop', '🛒', 'Tienda'], ['mis', '🎯', 'Misiones'], ['league', '🏅', 'Liga'], ['ars', '🎨', 'Arsenal']].map(([k, i, n]) => `<button type="button" class="lic" data-lic="${k}"><span>${i}</span>${n}</button>`).join('')}</div>`;
   paintDots();
@@ -4999,7 +5036,7 @@ $('#v-lobby').addEventListener('click', e => {
   const k = b.dataset.lob || b.dataset.lic;
   if(k === 'quick' || k === 'ranked' || k === 'squad') return startMatch(k);
   if(k === 'adv'){ go('play'); return; }
-  ({check:checkinSheet, pass:passSheet, chest:chestSheet, spin:spinSheet, shop:shopSheet, mis:missionSheet, league:leagueSheet, ars:arsenalSheet})[k]();
+  ({check:checkinSheet, pass:passSheet, chest:chestSheet, spin:spinSheet, shop:shopSheet, mis:missionSheet, league:leagueSheet, ars:arsenalSheet, worlds:worldSheet})[k]();
 });
 setInterval(() => { const c = $('[data-cd="day"]'); if(c && ST.view === 'lobby') c.textContent = fmtLeft(untilMidnight()); }, 30000);
 /* ===================================================================
@@ -5023,12 +5060,23 @@ const SQ_EN = {
   boss:{r:44, hp:90, sp:36, col:'#c0392b', pts:600}
 };
 const SQ_GCOL = ['#3ddcff', '#ffd23d', '#ff6bd6', '#7dff6b'];
+const SQ_THEMES = {
+  present:{a:'#e3cfa6', b:'#d8c193', line:'rgba(120,90,50,.18)', out:'#2c6e3f', edge:'#1f5130', center:'fountain', rim:'#9fb3c8', pool:'#5ec8f2', deco:['flowers', 'bench', 'lamp']},
+  passe:{a:'#efe3c4', b:'#e4d3a9', line:'rgba(140,105,40,.2)', out:'#3d6b2c', edge:'#24461a', center:'fountain', rim:'#d4af37', pool:'#79d0e8', deco:['hedge', 'statue', 'hedge']},
+  futur:{a:'#2d3266', b:'#272b5a', line:'rgba(140,160,255,.2)', out:'#0d0f2a', edge:'#5a64ff', center:'moon', deco:['crystal', 'lamp', 'crystal']},
+  cond:{a:'#d9e8a8', b:'#cfe09a', line:'rgba(90,110,40,.18)', out:'#7a5aa8', edge:'#5b3f86', center:'well', deco:['lavender', 'sunflower', 'lavender']},
+  subj:{a:'#f6e6b8', b:'#f0dca4', line:'rgba(160,130,60,.16)', out:'#2a9fd6', edge:'#1b7fb0', center:'pool', deco:['parasol', 'palm', 'shell']},
+  outils:{a:'#d4d4dc', b:'#c8c8d2', line:'rgba(80,80,100,.18)', out:'#5b4636', edge:'#3a2c22', center:'fountain', rim:'#8b7d6b', pool:'#6fc3e0', deco:['flowers', 'barrel', 'lamp']}
+};
+const touchUI = () => matchMedia('(hover:none), (pointer:coarse)').matches;
 const SQ_POW = {freeze:['❄️', 'CONGELADOS'], bomb:['💣', '¡BOMBA!'], magnet:['🧲', 'IMÁN'], rapid:['⚡', 'RÁFAGA']};
-function squadHTML(mode){
+function squadHTML(mode, world){
+  const T = world && TK[world], pl = T ? PLACE[T.cat] || PLACE.present : null;
+  const ctl = touchUI() ? '<b>Mitad izquierda</b> de la pantalla: arrastra para moverte. <b>Mitad derecha</b>: arrastra o toca para disparar. 💥 lanza tu súper.' : '<b>WASD / flechas</b>: moverte. <b>Clic</b> (mantén pulsado): disparar hacia el ratón. <b>E</b> o 💥: súper.';
   return `<div class="bl sq ${mode}"><div class="bl-hud"><button class="btn ghost sm" type="button" data-bquit>✕</button><span class="bl-time" data-b="time">${mode === 'stage' ? '' : '⏱ 90'}</span><span class="sq-hp" data-b="hp"></span><span class="sq-n" data-b="n"></span><span class="bl-mult" data-b="mult"></span><span class="bl-score" data-b="score">0</span></div>
     <div class="bl-q" data-b="q"><span class="bl-qt">Corre, recluta y que no te atrapen</span><i class="bl-tb"><b data-b="tb"></b></i></div>
-    <div class="bl-wrap sq-wrap" data-b="wrap"><canvas data-b="cv" aria-label="Escuadrón: muévete hasta el portal con la forma correcta"></canvas>
-    <div class="bl-start" data-b="start"><div class="bl-logo">ESCUA<br>DRÓN</div><p>Las <b>Fautes</b> te persiguen y tu escuadrón les dispara solo. Tú solo <b>te mueves</b>: arrastra el dedo en cualquier parte (o WASD / flechas).<br>Cuando salga una pregunta arriba, <b>corre al portal</b> con la forma correcta y se te une un compañero. Si entras al equivocado… ¡trampa!</p><button class="btn big-cta" type="button" data-bgo>▶ ¡A CORRER!</button></div></div>
+    <div class="bl-wrap sq-wrap" data-b="wrap"><canvas data-b="cv" aria-label="Escuadrón: muévete hasta el portal con la forma correcta"></canvas><button class="sq-sup" type="button" data-b="sup" aria-label="Súper">💥<small>SÚPER</small></button>
+    <div class="bl-start" data-b="start"><div class="bl-logo">ESCUA<br>DRÓN</div>${T ? `<div class="sq-world">${pl[1]} Mundo del ${T.fr} · ${pl[0]}</div>` : ''}<p>Las <b>Fautes</b> te persiguen. Tu escuadrón dispara solo, ¡y tú también!<br>${ctl}<br>Cuando salga una pregunta arriba, <b>corre al portal</b> con la forma correcta: se te une un compañero. Portal equivocado = ¡trampa!</p><button class="btn big-cta" type="button" data-bgo>▶ ¡A CORRER!</button></div></div>
     <div class="bl-feed" data-b="feed"></div></div>`;
 }
 function squad(host, opts){
@@ -5036,9 +5084,11 @@ function squad(host, opts){
   const cv = el('cv'), x = cv.getContext('2d'), wrap = el('wrap');
   const laser = IK[META.eq.laser] || IK.laser_gold, fx = IK[META.eq.fx] || IK.fx_spark, frameCol = {frame_none:'#ffffff', frame_bronze:'#c37b45', frame_neon:'#ff4fd8', frame_gold:'#ffd23d', frame_dragon:'#ff5a1f', frame_season:'#7df9ff'}[META.eq.frame] || '#ffd23d';
   const WW = stage ? 1100 : 1500, WH = WW, CAP = 14;
+  if(opts.world) opts.T = TK[opts.world];
+  const TH = SQ_THEMES[opts.T ? opts.T.cat : 'present'] || SQ_THEMES.present;
   const S = SQ.cur = {mode, score:0, combo:0, bestCombo:0, hits:0, shots:0, wrong:0, kills:0, picked:0, recruits:0, time:90, el:0, phase:'ready',
     L:{x:WW/2, y:WH/2 + 60, r:19, hp:10, max:10, face:0, inv:0, cd:0, rate:0.5, dmg:1, col:'#ff3b5c', hat:'crown', lead:1}, sq:[], en:[], bul:[], gates:[], drops:[], parts:[], floats:[], rings:[],
-    power:{}, C:null, gateT:0, gateMax:0, nextGate:1.4, spawnT:0.6, boss:null, bossDone:false, ev:eventToday(), last:0, shake:0, flash:0, cam:{x:WW/2, y:WH/2}, joy:null, keys:{}, goal:opts.goal || 5, sfxT:0, killT:0, hudT:0};
+    power:{}, C:null, gateT:0, gateMax:0, nextGate:1.4, spawnT:0.6, boss:null, bossDone:false, ev:eventToday(), last:0, shake:0, flash:0, cam:{x:WW/2, y:WH/2}, joy:null, fire:null, sup:0, world:opts.world || null, keys:{}, goal:opts.goal || 5, sfxT:0, killT:0, hudT:0};
   let W = 0, H = 0, dpr = 1, Z = 1;
   const resize = () => { const w = wrap.clientWidth; if(!w) return; dpr = Math.min(2, devicePixelRatio || 1); W = w; H = Math.round(w < 640 ? Math.min(w*1.3, innerHeight*0.64) : Math.min(w*0.6, innerHeight*0.68)); Z = w < 640 ? 0.7 : 1; cv.width = W*dpr; cv.height = H*dpr; cv.style.height = H + 'px'; };
   new ResizeObserver(resize).observe(wrap); resize();
@@ -5063,7 +5113,7 @@ function squad(host, opts){
   }
   function kindNow(){ if(S.el < 12) return 'f'; const r = Math.random(); if(S.el > 28 && r < 0.12) return 'big'; if(r < 0.36) return 'run'; return 'f'; }
   function kill(e){
-    S.en.splice(S.en.indexOf(e), 1); S.kills++; S.score += e.pts;
+    S.en.splice(S.en.indexOf(e), 1); S.kills++; S.score += e.pts; S.sup = Math.min(1, S.sup + (e.boss ? 1 : 0.03));
     burst(e.x, e.y, e.col, e.boss ? 60 : 14, 'rgb'); if(e.boss) fxBurst(e.x, e.y);
     if(S.el - S.killT > 0.07){ SFX.play(e.boss ? 'boom' : 'pop'); S.killT = S.el; }
     const nc = e.boss ? 14 : e.kind === 'big' ? 3 : Math.random() < 0.5 ? 1 : 0;
@@ -5109,7 +5159,7 @@ function squad(host, opts){
       const secs = S.el - S.t0, speed = Math.max(0, Math.round((8 - secs)*25)), ev = S.C.T.id === S.ev.id && !stage ? 2 : 1;
       S.combo++; S.bestCombo = Math.max(S.bestCombo, S.combo); S.hits++;
       const pts = Math.round((150 + speed)*mult()*ev); S.score += pts;
-      fxBurst(g.x, g.y); shock(g.x, g.y, 230, 6); S.shake = 0.5; haptic(18); SFX.play('boom');
+      fxBurst(g.x, g.y); shock(g.x, g.y, 230, 6); S.sup = Math.min(1, S.sup + 0.25); S.shake = 0.5; haptic(18); SFX.play('boom');
       const add = S.combo % 3 === 0 ? 2 : 1; let got = 0;
       for(let i = 0; i < add; i++) if(recruit(g.x + rnd(-20, 20), g.y + rnd(-20, 20))) got++;
       if(!got){ S.L.hp = Math.min(S.L.max, S.L.hp + 2); S.score += 100; S.floats.push({x:g.x, y:g.y - 60, t:0, txt:'¡Escuadrón completo! +100', col:'#7df9ff', s:18}); }
@@ -5163,6 +5213,7 @@ function squad(host, opts){
     const hp = el('hp'); hp.textContent = `❤️ ${S.L.hp}`; hp.classList.toggle('low', S.L.hp <= 3);
     el('n').textContent = `👥 ${S.sq.length + 1}`;
     el('mult').innerHTML = S.combo >= 2 ? `🔥 ${S.combo} · ×${mult()}` : '';
+    const sb = el('sup'); sb.style.setProperty('--p', Math.round(S.sup*100) + '%'); sb.classList.toggle('ready', S.sup >= 1);
   }
   function end(){
     if(S.ended) return; S.ended = true; S.phase = 'over'; SQ.on = false; BL.on = false; SFX.play('finish');
@@ -5175,6 +5226,18 @@ function squad(host, opts){
     if(k.ArrowLeft || k.a) dx--; if(k.ArrowRight || k.d) dx++; if(k.ArrowUp || k.w) dy--; if(k.ArrowDown || k.s) dy++;
     if(S.joy){ const m = Math.hypot(S.joy.dx, S.joy.dy); if(m > 6){ const f = Math.min(1, m/44); dx = S.joy.dx/m*f; dy = S.joy.dy/m*f; return [dx, dy]; } }
     const m = Math.hypot(dx, dy); return m ? [dx/m, dy/m] : [0, 0];
+  }
+  function fireAngle(){
+    const F = S.fire;
+    if(F){ if(F.kind === 'touch' && Math.hypot(F.dx, F.dy) >= 12) return Math.atan2(F.dy, F.dx); const [lx, ly] = toScreen(S.L.x, S.L.y); return Math.atan2(F.my - ly, F.mx - lx); }
+    if(S.keys.space){ let tg = null, bd = 420*420; S.en.forEach(e => { const d = (e.x - S.L.x)**2 + (e.y - S.L.y)**2; if(d < bd){ bd = d; tg = e; } }); return tg ? Math.atan2(tg.y - S.L.y, tg.x - S.L.x) : S.L.face; }
+    return null;
+  }
+  function superBlast(){
+    if(S.phase !== 'play' || S.sup < 1) return;
+    S.sup = 0; const L = S.L; SFX.play('boom'); SFX.play('power'); haptic([30, 20, 60]); S.shake = 1; announce('💥 ¡SÚPER!', wrap);
+    for(let i = 0; i < 32; i++){ const a = i/32*Math.PI*2; S.bul.push({x:L.x, y:L.y - 6, vx:Math.cos(a)*620, vy:Math.sin(a)*620, dmg:5, life:0.75, big:1, pierce:3}); }
+    shock(L.x, L.y, 250, 8); hud();
   }
   function update(dt){
     S.el += dt; const L = S.L, now = S.el;
@@ -5200,8 +5263,10 @@ function squad(host, opts){
     if(S.phase !== 'play') return;
     /* disparos automáticos */
     const fast = S.power.rapid > now ? 2.2 : 1, range = 270;
-    ms.forEach(m => { m.cd -= dt*fast; if(m.cd > 0) return; let tg = null, bd = range*range; S.en.forEach(e => { const d = (e.x - m.x)**2 + (e.y - m.y)**2; if(d < bd){ bd = d; tg = e; } }); if(!tg) return; m.cd = m.rate; const a = Math.atan2(tg.y - m.y, tg.x - m.x); m.aim = a; S.bul.push({x:m.x, y:m.y - 6, vx:Math.cos(a)*560, vy:Math.sin(a)*560, dmg:m.dmg, life:0.6}); if(now - S.sfxT > 0.16){ SFX.play('laser'); S.sfxT = now; } });
-    S.bul.forEach(b => { b.x += b.vx*dt; b.y += b.vy*dt; b.life -= dt; for(const e of S.en){ if(Math.hypot(e.x - b.x, e.y - b.y) < e.r + 4){ e.hp -= b.dmg; e.fl = 0.08; b.life = 0; e.x += b.vx*0.012; e.y += b.vy*0.012; if(e.hp <= 0) kill(e); break; } } });
+    const fa = fireAngle(); L.cd -= dt*fast;
+    if(fa !== null){ L.aim = fa; if(L.cd <= 0){ L.cd = 0.14; S.bul.push({x:L.x + Math.cos(fa)*20, y:L.y - 6 + Math.sin(fa)*20, vx:Math.cos(fa)*740, vy:Math.sin(fa)*740, dmg:1.8, life:0.7, big:1, pierce:1}); S.recoil = 1; if(now - S.sfxT > 0.1){ SFX.play('laser'); S.sfxT = now; } } }
+    ms.forEach(m => { if(m.lead){ if(fa !== null) return; } else m.cd -= dt*fast; if(m.cd > 0) return; let tg = null, bd = range*range; S.en.forEach(e => { const d = (e.x - m.x)**2 + (e.y - m.y)**2; if(d < bd){ bd = d; tg = e; } }); if(!tg) return; m.cd = m.rate; const a = Math.atan2(tg.y - m.y, tg.x - m.x); m.aim = a; S.bul.push({x:m.x, y:m.y - 6, vx:Math.cos(a)*560, vy:Math.sin(a)*560, dmg:m.dmg, life:0.6}); if(now - S.sfxT > 0.16){ SFX.play('laser'); S.sfxT = now; } });
+    S.bul.forEach(b => { b.x += b.vx*dt; b.y += b.vy*dt; b.life -= dt; for(const e of S.en){ if(b.hit && b.hit.includes(e)) continue; if(Math.hypot(e.x - b.x, e.y - b.y) < e.r + (b.big ? 7 : 4)){ e.hp -= b.dmg; e.fl = 0.08; e.x += b.vx*0.012; e.y += b.vy*0.012; if(b.pierce > 0){ b.pierce--; (b.hit = b.hit || []).push(e); } else b.life = 0; if(e.hp <= 0) kill(e); break; } } });
     S.bul = S.bul.filter(b => b.life > 0);
     /* objetos */
     const mag = S.power.magnet > now ? 340 : 70;
@@ -5220,7 +5285,7 @@ function squad(host, opts){
     S.parts.forEach(p => { p.t += dt; p.x += p.vx*dt; p.y += p.vy*dt; p.vx *= 0.94; p.vy *= 0.94; }); S.parts = S.parts.filter(p => p.t < p.life);
     S.floats.forEach(f => f.t += dt); S.floats = S.floats.filter(f => f.t < 1);
     S.rings.forEach(r => r.t += dt); S.rings = S.rings.filter(r => r.t < 0.45);
-    S.shake = Math.max(0, S.shake - dt*2.5); S.flash = Math.max(0, S.flash - dt*2.4);
+    S.recoil = Math.max(0, (S.recoil || 0) - dt*8); S.shake = Math.max(0, S.shake - dt*2.5); S.flash = Math.max(0, S.flash - dt*2.4);
     const vw = W/Z/2, vh = H/Z/2;
     const tx = WW <= vw*2 ? WW/2 : clamp(S.L.x, vw, WW - vw), ty = WH <= vh*2 ? WH/2 : clamp(S.L.y, vh, WH - vh);
     S.cam.x += (tx - S.cam.x)*Math.min(1, dt*7); S.cam.y += (ty - S.cam.y)*Math.min(1, dt*7);
@@ -5228,19 +5293,39 @@ function squad(host, opts){
   /* ----- dibujo ----- */
   const rr = (px, py, w, h, r) => { x.beginPath(); x.moveTo(px + r, py); x.arcTo(px + w, py, px + w, py + h, r); x.arcTo(px + w, py + h, px, py + h, r); x.arcTo(px, py + h, px, py, r); x.arcTo(px, py, px + w, py, r); x.closePath(); };
   const bulCol = t => laser.col === 'rainbow' ? `hsl(${(t*400) % 360} 100% 60%)` : laser.col === 'tri' ? ['#2f5cff', '#ffffff', '#ff3b3b'][Math.floor(t*12) % 3] : laser.col;
-  const DECO = (() => { const r = seeded('sq-deco'), out = []; for(let i = 0; i < 26; i++) out.push({x: 60 + r()*(WW - 120), y: 60 + r()*(WH - 120), k: Math.floor(r()*3), s: 0.7 + r()*0.6}); return out; })();
+  const DECO = (() => { const r = seeded('sq-deco:' + (opts.world || mode)), out = []; for(let i = 0; i < 28; i++){ const d = {x: 60 + r()*(WW - 120), y: 60 + r()*(WH - 120), k: TH.deco[Math.floor(r()*TH.deco.length)], s: 0.7 + r()*0.6}; if(Math.hypot(d.x - WW/2, d.y - WH/2) > 130) out.push(d); } return out; })();
+  const STARS = [...Array(60)].map((_, i) => ({x: (i*397) % WW, y: (i*631) % WH, p: i}));
+  function drawDeco(k, t){
+    const sh = (rx, ry, oy) => { x.fillStyle = 'rgba(0,0,0,.16)'; x.beginPath(); x.ellipse(0, oy || 8, rx, ry, 0, 0, 6.29); x.fill(); };
+    if(k === 'flowers'){ x.fillStyle = '#3f8f4a'; x.beginPath(); x.arc(0, 0, 26, 0, 6.29); x.fill(); ['#ff5a6e', '#ffd23d', '#ffffff', '#b07cff'].forEach((c, i) => { x.fillStyle = c; x.beginPath(); x.arc(Math.cos(i*1.7)*13, Math.sin(i*1.7)*13, 5, 0, 6.29); x.fill(); }); }
+    else if(k === 'bench'){ x.fillStyle = 'rgba(0,0,0,.12)'; x.fillRect(-26, 4, 52, 10); x.fillStyle = '#7a5230'; x.fillRect(-26, -6, 52, 9); x.fillRect(-26, -16, 52, 5); }
+    else if(k === 'lamp'){ sh(9, 4, 6); x.fillStyle = '#2b2f3a'; x.fillRect(-2, -34, 4, 40); x.fillStyle = TH === SQ_THEMES.futur ? '#7df9ff' : '#ffe9a0'; if(TH === SQ_THEMES.futur){ x.shadowColor = '#7df9ff'; x.shadowBlur = 14; } x.beginPath(); x.arc(0, -36, 7, 0, 6.29); x.fill(); x.shadowBlur = 0; }
+    else if(k === 'hedge'){ sh(30, 8, 22); x.fillStyle = '#2f6b2a'; rr(-28, -24, 56, 44, 10); x.fill(); x.fillStyle = '#4c9a3f'; rr(-24, -24, 48, 30, 9); x.fill(); }
+    else if(k === 'statue'){ sh(16, 5, 14); x.fillStyle = '#a9a9b4'; x.fillRect(-14, -6, 28, 18); x.fillStyle = '#d6d6de'; x.fillRect(-7, -30, 14, 24); x.beginPath(); x.arc(0, -36, 8, 0, 6.29); x.fill(); x.fillStyle = '#d4af37'; x.fillRect(-14, -8, 28, 3); }
+    else if(k === 'crystal'){ x.save(); x.shadowColor = '#b07cff'; x.shadowBlur = 18; x.fillStyle = `hsl(${270 + Math.sin(t*2)*20} 90% 70%)`; x.beginPath(); x.moveTo(0, -34); x.lineTo(12, -6); x.lineTo(0, 8); x.lineTo(-12, -6); x.closePath(); x.fill(); x.fillStyle = '#7df9ff'; x.beginPath(); x.moveTo(16, -16); x.lineTo(22, -2); x.lineTo(14, 6); x.lineTo(9, -4); x.closePath(); x.fill(); x.restore(); }
+    else if(k === 'lavender'){ x.fillStyle = '#6f9a3c'; x.beginPath(); x.ellipse(0, 0, 34, 16, 0, 0, 6.29); x.fill(); x.fillStyle = '#9b6bd6'; for(let i = -3; i <= 3; i++) for(let j = -1; j <= 1; j++){ x.beginPath(); x.arc(i*9, j*8 - 4, 4, 0, 6.29); x.fill(); } }
+    else if(k === 'sunflower'){ sh(10, 4, 10); x.strokeStyle = '#3f7a2a'; x.lineWidth = 3; x.beginPath(); x.moveTo(0, 10); x.lineTo(0, -16); x.stroke(); x.fillStyle = '#ffcf26'; for(let i = 0; i < 10; i++){ const a = i/10*6.29; x.beginPath(); x.ellipse(Math.cos(a)*10, -22 + Math.sin(a)*10, 6, 3, a, 0, 6.29); x.fill(); } x.fillStyle = '#6b3d1a'; x.beginPath(); x.arc(0, -22, 6, 0, 6.29); x.fill(); }
+    else if(k === 'parasol'){ sh(30, 10, 6); ['#ff4f5e', '#ffffff'].forEach((c, ci) => { for(let i = ci; i < 8; i += 2){ x.fillStyle = c; x.beginPath(); x.moveTo(0, -10); x.arc(0, -10, 30, i/8*6.29, (i + 1)/8*6.29); x.closePath(); x.fill(); } }); }
+    else if(k === 'palm'){ sh(20, 6, 8); x.fillStyle = '#8a5a2b'; x.beginPath(); x.arc(0, 0, 7, 0, 6.29); x.fill(); x.strokeStyle = '#2e9a4a'; x.lineWidth = 7; x.lineCap = 'round'; for(let i = 0; i < 6; i++){ const a = i/6*6.29 + Math.sin(t + i)*0.05; x.beginPath(); x.moveTo(0, 0); x.quadraticCurveTo(Math.cos(a)*18, Math.sin(a)*18 - 8, Math.cos(a)*32, Math.sin(a)*32); x.stroke(); } x.lineCap = 'butt'; }
+    else if(k === 'shell'){ x.fillStyle = '#ffb3c7'; x.beginPath(); x.moveTo(0, 6); x.arc(0, 6, 12, Math.PI*1.1, Math.PI*1.9); x.closePath(); x.fill(); x.fillStyle = '#ffd6a0'; x.beginPath(); x.arc(20, -4, 5, 0, 6.29); x.fill(); }
+    else if(k === 'barrel'){ sh(14, 5, 12); x.fillStyle = '#8b5a2b'; x.beginPath(); x.arc(0, 0, 14, 0, 6.29); x.fill(); x.strokeStyle = '#3a2c22'; x.lineWidth = 2.5; [14, 9].forEach(r => { x.beginPath(); x.arc(0, 0, r, 0, 6.29); x.stroke(); }); }
+  }
+  function drawCenter(t){
+    const cx = WW/2, cy = WH/2;
+    if(TH.center === 'fountain'){ x.fillStyle = TH.rim; x.beginPath(); x.arc(cx, cy, 70, 0, 6.29); x.fill(); x.fillStyle = TH.pool; x.beginPath(); x.arc(cx, cy, 58, 0, 6.29); x.fill(); x.fillStyle = 'rgba(255,255,255,.5)'; x.beginPath(); x.arc(cx, cy, 14 + 4*Math.sin(t*3), 0, 6.29); x.fill(); }
+    else if(TH.center === 'moon'){ x.save(); x.shadowColor = '#bcd4ff'; x.shadowBlur = 40; x.fillStyle = '#e9f0ff'; x.beginPath(); x.arc(cx, cy, 62, 0, 6.29); x.fill(); x.restore(); x.fillStyle = 'rgba(150,170,220,.45)'; [[-20, -14, 12], [18, 10, 9], [-6, 26, 7], [24, -22, 6]].forEach(([a, b, r]) => { x.beginPath(); x.arc(cx + a, cy + b, r, 0, 6.29); x.fill(); }); }
+    else if(TH.center === 'well'){ x.fillStyle = '#9a8f80'; x.beginPath(); x.arc(cx, cy, 52, 0, 6.29); x.fill(); x.fillStyle = '#2a2430'; x.beginPath(); x.arc(cx, cy, 36, 0, 6.29); x.fill(); x.fillStyle = '#5ec8f2'; x.globalAlpha = 0.5 + 0.2*Math.sin(t*2); x.beginPath(); x.arc(cx, cy, 26, 0, 6.29); x.fill(); x.globalAlpha = 1; }
+    else if(TH.center === 'pool'){ x.fillStyle = '#ffffff'; rr(cx - 95, cy - 60, 190, 120, 26); x.fill(); x.fillStyle = '#35b8e8'; rr(cx - 84, cy - 49, 168, 98, 20); x.fill(); x.strokeStyle = 'rgba(255,255,255,.55)'; x.lineWidth = 3; for(let i = 0; i < 3; i++){ x.beginPath(); for(let k = 0; k <= 12; k++){ const px = cx - 70 + k*12, py = cy - 24 + i*24 + Math.sin(t*2 + k + i)*4; k ? x.lineTo(px, py) : x.moveTo(px, py); } x.stroke(); } }
+  }
   function drawFloor(){
     const vw = W/Z, vh = H/Z, x0 = S.cam.x - vw/2, y0 = S.cam.y - vh/2, T = 80;
-    x.fillStyle = '#2c6e3f'; x.fillRect(x0 - 40, y0 - 40, vw + 80, vh + 80);
-    for(let ty = Math.max(0, Math.floor(y0/T)*T); ty < Math.min(WH, y0 + vh + T); ty += T) for(let tx = Math.max(0, Math.floor(x0/T)*T); tx < Math.min(WW, x0 + vw + T); tx += T){ x.fillStyle = ((tx + ty)/T) % 2 ? '#e3cfa6' : '#d8c193'; x.fillRect(tx, ty, Math.min(T, WW - tx), Math.min(T, WH - ty)); }
-    x.strokeStyle = 'rgba(120,90,50,.18)'; x.lineWidth = 2; for(let ty = Math.max(0, Math.floor(y0/T)*T); ty < Math.min(WH, y0 + vh + T); ty += T){ x.beginPath(); x.moveTo(Math.max(0, x0), ty); x.lineTo(Math.min(WW, x0 + vw), ty); x.stroke(); }
-    const cx = WW/2, cy = WH/2; x.fillStyle = '#9fb3c8'; x.beginPath(); x.arc(cx, cy, 70, 0, 6.29); x.fill(); x.fillStyle = '#5ec8f2'; x.beginPath(); x.arc(cx, cy, 58, 0, 6.29); x.fill(); x.fillStyle = 'rgba(255,255,255,.5)'; x.beginPath(); x.arc(cx, cy, 14 + 4*Math.sin(S.el*3), 0, 6.29); x.fill();
-    DECO.forEach(d => { if(d.x < x0 - 60 || d.x > x0 + vw + 60 || d.y < y0 - 60 || d.y > y0 + vh + 60) return; x.save(); x.translate(d.x, d.y); x.scale(d.s, d.s);
-      if(d.k === 0){ x.fillStyle = '#3f8f4a'; x.beginPath(); x.arc(0, 0, 26, 0, 6.29); x.fill(); ['#ff5a6e', '#ffd23d', '#ffffff', '#b07cff'].forEach((c, i) => { x.fillStyle = c; x.beginPath(); x.arc(Math.cos(i*1.7)*13, Math.sin(i*1.7)*13, 5, 0, 6.29); x.fill(); }); }
-      else if(d.k === 1){ x.fillStyle = 'rgba(0,0,0,.12)'; x.fillRect(-26, 4, 52, 10); x.fillStyle = '#7a5230'; x.fillRect(-26, -6, 52, 9); x.fillRect(-26, -16, 52, 5); }
-      else { x.fillStyle = 'rgba(0,0,0,.15)'; x.beginPath(); x.ellipse(0, 6, 9, 4, 0, 0, 6.29); x.fill(); x.fillStyle = '#2b2f3a'; x.fillRect(-2, -34, 4, 40); x.fillStyle = '#ffe9a0'; x.beginPath(); x.arc(0, -36, 7, 0, 6.29); x.fill(); }
-      x.restore(); });
-    x.strokeStyle = '#1f5130'; x.lineWidth = 16; x.strokeRect(-8, -8, WW + 16, WH + 16);
+    x.fillStyle = TH.out; x.fillRect(x0 - 40, y0 - 40, vw + 80, vh + 80);
+    for(let ty = Math.max(0, Math.floor(y0/T)*T); ty < Math.min(WH, y0 + vh + T); ty += T) for(let tx = Math.max(0, Math.floor(x0/T)*T); tx < Math.min(WW, x0 + vw + T); tx += T){ x.fillStyle = ((tx + ty)/T) % 2 ? TH.a : TH.b; x.fillRect(tx, ty, Math.min(T, WW - tx), Math.min(T, WH - ty)); }
+    x.strokeStyle = TH.line; x.lineWidth = 2; for(let ty = Math.max(0, Math.floor(y0/T)*T); ty < Math.min(WH, y0 + vh + T); ty += T){ x.beginPath(); x.moveTo(Math.max(0, x0), ty); x.lineTo(Math.min(WW, x0 + vw), ty); x.stroke(); }
+    if(TH === SQ_THEMES.futur) STARS.forEach(st => { if(st.x < x0 || st.x > x0 + vw || st.y < y0 || st.y > y0 + vh) return; x.globalAlpha = 0.4 + 0.4*Math.sin(S.el*2 + st.p); x.fillStyle = '#c9d4ff'; x.fillRect(st.x, st.y, 2.5, 2.5); }); x.globalAlpha = 1;
+    drawCenter(S.el);
+    DECO.forEach(d => { if(d.x < x0 - 60 || d.x > x0 + vw + 60 || d.y < y0 - 60 || d.y > y0 + vh + 60) return; x.save(); x.translate(d.x, d.y); x.scale(d.s, d.s); drawDeco(d.k, S.el); x.restore(); });
+    x.strokeStyle = TH.edge; x.lineWidth = 16; x.strokeRect(-8, -8, WW + 16, WH + 16);
   }
   function drawGuy(m, t){
     const bob = m.moving ? Math.abs(Math.sin(t*14 + (m.born || 0)))*4 : Math.sin(t*3 + (m.born || 0))*1.2, r = m.r, px = m.x, py = m.y - bob;
@@ -5292,10 +5377,11 @@ function squad(host, opts){
   function drawLabel(g){
     const a = g.fade ? Math.max(0, 1 - g.fade) : Math.min(1, (S.el - g.born)*4); if(a <= 0) return;
     const w0 = wrapText(x, g.t, 200, 19), w = Math.min(220, Math.max(...w0.lines.map(l => x.measureText(l).width)) + 24), h = 14 + w0.lines.length*w0.fs*1.15, below = g.y - g.r - 12 - h < S.cam.y - H/Z/2 + 6, by = below ? g.y + g.r*0.7 + 12 : g.y - g.r - 12 - h;
-    x.save(); x.globalAlpha = a; rr(g.x - w/2, by, w, h, 10); x.fillStyle = 'rgba(16,14,34,.9)'; x.fill(); x.lineWidth = 3; x.strokeStyle = S.hint && g.ok ? '#ffffff' : g.col; x.stroke();
+    const vl = S.cam.x - W/Z/2, lx = clamp(g.x, vl + w/2 + 4, vl + W/Z - w/2 - 4);
+    x.save(); x.globalAlpha = a; rr(lx - w/2, by, w, h, 10); x.fillStyle = 'rgba(16,14,34,.9)'; x.fill(); x.lineWidth = 3; x.strokeStyle = S.hint && g.ok ? '#ffffff' : g.col; x.stroke();
     x.beginPath(); if(below){ x.moveTo(g.x - 7, by); x.lineTo(g.x + 7, by); x.lineTo(g.x, by - 8); } else { x.moveTo(g.x - 7, by + h); x.lineTo(g.x + 7, by + h); x.lineTo(g.x, by + h + 8); } x.closePath(); x.fill();
     x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle'; x.font = `800 ${w0.fs}px Figtree, Arial`;
-    w0.lines.forEach((l, k) => x.fillText(l, g.x, by + h/2 + (k - (w0.lines.length - 1)/2)*w0.fs*1.15)); x.restore();
+    w0.lines.forEach((l, k) => x.fillText(l, lx, by + h/2 + (k - (w0.lines.length - 1)/2)*w0.fs*1.15)); x.restore();
   }
   function drawDrop(d, t){
     const blink = d.t > 11 && Math.floor(t*8) % 2; if(blink) return;
@@ -5319,7 +5405,11 @@ function squad(host, opts){
     if(S.boss){ const bw = Math.min(320, W - 140), bx = 12; x.fillStyle = 'rgba(0,0,0,.6)'; rr(bx, 12, bw, 22, 8); x.fill(); x.fillStyle = '#ff3b3b'; rr(bx + 3, 15, (bw - 6)*Math.max(0, S.boss.hp/S.boss.max), 16, 6); x.fill(); x.fillStyle = '#fff'; x.font = '900 12px Figtree, Arial'; x.textAlign = 'left'; x.textBaseline = 'middle'; x.fillText('👹 MONSIEUR FAUTE', bx + 10, 23); }
     const pw = Object.entries(S.power).filter(([, v]) => v > S.el); pw.forEach(([k, v], i) => { x.font = '800 14px Figtree, Arial'; x.textAlign = 'left'; x.textBaseline = 'middle'; x.fillStyle = '#fff'; x.fillText(`${SQ_POW[k][0]} ${Math.ceil(v - S.el)} s`, 12, H - 18 - i*22); });
     if(S.joy){ x.strokeStyle = 'rgba(255,255,255,.5)'; x.fillStyle = 'rgba(255,255,255,.12)'; x.lineWidth = 3; x.beginPath(); x.arc(S.joy.ox, S.joy.oy, 44, 0, 6.29); x.fill(); x.stroke(); const m = Math.hypot(S.joy.dx, S.joy.dy) || 1, f = Math.min(1, 44/m); x.fillStyle = 'rgba(255,255,255,.75)'; x.beginPath(); x.arc(S.joy.ox + S.joy.dx*f, S.joy.oy + S.joy.dy*f, 20, 0, 6.29); x.fill(); }
-    if(S.phase === 'play' && S.el < 4 && !S.joy){ x.globalAlpha = Math.max(0, 1 - S.el/4); x.fillStyle = '#fff'; x.font = '800 15px Figtree, Arial'; x.textAlign = 'center'; x.fillText(matchMedia('(hover:hover)').matches ? 'Muévete con WASD / flechas o arrastrando el ratón' : 'Arrastra el dedo para moverte', W/2, H - 22); x.globalAlpha = 1; }
+    if(S.fire && S.fire.kind === 'touch'){ x.strokeStyle = 'rgba(255,90,110,.6)'; x.fillStyle = 'rgba(255,90,110,.14)'; x.lineWidth = 3; x.beginPath(); x.arc(S.fire.ox, S.fire.oy, 44, 0, 6.29); x.fill(); x.stroke(); const m = Math.hypot(S.fire.dx, S.fire.dy) || 1, f = Math.min(1, 44/m); x.fillStyle = 'rgba(255,90,110,.85)'; x.beginPath(); x.arc(S.fire.ox + S.fire.dx*f, S.fire.oy + S.fire.dy*f, 20, 0, 6.29); x.fill(); }
+    if(S.phase === 'play' && S.el < 7){ x.globalAlpha = Math.max(0, Math.min(1, (7 - S.el)/2)); x.fillStyle = '#fff'; x.strokeStyle = 'rgba(0,0,0,.55)'; x.lineWidth = 4; x.font = '900 14px Figtree, Arial'; x.textBaseline = 'middle';
+      if(touchUI()){ x.textAlign = 'left'; x.strokeText('◀ MOVER', 12, H - 22); x.fillText('◀ MOVER', 12, H - 22); x.textAlign = 'right'; x.strokeText('DISPARAR ▶', W - 82, H - 22); x.fillText('DISPARAR ▶', W - 82, H - 22); x.setLineDash([6, 8]); x.strokeStyle = 'rgba(255,255,255,.35)'; x.lineWidth = 2; x.beginPath(); x.moveTo(W/2, 60); x.lineTo(W/2, H - 40); x.stroke(); x.setLineDash([]); }
+      else { x.textAlign = 'center'; const tx = 'WASD / flechas: moverte · clic: disparar · E: súper'; x.strokeText(tx, W/2, H - 22); x.fillText(tx, W/2, H - 22); }
+      x.globalAlpha = 1; }
   }
   function frame(now){
     if(!cv.isConnected){ BL.on = SQ.on = false; document.removeEventListener('keydown', S.key); document.removeEventListener('keyup', S.keyup); return; }
@@ -5331,7 +5421,8 @@ function squad(host, opts){
     const sh = S.shake*10; x.save(); x.translate(W/2 + (Math.random() - 0.5)*sh, H/2 + (Math.random() - 0.5)*sh); x.scale(Z, Z); x.translate(-S.cam.x, -S.cam.y);
     drawFloor(); S.drops.forEach(d => drawDrop(d, t)); S.gates.forEach(g => drawGate(g, t));
     [...S.en.map(e => ({e, y:e.y})), ...members().map(m => ({m, y:m.y}))].sort((a, b) => a.y - b.y).forEach(o => o.e ? drawEnemy(o.e, t) : drawGuy(o.m, t));
-    const bc = bulCol(t); x.fillStyle = bc; x.shadowColor = bc; x.shadowBlur = 10; S.bul.forEach(b => { x.beginPath(); x.arc(b.x, b.y, 4.5, 0, 6.29); x.fill(); }); x.shadowBlur = 0;
+    if(S.L.aim !== undefined && S.fire){ const a = S.L.aim; x.save(); x.strokeStyle = bulCol(t); x.globalAlpha = 0.45; x.lineWidth = 3; x.setLineDash([8, 10]); x.beginPath(); x.moveTo(S.L.x + Math.cos(a)*26, S.L.y - 6 + Math.sin(a)*26); x.lineTo(S.L.x + Math.cos(a)*190, S.L.y - 6 + Math.sin(a)*190); x.stroke(); x.restore(); }
+    const bc = bulCol(t); x.fillStyle = bc; x.shadowColor = bc; x.shadowBlur = 10; S.bul.forEach(b => { x.beginPath(); x.arc(b.x, b.y, b.big ? 7 : 4.5, 0, 6.29); x.fill(); }); x.shadowBlur = 0;
     S.parts.forEach(p => { const a = 1 - p.t/p.life; x.globalAlpha = a; if(p.kind === 'rgb' || p.kind === 'rnd' || p.kind === 'tri'){ x.fillStyle = p.kind === 'tri' ? ['#2f5cff', '#fff', '#ff3b3b'][Math.floor(p.s) % 3] : p.kind === 'rnd' ? `hsl(${(p.s*80 + p.vx) % 360} 100% 62%)` : p.col; x.fillRect(p.x, p.y, p.s, p.s); } else { x.font = `${10 + p.s*3}px serif`; x.fillStyle = p.col || '#fff'; x.textAlign = 'center'; x.fillText(p.kind, p.x, p.y); } }); x.globalAlpha = 1;
     S.rings.forEach(r => { x.strokeStyle = `rgba(255,255,255,${1 - r.t/0.45})`; x.lineWidth = 8*(1 - r.t/0.45) + 1; x.beginPath(); x.arc(r.x, r.y, r.r*(r.t/0.45), 0, 6.29); x.stroke(); });
     S.gates.forEach(g => drawLabel(g));
@@ -5345,17 +5436,30 @@ function squad(host, opts){
   }
   /* ----- controles ----- */
   const pt = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left)*W/r.width, (e.clientY - r.top)*H/r.height]; };
-  cv.addEventListener('pointerdown', e => { if(S.phase !== 'play') return; e.preventDefault(); const [px, py] = pt(e); S.joy = {id:e.pointerId, ox:px, oy:py, dx:0, dy:0}; try{ cv.setPointerCapture(e.pointerId); }catch(_){} });
-  cv.addEventListener('pointermove', e => { if(!S.joy || e.pointerId !== S.joy.id) return; const [px, py] = pt(e); let dx = px - S.joy.ox, dy = py - S.joy.oy; const m = Math.hypot(dx, dy); if(m > 60){ S.joy.ox += dx/m*(m - 60); S.joy.oy += dy/m*(m - 60); dx = px - S.joy.ox; dy = py - S.joy.oy; } S.joy.dx = dx; S.joy.dy = dy; });
-  const up = e => { if(S.joy && e.pointerId === S.joy.id) S.joy = null; };
+  cv.addEventListener('pointerdown', e => {
+    if(S.phase !== 'play') return; e.preventDefault(); const [px, py] = pt(e);
+    if(e.pointerType === 'mouse'){ if(e.button === 0) S.fire = {id:e.pointerId, kind:'mouse', mx:px, my:py}; }
+    else if(px < W/2 && !S.joy) S.joy = {id:e.pointerId, ox:px, oy:py, dx:0, dy:0};
+    else if(!S.fire) S.fire = {id:e.pointerId, kind:'touch', ox:px, oy:py, dx:0, dy:0, mx:px, my:py};
+    else return;
+    try{ cv.setPointerCapture(e.pointerId); }catch(_){}
+  });
+  const follow = (J, px, py) => { let dx = px - J.ox, dy = py - J.oy; const m = Math.hypot(dx, dy); if(m > 60){ J.ox += dx/m*(m - 60); J.oy += dy/m*(m - 60); dx = px - J.ox; dy = py - J.oy; } J.dx = dx; J.dy = dy; };
+  cv.addEventListener('pointermove', e => { const [px, py] = pt(e);
+    if(S.joy && e.pointerId === S.joy.id) follow(S.joy, px, py);
+    if(S.fire && e.pointerId === S.fire.id){ S.fire.mx = px; S.fire.my = py; if(S.fire.kind === 'touch') follow(S.fire, px, py); } });
+  const up = e => { if(S.joy && e.pointerId === S.joy.id) S.joy = null; if(S.fire && e.pointerId === S.fire.id) S.fire = null; };
   cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up); cv.addEventListener('lostpointercapture', up);
-  const KEYS = {ArrowLeft:1, ArrowRight:1, ArrowUp:1, ArrowDown:1, a:1, d:1, w:1, s:1, A:1, D:1, W:1, S:1};
-  S.key = e => { if(!cv.isConnected || S.phase !== 'play' || (e.target.closest && e.target.closest('input,textarea'))) return; if(KEYS[e.key]){ e.preventDefault(); S.keys[e.key.length === 1 ? e.key.toLowerCase() : e.key] = true; } };
-  S.keyup = e => { if(KEYS[e.key]) S.keys[e.key.length === 1 ? e.key.toLowerCase() : e.key] = false; };
+  cv.addEventListener('contextmenu', e => e.preventDefault());
+  const supBtn = el('sup'); supBtn.addEventListener('pointerdown', e => { e.preventDefault(); e.stopPropagation(); superBlast(); }); supBtn.addEventListener('click', e => { if(e.detail === 0) superBlast(); });
+  const KEYS = {ArrowLeft:1, ArrowRight:1, ArrowUp:1, ArrowDown:1, a:1, d:1, w:1, s:1, A:1, D:1, W:1, S:1, ' ':1};
+  const kn = k => k === ' ' ? 'space' : k.length === 1 ? k.toLowerCase() : k;
+  S.key = e => { if(!cv.isConnected || S.phase !== 'play' || (e.target.closest && e.target.closest('input,textarea'))) return; if(KEYS[e.key]){ e.preventDefault(); S.keys[kn(e.key)] = true; } if(/^[eEqQ]$/.test(e.key)){ e.preventDefault(); superBlast(); } };
+  S.keyup = e => { if(KEYS[e.key]) S.keys[kn(e.key)] = false; };
   document.addEventListener('keydown', S.key); document.addEventListener('keyup', S.keyup);
-  addEventListener('blur', () => { S.keys = {}; S.joy = null; });
+  addEventListener('blur', () => { S.keys = {}; S.joy = null; S.fire = null; });
   host.addEventListener('click', e => {
-    if(e.target.closest('[data-bgo]')){ el('start').hidden = true; S.phase = 'play'; BL.on = SQ.on = true; SFX.play('go'); announce('¡A CORRER!', wrap); for(let i = 0; i < 2; i++) recruit(null, null, true); for(let i = 0; i < 4; i++) spawnEnemy('f'); hud(); return; }
+    if(e.target.closest('[data-bgo]')){ el('start').hidden = true; S.phase = 'play'; BL.on = SQ.on = true; SFX.play('go'); announce(opts.T && !stage ? `${(PLACE[opts.T.cat] || PLACE.present)[1]} ${opts.T.fr.toUpperCase()}` : '¡A CORRER!', wrap); for(let i = 0; i < 2; i++) recruit(null, null, true); for(let i = 0; i < 4; i++) spawnEnemy('f'); hud(); return; }
     if(e.target.closest('[data-bquit]')){ if(S.phase === 'ready'){ opts.onQuit && opts.onQuit(); return; } end(); }
   });
   hud(); requestAnimationFrame(frame);
@@ -5363,7 +5467,7 @@ function squad(host, opts){
 }
 /* ---------- ronda de la Aventura ---------- */
 function squadRound(host, T){
-  host.innerHTML = squadHTML('stage');
+  host.innerHTML = squadHTML('stage', T.id);
   squad(host, {mode:'stage', T, goal:5, onEnd: S => roundEnd(S.wrong <= 1, `${S.hits} portales · ${S.wrong} fallos · ${S.kills} Fautes derrotadas`), onQuit(){}});
 }
 MISSIONS.push({id:'sq10', es:'Recluta 10 compañeros en Escuadrón', goal:10, ev:'sq:recruit'}, {id:'sqb', es:'Derrota a Monsieur Faute en Escuadrón', goal:1, ev:'sq:boss'});
